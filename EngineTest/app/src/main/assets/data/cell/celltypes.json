@@ -1,0 +1,18 @@
+[{
+    name: "Горы",
+    background: "#ededed",
+    parallax: [{
+        img: "xxx.jpg",
+        top: 0,
+        bottom: 1,
+        speed: .23
+    },{
+        img: "xxx.jpg",
+        top: 0,
+        bottom: 1,
+        speed: .23,
+        inFont: true,         
+    }],    
+    effects: ["snow","rain"]
+    
+}]
