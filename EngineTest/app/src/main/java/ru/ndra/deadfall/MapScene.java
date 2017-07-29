@@ -15,14 +15,17 @@ public class MapScene extends Scene {
         this.isButton = true;
 
         // А тут еще один спрайт
-        Sprite sprite = new Sprite(game){
+        Sprite sprite = new Sprite(game) {
             @Override
             public void update(float dt) {
                 super.update(dt);
                 this.rotation += dt * 10;
             }
         };
-        sprite.width = 300f;
+
+        float k = (float)game.map.width / (float)game.map.height;
+
+        sprite.width = 300f * k;
         sprite.height = 300f;
         sprite.setTexture("render/map");
         add(sprite);
