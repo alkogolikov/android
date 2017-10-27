@@ -12,7 +12,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by golikov on 20.02.2017.
  */
 
-public class DrawSprite {
+public class RenderSprite {
 
     // Программа
     private int program;
@@ -24,7 +24,7 @@ public class DrawSprite {
     private int mPositionHandle;
     private int textureHandle;
 
-    public DrawSprite(Game game) {
+    public RenderSprite(Game game) {
         this.game = game;
     }
 

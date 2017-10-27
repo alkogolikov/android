@@ -43,14 +43,14 @@ public class Game {
     /**
      * Класс для рендера спрайтов
      */
-    public DrawSprite spriteRender;
+    public RenderSprite spriteRender;
 
-    public DrawLine drawLine;
+    public RenderLine drawLine;
 
     public Game(Context context) {
         this.context = context;
-        spriteRender = new DrawSprite(this);
-        drawLine = new DrawLine(this);
+        spriteRender = new RenderSprite(this);
+        drawLine = new RenderLine(this);
         loader = new ResourceLoader(this);
         world = new World(this);
     }

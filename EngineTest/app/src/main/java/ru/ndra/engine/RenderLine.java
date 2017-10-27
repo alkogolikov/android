@@ -14,7 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by golikov on 20.02.2017.
  */
 
-public class DrawLine {
+public class RenderLine {
 
     // Программа
     private int program;
@@ -24,7 +24,7 @@ public class DrawLine {
     int uMatrixLocation;
     private int mPositionHandle;
 
-    public DrawLine(Game game) {
+    public RenderLine(Game game) {
         this.game = game;
     }
 
