@@ -3,23 +3,15 @@ package ru.ndra.engine;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.opengl.Matrix;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.ListIterator;
-
-/**
- * Created by golikov on 25.02.2017.
- */
 
 public class GameObject {
 
     public final Game game;
-    private ArrayList<GameObject> children  = new ArrayList<>();
+    private ArrayList<GameObject> children = new ArrayList<>();
     public GameObject parent;
     public boolean isButton = false;
 
@@ -79,7 +71,7 @@ public class GameObject {
     public void draw() {
         // Рисуем дочерние объекты
         int len = children.size();
-        for(int i = 0; i < len; i ++) {
+        for (int i = 0; i < len; i++) {
             GameObject obj = children.get(i);
             obj.draw();
         }
@@ -88,16 +80,16 @@ public class GameObject {
     public void beforeDraw() {
 
         // Сортирую коллекцию
-        if(!sorted) {
+        if (!sorted) {
             sorted = true;
             Collections.sort(children, new Comparator<GameObject>() {
                 @Override
                 public int compare(GameObject obj1, GameObject obj2) {
                     float d = obj1.zIndex - obj2.zIndex;
-                    if(d < 0) {
+                    if (d < 0) {
                         return -1;
                     }
-                    if(d > 0) {
+                    if (d > 0) {
                         return 1;
                     }
                     return 0;
@@ -106,7 +98,7 @@ public class GameObject {
         }
 
         int len = children.size();
-        for(int i = 0; i < len; i ++) {
+        for (int i = 0; i < len; i++) {
             GameObject obj = children.get(i);
             obj.beforeDraw();
         }
@@ -116,7 +108,7 @@ public class GameObject {
         update(dt);
         // Обновляем дочерние объекты
         int len = children.size();
-        for(int i = 0; i < len; i ++) {
+        for (int i = 0; i < len; i++) {
             GameObject obj = children.get(i);
             obj.updateSelfAndChildren(dt);
         }
@@ -133,7 +125,7 @@ public class GameObject {
         int len = children.size();
         for (int i = len - 1; i >= 0; i--) {
             GameObject obj = children.get(i);
-            if(obj.isButton) {
+            if (obj.isButton) {
                 GameObject target = obj.hitTest(x, y);
                 if (target != null) {
                     return target;

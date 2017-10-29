@@ -1,17 +1,10 @@
 package ru.ndra.engine;
 
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-
-import javax.microedition.khronos.opengles.GL10;
-
-/**
- * Created by golikov on 03.01.2017.
- */
 
 public class DrawView extends GLSurfaceView {
 
-    private MyRenderer renderer;
+    private ru.ndra.engine.Renderer renderer;
 
     public DrawView(Game game) {
 
@@ -19,9 +12,9 @@ public class DrawView extends GLSurfaceView {
 
         this.setEGLContextClientVersion(2);
 
-        renderer = new MyRenderer(game);
+        renderer = new ru.ndra.engine.Renderer(game.eventManager, game);
 
-        setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
+        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
         setRenderer(renderer);
 
         setOnTouchListener(game.touchListener);

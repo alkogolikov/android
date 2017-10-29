@@ -5,6 +5,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.GLES20;
 
+import ru.ndra.engine.event.EventManager;
+
 /**
  * Created by golikov on 20.02.2017.
  */
@@ -46,6 +48,8 @@ public class Game {
     public RenderSprite spriteRender;
 
     public RenderLine drawLine;
+
+    public final EventManager eventManager = new EventManager();
 
     public Game(Context context) {
         this.context = context;

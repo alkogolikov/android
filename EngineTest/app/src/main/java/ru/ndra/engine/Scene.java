@@ -1,13 +1,11 @@
 package ru.ndra.engine;
 
-import android.graphics.PointF;
 import android.opengl.Matrix;
-import android.util.Log;
-import android.view.MotionEvent;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
-
+/**
+ * Сцена - это такой специальный игровой объект, у которого есть камера
+ * И матрица трансформации цены зависит от камеры
+ */
 public class Scene extends GameObject {
 
     public final Camera camera = new Camera(this);
@@ -35,8 +33,8 @@ public class Scene extends GameObject {
     @Override
     public GameObject hitTest(float x, float y) {
 
-        GameObject ret = super.hitTest(x ,y);
-        if(ret != null) {
+        GameObject ret = super.hitTest(x, y);
+        if (ret != null) {
             return ret;
         }
 
