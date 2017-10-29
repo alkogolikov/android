@@ -11,16 +11,18 @@ import ru.ndra.engine.TouchEvent;
 public class CombatScene extends Scene {
 
     private final HeroSprite hero;
-    private final Bar bar;
 
     public CombatScene(Game game) {
 
         super(game);
 
-        bar = new Bar(game);
-        game.world.add(bar);
+        // Добавляем элементы управления
+        CombatControlsScene controlsScene = new CombatControlsScene(game);
+        controlsScene.zIndex = 100;
+        game.world.add(controlsScene);
 
-        isButton = true;
+        // Вся сцена кликается
+        this.isButton = true;
 
         addParallax("map/foothills/plane4.png", 200 * 3, 500, .009f / .08f, false);
         addParallax("map/foothills/plane3.png", 108 * 3, 400, .015f / .08f, false);
@@ -48,7 +50,6 @@ public class CombatScene extends Scene {
             enemy.setTexture("enemy.png");
             add(enemy);
         }
-
 
     }
 
@@ -82,7 +83,7 @@ public class CombatScene extends Scene {
         add(sprite);
     }
 
-    @Override
+    /*@Override
     public void onTouch(TouchEvent event) {
         if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
 
@@ -95,5 +96,5 @@ public class CombatScene extends Scene {
         if (event.action == MotionEvent.ACTION_UP) {
             hero.setSpeed(1);
         }
-    }
+    } */
 }
