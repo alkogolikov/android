@@ -28,10 +28,18 @@ public class TouchEvent {
         }
     }
 
+    /**
+     * @return Возвращает x-координату нажатия
+     * Если касание несколькими пальцами, используется первый палец
+     */
     public float getX() {
         return x[0];
     }
 
+    /**
+     * @return Возвращает y-координату нажатия
+     * Если касание несколькими пальцами, используется первый палец
+     */
     public float getY() {
         return y[0];
     }
@@ -40,6 +48,11 @@ public class TouchEvent {
         return ids[i];
     }
 
+    /**
+     * Возвращает количество пальцев, касающихся экрана
+     *
+     * @return integer
+     */
     public float getPointerCount() {
         return this.x.length;
     }

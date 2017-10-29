@@ -143,11 +143,11 @@ public class GameObject {
         return null;
     }
 
-    private void drawLine(float x1, float y1, float x2, float y2, Color color) {
+    public void drawLine(float x1, float y1, float x2, float y2, Color color) {
         game.drawLine.draw(matrix, x1, y1, x2, y2, color);
     }
 
-    private void drawRect(float x1, float y1, float x2, float y2, Color color) {
+    public void drawRect(float x1, float y1, float x2, float y2, Color color) {
         drawLine(x1, y1, x2, y1, color);
         drawLine(x2, y1, x2, y2, color);
         drawLine(x2, y2, x1, y2, color);
