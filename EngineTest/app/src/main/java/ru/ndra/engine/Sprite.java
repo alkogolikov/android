@@ -30,7 +30,7 @@ public class Sprite extends GameObject {
     @Override
     public void draw() {
         if(texture != null) {
-            game.spriteRender.draw(this);
+            game.glHelper.drawSprite(this);
         } else {
             drawRect(-width / 2, -height / 2, width / 2, height / 2, new Color());
         }

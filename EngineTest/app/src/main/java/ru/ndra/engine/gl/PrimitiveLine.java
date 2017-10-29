@@ -10,7 +10,7 @@ import java.nio.FloatBuffer;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
-public class HelperLine extends Helper {
+public class PrimitiveLine extends Primitive {
 
     // Программа
     private int program;
@@ -19,7 +19,7 @@ public class HelperLine extends Helper {
     private int uMatrixLocation;
     private int mPositionHandle;
 
-    public HelperLine(EventManager eventManager) {
+    public PrimitiveLine(EventManager eventManager) {
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });
@@ -74,7 +74,7 @@ public class HelperLine extends Helper {
                 .asFloatBuffer();
     }
 
-       public void draw(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
+    public void draw(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
 
         GLES20.glUseProgram(program);
         GLES20.glEnableVertexAttribArray(mPositionHandle);

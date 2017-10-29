@@ -13,7 +13,7 @@ import ru.ndra.engine.Sprite;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
-public class HelperSprite extends Helper {
+public class PrimitiveSprite extends Primitive {
 
     // Программа
     private int program;
@@ -24,7 +24,7 @@ public class HelperSprite extends Helper {
     private int mPositionHandle;
     private int textureHandle;
 
-    public HelperSprite(EventManager eventManager) {
+    public PrimitiveSprite(EventManager eventManager) {
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });

@@ -81,10 +81,10 @@ class Map {
         Canvas c = new Canvas(render);
         Paint p = new Paint();
         p.setColor(Color.RED);
-        //c.HelperLine(0, 0, render.getWidth() - 1, 0, p);
-        //c.HelperLine(render.getWidth()- 1, 0, render.getWidth()- 1, render.getHeight(), p);
-        //c.HelperLine(render.getWidth()- 1, render.getHeight() - 1, 0, render.getHeight(), p);
-        //c.HelperLine(0, render.getHeight() - 1, 0, 0, p);
+        //c.PrimitiveLine(0, 0, render.getWidth() - 1, 0, p);
+        //c.PrimitiveLine(render.getWidth()- 1, 0, render.getWidth()- 1, render.getHeight(), p);
+        //c.PrimitiveLine(render.getWidth()- 1, render.getHeight() - 1, 0, render.getHeight(), p);
+        //c.PrimitiveLine(0, render.getHeight() - 1, 0, 0, p);
 
         Iterator itr = cells.entrySet().iterator();
         while (itr.hasNext()) {

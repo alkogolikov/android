@@ -136,7 +136,7 @@ public class GameObject {
     }
 
     public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-        game.drawLine.draw(matrix, x1, y1, x2, y2, color);
+        game.glHelper.drawLine(matrix, x1, y1, x2, y2, color);
     }
 
     public void drawRect(float x1, float y1, float x2, float y2, Color color) {

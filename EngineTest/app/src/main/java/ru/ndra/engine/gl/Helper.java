@@ -1,25 +1,26 @@
 package ru.ndra.engine.gl;
 
 import android.graphics.Color;
-import android.opengl.GLES20;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
-import ru.ndra.engine.event.Event;
+import ru.ndra.engine.Sprite;
 import ru.ndra.engine.event.EventManager;
 
-abstract class Helper {
+public class Helper {
 
-    /**
-     * Компилирует шейдеры из исходного кода
-     */
-    protected static int loadShader(int type, String shaderCode) {
-        int shader = GLES20.glCreateShader(type);
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
+    private PrimitiveLine primitiveLine;
+    private PrimitiveSprite primitiveSprite;
+
+    public Helper(EventManager eventManager) {
+        this.primitiveLine = new PrimitiveLine(eventManager);
+        this.primitiveSprite = new PrimitiveSprite(eventManager);
+    }
+
+    public void drawLine(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
+        this.primitiveLine.draw(matrix, x1, y1, x2, y2, color);
+    }
+
+    public void drawSprite(Sprite sprite) {
+        this.primitiveSprite.draw(sprite);
     }
 
 }
