@@ -2,37 +2,34 @@ package ru.ndra.engine;
 
 import android.graphics.Color;
 import android.opengl.GLES20;
-import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import javax.microedition.khronos.opengles.GL10;
-
-/**
- * Created by golikov on 20.02.2017.
- */
+import ru.ndra.engine.event.Event;
+import ru.ndra.engine.event.EventManager;
 
 public class RenderLine {
 
     // Программа
     private int program;
-    private final Game game;
     private FloatBuffer vertexBuffer;
 
-    int uMatrixLocation;
+    private int uMatrixLocation;
     private int mPositionHandle;
 
-    public RenderLine(Game game) {
-        this.game = game;
+    RenderLine(EventManager eventManager) {
+        eventManager.on("gl/init", (Event event) -> {
+            this.glInit();
+        });
     }
 
-    public void glInit() {
+    private void glInit() {
 
         // Создаем программу
         program = GLES20.glCreateProgram();
-        if(program == 0) {
+        if (program == 0) {
             throw new RuntimeException("Opengl create program failed code " + GLES20.glGetError());
         }
 
@@ -80,25 +77,19 @@ public class RenderLine {
     /**
      * Компилирует шейдеры из исходного кода
      */
-    public static int loadShader(int type, String shaderCode) {
-
-        // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
-        // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
+    private static int loadShader(int type, String shaderCode) {
         int shader = GLES20.glCreateShader(type);
-
-        // add the source code to the shader and compile it
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
-
         return shader;
     }
 
-    public void draw(float[] matrix, float x1, float y1,float x2, float y2, Color color) {
+    public void draw(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
 
         GLES20.glUseProgram(program);
         GLES20.glEnableVertexAttribArray(mPositionHandle);
 
-        // Обновляем в бефере координаты текстуры
+        // Обновляем в буфере координаты текстуры
         float[] lineCoords = {x1, y1, x2, y2};
         vertexBuffer.rewind();
 

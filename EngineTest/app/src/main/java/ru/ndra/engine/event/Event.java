@@ -1,12 +1,11 @@
 package ru.ndra.engine.event;
 
-/**
- * Created by golikov on 29.10.2017.
- */
+import java.util.HashMap;
 
 public class Event {
 
     private String name;
+    public HashMap<String, Integer> paramsInt = new HashMap<>();
 
     public Event(String name) {
         this.name = name;

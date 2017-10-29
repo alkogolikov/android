@@ -5,34 +5,37 @@ import android.opengl.GLES20;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
 public class Renderer implements android.opengl.GLSurfaceView.Renderer {
 
     private final EventManager eventManager;
-    Game game;
+   // Game game;
 
-    public Renderer(EventManager eventManager, Game game) {
+    public Renderer(EventManager eventManager) {
         super();
-        this.game = game;
+    //    this.game = game;
         this.eventManager = eventManager;
     }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         GLES20.glClearColor(0, 0, 0, 1.0f);
-        game.glInit();
+        //game.glInit();
         this.eventManager.trigger("gl/init");
     }
 
     public void onDrawFrame(GL10 unused) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        game.draw();
-        this.eventManager.trigger("gl/draw");
+        this.eventManager.trigger("engine/tick");
     }
 
     public void onSurfaceChanged(GL10 unused, int width, int height) {
-        game.glSetViewport(width, height);
-        this.eventManager.trigger("gl/surface-changed");
+        GLES20.glViewport(0, 0, width, height);
+        Event event = new Event("gl/surface-changed");
+        event.paramsInt.put("width", width);
+        event.paramsInt.put("height", height);
+        this.eventManager.trigger(event);
     }
 
 }

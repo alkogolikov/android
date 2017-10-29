@@ -3,14 +3,10 @@ package ru.ndra.engine;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.opengl.GLES20;
 
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
-
-/**
- * Created by golikov on 20.02.2017.
- */
+import ru.ndra.engine.event.Stop;
 
 public class Game {
 
@@ -57,89 +53,72 @@ public class Game {
         spriteRender = new RenderSprite(this);
         drawLine = new RenderLine(this);
         loader = new ResourceLoader(this);
-
         world = new World(this);
-        this.eventManager.on("engine/render.pre", (Event event) -> {
-            world.beforeDraw();
+
+        this.eventManager.on("engine/tick", (Event event) -> {
+
+            // Обновляем тайм-менеджер
+            // Делаем это в самом начале, чтобы
+            timeManager.update();
+
+            this.loader.inOpenglThread();
+            if (!loader.isLoaded()) {
+                throw new Stop();
+            }
+
+            touchListener.processTouchEvents();
         });
-        this.eventManager.on("engine/render", (Event event) -> {
+
+        this.eventManager.on("engine/tick", (Event event) -> {
+            // Обновляем слои
+            world.updateSelfAndChildren(timeManager.dt());
+            world.beforeDraw();
             world.draw();
         });
+
+        this.eventManager.on("gl/surface-changed", (Event event) -> {
+
+            this.width = event.paramsInt.get("width");
+            this.height = event.paramsInt.get("height");
+
+            // Расчитываем вью-матрицу
+            float w = 1, h = 1;
+            if (width > height) {
+                w = (float) height / width;
+            } else {
+                h = (float) width / height;
+            }
+
+            // Создаем матрицу вида
+            // 500 = 1000 / 2 - чтобы размеры объектов задавались в разумных числах
+            viewMatrix = new float[]{
+                    w / 500, 0, 0, 0,
+                    0, h / 500, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1,
+            };
+
+            world.matrix = viewMatrix;
+
+            PointF a = world.screenToModel(0, 0);
+            PointF b = world.screenToModel(width, height);
+            viewport = new RectF(a.x, a.y, b.x, b.y);
+        });
+
+
     }
 
     /**
      * Инициализация OpenGL
      * Выполняется в OpenGL трэде
-     */
+
     public void glInit() {
         spriteRender.glInit();
         drawLine.glInit();
-    }
-
-    /**
-     * Отрисовка игры
-     * Выполняется в OpenGL трэде
-     */
-    public void draw() {
-
-
-        loader.inOpenglThread();
-        if(!loader.isLoaded()) {
-            return;
-        }
-
-        timeManager.update();
-
-        touchListener.processTouchEvents();
-
-        // Обновляем слои
-        world.updateSelfAndChildren(timeManager.dt());
-
-        this.eventManager.trigger("engine/tick.pre");
-        this.eventManager.trigger("engine/tick");
-        this.eventManager.trigger("engine/render.pre");
-        this.eventManager.trigger("engine/render");
-
-    }
-
-    /**
-     * Вызывается при ресайзе
-     */
-    public void glSetViewport(int width, int height) {
-        GLES20.glViewport(0, 0, width, height);
-
-        this.width = width;
-        this.height = height;
-
-        // Расчитываем вью-матрицу
-        float w = 1, h = 1;
-        if(width > height) {
-            w = (float)height / width;
-        } else {
-            h = (float)width / height;
-        }
-
-        // Создаем матрицу вида
-        // 500 = 1000 / 2 - чтобы размеры объектов задавались в разумных числах
-        viewMatrix = new float[] {
-            w / 500,0,0,0,
-            0,h / 500,0,0,
-            0,0,1,0,
-            0,0,0,1,
-        };
-
-        world.matrix = viewMatrix;
-
-        PointF a = world.screenToModel(0, 0);
-        PointF b = world.screenToModel(width, height);
-        viewport = new RectF(a.x, a.y, b.x, b.y);
-
-    }
+    }*/
 
     public DrawView getView() {
         return new DrawView(this);
     }
-
-
 
 }
