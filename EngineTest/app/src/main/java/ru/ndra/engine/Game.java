@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.GLES20;
 
+import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
 /**
@@ -56,7 +57,14 @@ public class Game {
         spriteRender = new RenderSprite(this);
         drawLine = new RenderLine(this);
         loader = new ResourceLoader(this);
+
         world = new World(this);
+        this.eventManager.on("engine/render.pre", (Event event) -> {
+            world.beforeDraw();
+        });
+        this.eventManager.on("engine/render", (Event event) -> {
+            world.draw();
+        });
     }
 
     /**
@@ -74,6 +82,7 @@ public class Game {
      */
     public void draw() {
 
+
         loader.inOpenglThread();
         if(!loader.isLoaded()) {
             return;
@@ -86,11 +95,11 @@ public class Game {
         // Обновляем слои
         world.updateSelfAndChildren(timeManager.dt());
 
-        // Готовим слои к отрисовке
-        world.beforeDraw();
+        this.eventManager.trigger("engine/tick.pre");
+        this.eventManager.trigger("engine/tick");
+        this.eventManager.trigger("engine/render.pre");
+        this.eventManager.trigger("engine/render");
 
-        // Отрисовываем слои
-        world.draw();
     }
 
     /**
