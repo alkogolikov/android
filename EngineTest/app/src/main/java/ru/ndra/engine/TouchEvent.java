@@ -1,12 +1,7 @@
 package ru.ndra.engine;
 
 import android.graphics.PointF;
-import android.util.Log;
 import android.view.MotionEvent;
-
-/**
- * Created by golikov on 25.02.2017.
- */
 
 public class TouchEvent {
 
@@ -26,7 +21,7 @@ public class TouchEvent {
         this.ids = new int[event.getPointerCount()];
         this.event = event;
         this.listener = listener;
-        for(int i = 0; i < event.getPointerCount(); i ++ ) {
+        for (int i = 0; i < event.getPointerCount(); i++) {
             this.x[i] = event.getX(i);
             this.y[i] = event.getY(i);
             this.ids[i] = event.getPointerId(i);

@@ -62,7 +62,7 @@ public class RenderSprite {
 
         // Создаем программу
         program = GLES20.glCreateProgram();
-        if(program == 0) {
+        if (program == 0) {
             throw new RuntimeException("Opengl create program failed code " + GLES20.glGetError());
         }
 
@@ -93,20 +93,11 @@ public class RenderSprite {
 
     /**
      * Компилирует шейдеры из исходного кода
-     * @param type
-     * @param shaderCode
-     * @return
      */
-    public static int loadShader(int type, String shaderCode) {
-
-        // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
-        // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
+    private static int loadShader(int type, String shaderCode) {
         int shader = GLES20.glCreateShader(type);
-
-        // add the source code to the shader and compile it
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
-
         return shader;
     }
 
@@ -114,8 +105,8 @@ public class RenderSprite {
 
         GLES20.glUseProgram(program);
 
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
-        GLES20.glEnableVertexAttribArray(textureHandle);
+        GLES20.glEnableVertexAttribArray(this.mPositionHandle);
+        GLES20.glEnableVertexAttribArray(this.textureHandle);
 
 
         // Обновляем в бефере координаты текстуры

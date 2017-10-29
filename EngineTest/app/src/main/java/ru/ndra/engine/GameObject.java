@@ -56,13 +56,16 @@ public class GameObject {
         sorted = false;
     }
 
+    /**
+     * Убирает все дочерние элементы
+     */
     public void clear() {
         children.clear();
     }
 
     /**
      * Преобразует экранные координаты в координаты модели
-     * @todo рефакторить, тут неэффетивный код
+     * todo рефакторить, тут неэффетивный код
      */
     public PointF screenToModel(float x, float y) {
         float[] src = {x / game.width * 2 - 1, -y / game.height * 2 + 1, 0, 1};
@@ -122,8 +125,8 @@ public class GameObject {
     public void update(float dt) {
     }
 
-    /** Трейсит точку
-     * @param event
+    /**
+     * Трейсит точку
      */
     public GameObject hitTest(float x, float y) {
 
@@ -140,19 +143,15 @@ public class GameObject {
         return null;
     }
 
-    public void drawLine(float x1, float y1, float x2, float y2, Color color) {
+    private void drawLine(float x1, float y1, float x2, float y2, Color color) {
         game.drawLine.draw(matrix, x1, y1, x2, y2, color);
     }
 
-    public void drawRect(float x1, float y1, float x2, float y2, Color color) {
+    private void drawRect(float x1, float y1, float x2, float y2, Color color) {
         drawLine(x1, y1, x2, y1, color);
         drawLine(x2, y1, x2, y2, color);
         drawLine(x2, y2, x1, y2, color);
         drawLine(x1, y2, x1, y1, color);
-    }
-
-    public void cmd(String cmd) {
-
     }
 
 }

@@ -4,8 +4,14 @@ import android.util.Log;
 
 public class TimeManager {
 
+    /**
+     * Итератор тиков
+     */
     private int tick = 0;
 
+    /**
+     * Время предыдущего запуска метода update()
+     */
     private double lastTime = 0;
 
     private int fps = 0;
@@ -45,7 +51,7 @@ public class TimeManager {
         double k = 0.1;
         smoothDt = dt * k + smoothDt * (1 - k);
 
-        if(tick % 100 == 0) {
+        if (tick % 100 == 0) {
             Log.d("xxx", "fps: " + fps());
         }
 
@@ -53,17 +59,13 @@ public class TimeManager {
 
     /**
      * Возвращает скорость игры
-     *
-     * @return
      */
     public float dt() {
-        return (float)(smoothDt / 1000);
+        return (float) (smoothDt / 1000);
     }
 
     /**
      * Возвращает количество кадров в секунду
-     *
-     * @return
      */
     public int fps() {
         return fps;

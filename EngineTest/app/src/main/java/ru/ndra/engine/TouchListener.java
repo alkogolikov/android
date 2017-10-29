@@ -144,7 +144,7 @@ public class TouchListener implements View.OnTouchListener {
 
     }
 
-    public void resetStartPoints(TouchEvent event) {
+    private void resetStartPoints(TouchEvent event) {
         for(int i = 0; i < event.getPointerCount(); i ++) {
             start.put(event.getPointerId(i), new PointF(event.getX(i), event.getY(i)));
         }
