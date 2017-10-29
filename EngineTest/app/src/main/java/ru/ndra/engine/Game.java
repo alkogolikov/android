@@ -7,6 +7,8 @@ import android.graphics.RectF;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
+import ru.ndra.engine.gl.HelperLine;
+import ru.ndra.engine.gl.HelperSprite;
 
 public class Game {
 
@@ -42,16 +44,18 @@ public class Game {
     /**
      * Класс для рендера спрайтов
      */
-    public RenderSprite spriteRender;
+    public HelperSprite spriteRender;
 
-    public RenderLine drawLine;
+    public HelperLine drawLine;
 
     public final EventManager eventManager = new EventManager();
 
     public Game(Context context) {
         this.context = context;
-        spriteRender = new RenderSprite(this);
-        drawLine = new RenderLine(this);
+
+        spriteRender = new HelperSprite(this.eventManager);
+        drawLine = new HelperLine(this.eventManager);
+
         loader = new ResourceLoader(this);
         world = new World(this);
 
@@ -107,15 +111,6 @@ public class Game {
 
 
     }
-
-    /**
-     * Инициализация OpenGL
-     * Выполняется в OpenGL трэде
-
-    public void glInit() {
-        spriteRender.glInit();
-        drawLine.glInit();
-    }*/
 
     public DrawView getView() {
         return new DrawView(this);

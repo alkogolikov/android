@@ -1,4 +1,4 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gl;
 
 import android.opengl.GLES20;
 
@@ -11,17 +11,14 @@ import ru.ndra.engine.event.EventManager;
 public class Renderer implements android.opengl.GLSurfaceView.Renderer {
 
     private final EventManager eventManager;
-   // Game game;
 
     public Renderer(EventManager eventManager) {
         super();
-    //    this.game = game;
         this.eventManager = eventManager;
     }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         GLES20.glClearColor(0, 0, 0, 1.0f);
-        //game.glInit();
         this.eventManager.trigger("gl/init");
     }
 

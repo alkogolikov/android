@@ -1,4 +1,4 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gl;
 
 import android.opengl.GLES20;
 
@@ -8,27 +8,29 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-/**
- * Created by golikov on 20.02.2017.
- */
+import ru.ndra.engine.Game;
+import ru.ndra.engine.Sprite;
+import ru.ndra.engine.event.Event;
+import ru.ndra.engine.event.EventManager;
 
-public class RenderSprite {
+public class HelperSprite extends Helper {
 
     // Программа
     private int program;
-    private final Game game;
     private FloatBuffer vertexBuffer;
 
-    int uMatrixLocation;
+    private int uMatrixLocation;
     private int uTextureUnitLocation;
     private int mPositionHandle;
     private int textureHandle;
 
-    public RenderSprite(Game game) {
-        this.game = game;
+    public HelperSprite(EventManager eventManager) {
+        eventManager.on("gl/init", (Event event) -> {
+            this.glInit();
+        });
     }
 
-    public void glInit() {
+    private void glInit() {
 
         // Включаем прозрачность
         GLES20.glEnable(GLES20.GL_BLEND);
@@ -91,16 +93,6 @@ public class RenderSprite {
 
     }
 
-    /**
-     * Компилирует шейдеры из исходного кода
-     */
-    private static int loadShader(int type, String shaderCode) {
-        int shader = GLES20.glCreateShader(type);
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
-    }
-
     public void draw(Sprite sprite) {
 
         GLES20.glUseProgram(program);
@@ -137,6 +129,7 @@ public class RenderSprite {
         // юнит текстуры
         GLES20.glUniform1i(uTextureUnitLocation, 0);
 
+        Game game = sprite.game;
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, game.loader.getTexture(sprite.texture));
 
         // ----------------------------------------------------------------------

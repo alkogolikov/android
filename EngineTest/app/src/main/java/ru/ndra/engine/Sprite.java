@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Sprite extends GameObject {
 
-    String texture;
+    public String texture;
 
     public float width = 1;
     public float height = 1;

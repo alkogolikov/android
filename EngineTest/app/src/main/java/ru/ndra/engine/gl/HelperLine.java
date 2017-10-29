@@ -1,4 +1,4 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gl;
 
 import android.graphics.Color;
 import android.opengl.GLES20;
@@ -10,7 +10,7 @@ import java.nio.FloatBuffer;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
-public class RenderLine {
+public class HelperLine extends Helper {
 
     // Программа
     private int program;
@@ -19,7 +19,7 @@ public class RenderLine {
     private int uMatrixLocation;
     private int mPositionHandle;
 
-    RenderLine(EventManager eventManager) {
+    public HelperLine(EventManager eventManager) {
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });
@@ -74,17 +74,7 @@ public class RenderLine {
                 .asFloatBuffer();
     }
 
-    /**
-     * Компилирует шейдеры из исходного кода
-     */
-    private static int loadShader(int type, String shaderCode) {
-        int shader = GLES20.glCreateShader(type);
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
-    }
-
-    public void draw(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
+       public void draw(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
 
         GLES20.glUseProgram(program);
         GLES20.glEnableVertexAttribArray(mPositionHandle);

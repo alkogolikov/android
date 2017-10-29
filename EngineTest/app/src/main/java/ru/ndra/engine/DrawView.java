@@ -4,7 +4,7 @@ import android.opengl.GLSurfaceView;
 
 public class DrawView extends GLSurfaceView {
 
-    private ru.ndra.engine.Renderer renderer;
+    private ru.ndra.engine.gl.Renderer renderer;
 
     public DrawView(Game game) {
 
@@ -12,7 +12,7 @@ public class DrawView extends GLSurfaceView {
 
         this.setEGLContextClientVersion(2);
 
-        renderer = new ru.ndra.engine.Renderer(game.eventManager, game);
+        renderer = new ru.ndra.engine.gl.Renderer(game.eventManager);
 
         setEGLConfigChooser(8, 8, 8, 8, 16, 0);
         setRenderer(renderer);

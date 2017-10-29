@@ -3,10 +3,6 @@ package ru.ndra.engine;
 import android.graphics.PointF;
 import android.opengl.Matrix;
 
-/**
- * Created by golikov on 21.02.2017.
- */
-
 public class Camera {
 
     private final Scene layer;
