@@ -21,15 +21,8 @@ public class CombatScene extends Scene {
         controlsScene.zIndex = 100;
         game.world.add(controlsScene);
 
-        // Вся сцена кликается
-        this.isButton = true;
-
-        addParallax("map/foothills/plane4.png", 200 * 3, 500, .009f / .08f, false);
-        addParallax("map/foothills/plane3.png", 108 * 3, 400, .015f / .08f, false);
-        addParallax("map/foothills/plane2.png", 69 * 3, 370, .03f / .08f, false);
-        addParallax("map/foothills/plane1.png", 145 * 3, 0, .05f / .08f, false);
-        addParallax("map/foothills/plane5.png", 74 * 3, 0, 1, false);
-        addParallax("map/foothills/plane6.png", 56 * 3, -50, .15f / .08f, true);
+        ParallaxScene parallaxScene = new ParallaxScene(game);
+        game.world.add(parallaxScene);
 
         // ГГ
         hero = new HeroSprite(game);
@@ -53,48 +46,4 @@ public class CombatScene extends Scene {
 
     }
 
-    public void update(float dt) {
-        camera.position.x = hero.position.x;
-    }
-
-    private void addParallax(final String texture, float height, final float bottom, final float speed, boolean onTop) {
-        Sprite sprite = new Sprite(game) {
-            float textureRight;
-            boolean configured;
-            float realSpeed;
-
-            public void update(float dt) {
-                if (!configured) {
-                    Point size = game.loader.textureSize(texture);
-                    width = game.viewport.right - game.viewport.left;
-                    position.y = game.viewport.bottom + height / 2 + bottom;
-                    textureRight = (float) size.y / size.x * width / height;
-                    realSpeed = textureRight / width;
-                    configured = true;
-                }
-                position.x = camera.position.x;
-                textureCoords.left = hero.position.x * realSpeed * speed;
-                textureCoords.right = hero.position.x * realSpeed * speed + textureRight;
-            }
-        };
-        sprite.setTexture(texture);
-        sprite.height = height;
-        sprite.zIndex = onTop ? 1 : 0;
-        add(sprite);
-    }
-
-    /*@Override
-    public void onTouch(TouchEvent event) {
-        if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
-
-            if (event.getX() > game.width / 2) {
-                bar.reset();
-            } else {
-                hero.setSpeed(-1);
-            }
-        }
-        if (event.action == MotionEvent.ACTION_UP) {
-            hero.setSpeed(1);
-        }
-    } */
 }
