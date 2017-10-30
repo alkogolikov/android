@@ -8,8 +8,6 @@ import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gl.Helper;
-import ru.ndra.engine.gl.PrimitiveLine;
-import ru.ndra.engine.gl.PrimitiveSprite;
 
 public class Game {
 
@@ -31,17 +29,24 @@ public class Game {
 
     TouchListener touchListener = new TouchListener(this);
 
+    /**
+     * Прямоугольник экрана в мировых координатах
+     */
     public RectF viewport;
 
     /**
-     * Коллекция слоев
+     * Основной игровой объект
      */
-    public World world;
+    public GameObject world;
 
     public float[] viewMatrix;
 
+    // todo убрать бы их
     public int width, height;
 
+    /**
+     * Помошник для рисования примитивов
+     */
     public Helper glHelper;
 
     public final EventManager eventManager = new EventManager();
@@ -52,7 +57,7 @@ public class Game {
         glHelper = new Helper(this.eventManager);
 
         loader = new ResourceLoader(this);
-        world = new World(this);
+        world = new GameObject(this);
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
