@@ -9,6 +9,7 @@ public class HeroSprite extends CreatureSprite {
 
     public HeroSprite(Game game) {
         super(game);
+        this.setTexture("character.png");
         game.eventManager.on("control/move-forward", (Event event) -> {
             this.moveForward();
         });

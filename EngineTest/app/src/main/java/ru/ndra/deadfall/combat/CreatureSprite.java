@@ -11,6 +11,8 @@ public class CreatureSprite extends Sprite {
 
     public CreatureSprite(Game game) {
         super(game);
+        this.width = 200;
+        this.height = 300;
     }
 
     /**
