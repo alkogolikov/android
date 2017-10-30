@@ -2,12 +2,12 @@ package ru.ndra.deadfall.combat;
 
 import ru.ndra.engine.Game;
 import ru.ndra.engine.Sprite;
-import ru.ndra.engine.event.Event;
 
 
 public class CreatureSprite extends Sprite {
 
-    private float speed = 0;
+    private float moveDirection = 0;
+    public float speed = 200;
 
     public CreatureSprite(Game game) {
         super(game);
@@ -19,35 +19,35 @@ public class CreatureSprite extends Sprite {
      * Существо идет вперед
      */
     public void moveBackward() {
-        this.setSpeed(-1);
+        this.setMoveDirection(-1);
     }
 
     /**
      * Существо идет назад
      */
     public void moveForward() {
-        this.setSpeed(1);
+        this.setMoveDirection(1);
     }
 
     /**
      * Существо останавливается
      */
     public void moveStop() {
-        this.setSpeed(0);
+        this.setMoveDirection(0);
     }
 
     /**
      * Установить скорость
      *
-     * @param speed Скорость (положительная - идти вперед, отпицательная - идти назад)
+     * @param moveDirection Направление перемещения (1 - идти вперед, -1 - идти назад, 0 - стоять)
      */
-    public void setSpeed(float speed) {
-        this.speed = speed;
+    public void setMoveDirection(float moveDirection) {
+        this.moveDirection = moveDirection;
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
-        this.position.x += speed * dt * 200;
+        this.position.x += moveDirection * dt * this.speed;
     }
 }
