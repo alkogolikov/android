@@ -1,4 +1,4 @@
-package ru.ndra.deadfall.combat;
+package ru.ndra.deadfall.combat.creature;
 
 import java.util.Random;
 
@@ -21,14 +21,14 @@ public class EnemySprite extends CreatureSprite {
         Random rand = new Random();
 
         if (Math.random() < .01) {
-            switch (rand.nextInt(3)) {
+            switch (rand.nextInt(10)) {
                 case 0:
                     this.moveForward();
                     break;
                 case 1:
                     this.moveBackward();
                     break;
-                case 2:
+                default:
                     this.moveStop();
                     break;
             }

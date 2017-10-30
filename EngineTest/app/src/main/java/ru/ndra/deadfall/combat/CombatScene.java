@@ -1,6 +1,8 @@
 package ru.ndra.deadfall.combat;
 
 import ru.ndra.deadfall.Game;
+import ru.ndra.deadfall.combat.creature.EnemySprite;
+import ru.ndra.deadfall.combat.creature.HeroSprite;
 import ru.ndra.deadfall.combat.parallax.ParallaxScene;
 import ru.ndra.engine.Scene;
 import ru.ndra.engine.Sprite;

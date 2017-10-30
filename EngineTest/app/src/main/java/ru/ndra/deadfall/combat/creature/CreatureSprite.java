@@ -1,4 +1,4 @@
-package ru.ndra.deadfall.combat;
+package ru.ndra.deadfall.combat.creature;
 
 import ru.ndra.engine.Game;
 import ru.ndra.engine.Sprite;
