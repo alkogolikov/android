@@ -1,12 +1,10 @@
 package ru.ndra.deadfall.combat;
 
-import android.graphics.Point;
-import android.view.MotionEvent;
-
 import ru.ndra.deadfall.Game;
+import ru.ndra.deadfall.combat.parallax.ParallaxScene;
 import ru.ndra.engine.Scene;
 import ru.ndra.engine.Sprite;
-import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.event.Event;
 
 public class CombatScene extends Scene {
 
@@ -23,6 +21,10 @@ public class CombatScene extends Scene {
 
         ParallaxScene parallaxScene = new ParallaxScene(game);
         game.world.add(parallaxScene);
+
+        game.eventManager.on("combat/camera-position", (Event event) -> {
+            this.camera.position.x = event.paramsFloat.get("x");
+        });
 
         // ГГ
         hero = new HeroSprite(game);

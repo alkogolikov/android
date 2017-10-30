@@ -1,7 +1,6 @@
 package ru.ndra.deadfall.combat;
 
 import ru.ndra.engine.Game;
-import ru.ndra.engine.Sprite;
 import ru.ndra.engine.event.Event;
 
 
@@ -21,4 +20,11 @@ public class HeroSprite extends CreatureSprite {
         });
     }
 
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        Event event = new Event("combat/camera-position");
+        event.paramsFloat.put("x", this.position.x);
+        this.game.eventManager.trigger(event);
+    }
 }

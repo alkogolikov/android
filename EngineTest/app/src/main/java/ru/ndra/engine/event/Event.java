@@ -6,6 +6,7 @@ public class Event {
 
     private String name;
     public HashMap<String, Integer> paramsInt = new HashMap<>();
+    public HashMap<String, Float> paramsFloat = new HashMap<>();
 
     public Event(String name) {
         this.name = name;
