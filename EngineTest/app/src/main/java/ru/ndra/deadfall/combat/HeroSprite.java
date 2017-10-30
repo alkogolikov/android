@@ -22,18 +22,32 @@ public class HeroSprite extends Sprite {
         });
     }
 
+    /**
+     * Существо идет вперед
+     */
     private void moveBackward() {
         this.setSpeed(-1);
     }
 
+    /**
+     * Существо идет назад
+     */
     private void moveForward() {
         this.setSpeed(1);
     }
 
+    /**
+     * Существо останавливается
+     */
     private void moveStop() {
         this.setSpeed(0);
     }
 
+    /**
+     * Установить скорость
+     *
+     * @param speed Скорость (положительная - идти вперед, отпицательная - идти назад)
+     */
     public void setSpeed(float speed) {
         this.speed = speed;
     }

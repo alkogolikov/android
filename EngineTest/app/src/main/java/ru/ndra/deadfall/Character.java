@@ -1,9 +1,8 @@
 package ru.ndra.deadfall;
 
 /**
- * Created by golikov on 26.02.2017.
+ * Базовый класс персонажа
  */
-
 public class Character extends Creature {
 
     /**
@@ -20,8 +19,6 @@ public class Character extends Creature {
     public void items() {
 
     }
-
-
 
     /**
      * Возвращает коллекцию квестов пользователя

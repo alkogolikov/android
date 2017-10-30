@@ -1,21 +1,9 @@
 package ru.ndra.deadfall;
 
-import android.graphics.PointF;
-
-import ru.ndra.deadfall.AttackEvent;
-
-/**
- * Created by golikov on 26.02.2017.
- */
 public class Creature {
 
-    public final void takeDamage(AttackEvent event) {
-
-    }
-
     /**
-     * Возврщает количество жизни у персонажа
-     * @return
+     * @return Возврщает количество жизни у персонажа
      */
     public float hp() {
         return 100;
@@ -68,6 +56,10 @@ public class Creature {
      * Возвращает коллекцию скиллов пользователя
      */
     public void skills() {
+
+    }
+
+    public final void takeDamage(AttackEvent event) {
 
     }
 
