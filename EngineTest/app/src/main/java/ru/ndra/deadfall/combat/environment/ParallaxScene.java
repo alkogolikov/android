@@ -18,11 +18,14 @@ public class ParallaxScene extends Scene {
         });
     }
 
-    public void addParallax(final String texture, float height, final float bottom, final float speed, boolean onTop) {
+    public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed, boolean onTop) {
         Sprite sprite = new Sprite(game) {
+
             float textureRight;
             boolean configured;
             float realSpeed;
+
+            float selfOffset;
 
             public void update(float dt) {
                 if (!configured) {
@@ -33,9 +36,12 @@ public class ParallaxScene extends Scene {
                     realSpeed = textureRight / width;
                     configured = true;
                 }
+
+                selfOffset += selfSpeed * dt;
+
                 position.x = camera.position.x;
-                textureCoords.left = ParallaxScene.this.offsetX * realSpeed * speed;
-                textureCoords.right = ParallaxScene.this.offsetX * realSpeed * speed + textureRight;
+                textureCoords.left = (selfOffset + ParallaxScene.this.offsetX) * realSpeed * speed;
+                textureCoords.right = textureCoords.left + textureRight;
             }
         };
         sprite.setTexture(texture);
