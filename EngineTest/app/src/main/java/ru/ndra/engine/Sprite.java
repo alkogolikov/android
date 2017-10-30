@@ -4,9 +4,6 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.Matrix;
-import android.util.Log;
-
-import java.util.ArrayList;
 
 /**
  * Created by golikov on 18.02.2017.
@@ -39,16 +36,16 @@ public class Sprite extends GameObject {
 
     public void beforeDraw() {
         super.beforeDraw();
-        matrix = new float[]{
+        modelToScreenMatrix = new float[]{
                 1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1,
         };
-        Matrix.translateM(matrix, 0, position.x, position.y, 0);
-        Matrix.rotateM(matrix, 0, rotation, 0, 0, 1);
-        //Matrix.scaleM(matrix, 0, width, height, 1);
-        Matrix.multiplyMM(matrix, 0, parent.matrix, 0, matrix, 0);
+        Matrix.translateM(modelToScreenMatrix, 0, position.x, position.y, 0);
+        Matrix.rotateM(modelToScreenMatrix, 0, rotation, 0, 0, 1);
+        //Matrix.scaleM(modelToScreenMatrix, 0, width, height, 1);
+        Matrix.multiplyMM(modelToScreenMatrix, 0, parent.modelToScreenMatrix, 0, modelToScreenMatrix, 0);
     }
 
     public void setTexture(String texture) {

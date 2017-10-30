@@ -3,11 +3,7 @@ package ru.ndra.deadfall;
 import android.content.Context;
 
 import ru.ndra.deadfall.combat.CombatScene;
-import ru.ndra.engine.Scene;
-
-/**
- * Created by golikov on 22.02.2017.
- */
+import ru.ndra.engine.GameObject;
 
 public class Game extends ru.ndra.engine.Game {
 
@@ -18,7 +14,7 @@ public class Game extends ru.ndra.engine.Game {
 
         map = new Map(this);
 
-        Scene scene = new CombatScene(this);
+        GameObject scene = new CombatScene(this);
         world.add(scene);
 
     }

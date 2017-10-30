@@ -102,7 +102,7 @@ public class Game {
                     0, 0, 0, 1,
             };
 
-            world.matrix = viewMatrix;
+            world.modelToScreenMatrix = viewMatrix;
 
             PointF a = world.screenToModel(0, 0);
             PointF b = world.screenToModel(width, height);

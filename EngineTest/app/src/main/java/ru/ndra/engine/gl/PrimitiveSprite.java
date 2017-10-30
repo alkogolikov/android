@@ -136,7 +136,7 @@ public class PrimitiveSprite extends Primitive {
 
         // Пуляем матрицу
 
-        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, sprite.matrix, 0);
+        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, sprite.modelToScreenMatrix, 0);
 
         // -----------------------------------------------------------------------
 
