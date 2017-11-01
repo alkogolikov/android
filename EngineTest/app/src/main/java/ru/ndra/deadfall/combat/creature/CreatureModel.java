@@ -32,7 +32,7 @@ public class CreatureModel {
      * @return Регенерация HP за секунду
      */
     public float hpRegenPerSecond() {
-        return 1f;
+        return 10f;
     }
 
  /*   public float mana() {
@@ -84,9 +84,13 @@ public class CreatureModel {
 
     /**
      * Тик обновления модели
+     *
      * @param dt интервал, на который нужно обновить
      */
     public void update(float dt) {
         this.hp += this.hpRegenPerSecond() * dt;
+        if (this.hp > this.getHpMax()) {
+            this.hp = this.getHpMax();
+        }
     }
 }
