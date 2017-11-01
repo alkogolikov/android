@@ -6,6 +6,7 @@ import ru.ndra.engine.Sprite;
 
 public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
+    private final Sprite hpSprite;
     private float moveDirection = 0;
 
     public float speed = 200;
@@ -13,10 +14,19 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
     public T model;
 
     public CreatureSprite(Game game, T model) {
+
         super(game);
+
         this.width = 200;
         this.height = 300;
         this.model = model;
+
+        this.hpSprite = new Sprite(game);
+        this.hpSprite.width = this.width;
+        this.hpSprite.height = 20;
+        this.hpSprite.position.x = 0;
+        this.hpSprite.position.y = this.height / 2;
+        this.add(hpSprite);
     }
 
     /**

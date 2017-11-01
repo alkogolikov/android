@@ -39,7 +39,7 @@ public class CombatScene extends Scene {
         for (int i = 0; i < 6; i++) {
             CreatureModel enemyModel = new CreatureModel();
             Sprite enemy = new EnemySprite(game, enemyModel);
-            enemy.position.y = -300;
+            enemy.position.y = -330;
             enemy.position.x = (float) (Math.random() * 3000 - 1000);
             objectsScene.add(enemy);
         }
