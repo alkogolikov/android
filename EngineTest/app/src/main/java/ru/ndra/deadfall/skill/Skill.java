@@ -1,7 +1,6 @@
 package ru.ndra.deadfall.skill;
 
-import ru.ndra.deadfall.AttackEvent;
-import ru.ndra.deadfall.Creature;
+import ru.ndra.deadfall.combat.creature.CreatureModel;
 
 /**
  * Created by golikov on 26.02.2017.
@@ -9,9 +8,9 @@ import ru.ndra.deadfall.Creature;
 
 public abstract class Skill {
 
-    private Creature owner;
+    private CreatureModel owner;
 
-    abstract public void useInCombat(Creature target);
+    abstract public void useInCombat(CreatureModel target);
 
 
 }

@@ -6,8 +6,8 @@ import ru.ndra.engine.event.Event;
 
 public class HeroSprite extends CreatureSprite {
 
-    public HeroSprite(Game game) {
-        super(game);
+    public HeroSprite(Game game, HeroModel model) {
+        super(game, model);
         this.setTexture("character.png");
         game.eventManager.on("control/move-forward", (Event event) -> {
             this.moveForward();

@@ -1,7 +1,7 @@
 package ru.ndra.deadfall.skill;
 
 import ru.ndra.deadfall.AttackEvent;
-import ru.ndra.deadfall.Creature;
+import ru.ndra.deadfall.combat.creature.CreatureModel;
 
 /**
  * Умение укуса5
@@ -9,15 +9,15 @@ import ru.ndra.deadfall.Creature;
 
 public class Bite extends Skill {
 
-    public final Creature owner;
+    public final CreatureModel owner;
 
-    public Bite(Creature owner) {
+    public Bite(CreatureModel owner) {
         this.owner = owner;
     }
 
-    public void useInCombat(Creature target) {
+    public void useInCombat(CreatureModel target) {
         AttackEvent event = new AttackEvent();
-        event.addDamage(AttackEvent.TYPE_MELEE, owner.strength() / 10);
+       // event.addDamage(AttackEvent.TYPE_MELEE, owner.strength() / 10);
         target.takeDamage(event);
     }
 

@@ -7,8 +7,8 @@ import ru.ndra.engine.Game;
 
 public class EnemySprite extends CreatureSprite {
 
-    public EnemySprite(Game game) {
-        super(game);
+    public EnemySprite(Game game, CreatureModel model) {
+        super(game, model);
         this.setTexture("enemy.png");
         this.speed = 50;
     }

@@ -1,14 +1,14 @@
-package ru.ndra.deadfall;
+package ru.ndra.deadfall.combat.creature;
 
 /**
  * Базовый класс персонажа
  */
-public class Character extends Creature {
+public class HeroModel extends CreatureModel {
 
     /**
      * Сколько денег у пользователя
      */
-    public void money() {
+    public void getMoney() {
 
     }
 
@@ -16,14 +16,14 @@ public class Character extends Creature {
      * Возвращает коллекцию вещей персонажа
      * Сюда входит также одежда
      */
-    public void items() {
+    public void getItems() {
 
     }
 
     /**
      * Возвращает коллекцию квестов пользователя
      */
-    public void quests() {
+    public void getQuests() {
 
     }
 

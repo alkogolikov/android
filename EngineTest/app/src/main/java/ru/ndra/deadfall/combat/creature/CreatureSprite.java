@@ -4,15 +4,19 @@ import ru.ndra.engine.Game;
 import ru.ndra.engine.Sprite;
 
 
-public class CreatureSprite extends Sprite {
+public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
     private float moveDirection = 0;
+
     public float speed = 200;
 
-    public CreatureSprite(Game game) {
+    public T model;
+
+    public CreatureSprite(Game game, T model) {
         super(game);
         this.width = 200;
         this.height = 300;
+        this.model = model;
     }
 
     /**
@@ -37,7 +41,7 @@ public class CreatureSprite extends Sprite {
     }
 
     /**
-     * Установить скорость
+     * Установить направления перемещения
      *
      * @param moveDirection Направление перемещения (1 - идти вперед, -1 - идти назад, 0 - стоять)
      */
@@ -47,6 +51,7 @@ public class CreatureSprite extends Sprite {
 
     @Override
     public void update(float dt) {
+        this.model.update(dt);
         super.update(dt);
         this.position.x += moveDirection * dt * this.speed;
     }
