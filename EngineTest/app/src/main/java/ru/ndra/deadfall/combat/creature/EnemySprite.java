@@ -4,7 +4,6 @@ import java.util.Random;
 
 import ru.ndra.engine.Game;
 
-
 public class EnemySprite extends CreatureSprite {
 
     public EnemySprite(Game game, CreatureModel model) {

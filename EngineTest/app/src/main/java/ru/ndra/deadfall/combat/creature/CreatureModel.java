@@ -4,6 +4,8 @@ import ru.ndra.deadfall.AttackEvent;
 
 public class CreatureModel {
 
+    private float hp;
+
     /**
      * @return Живо ли существо?
      * Для зомбака или вампира, пока его не убьют, методтоже вернет true :)
@@ -16,7 +18,7 @@ public class CreatureModel {
      * @return Возврщает текущее количество очков жизни (health point, HP) у персонажа
      */
     public float getHp() {
-        return 50;
+        return this.hp;
     }
 
     /**
@@ -30,7 +32,7 @@ public class CreatureModel {
      * @return Регенерация HP за секунду
      */
     public float hpRegenPerSecond() {
-        return 0;
+        return 1f;
     }
 
  /*   public float mana() {
@@ -85,5 +87,6 @@ public class CreatureModel {
      * @param dt интервал, на который нужно обновить
      */
     public void update(float dt) {
+        this.hp += this.hpRegenPerSecond() * dt;
     }
 }

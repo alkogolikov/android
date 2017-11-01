@@ -6,7 +6,7 @@ import ru.ndra.engine.Sprite;
 
 public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
-    private final Sprite hpSprite;
+    private final HpSprite hpSprite;
     private float moveDirection = 0;
 
     public float speed = 200;
@@ -59,8 +59,17 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
     @Override
     public void update(float dt) {
+
+        // Обноляем модель
         this.model.update(dt);
+
         super.update(dt);
+
+        // Перемещение существа
         this.position.x += moveDirection * dt * this.speed;
+
+        // Рассчитываем заполнение hp
+        float hpFilling = this.model.getHp() / this.model.getHpMax();
+        this.hpSprite.setFilling(hpFilling);
     }
 }
