@@ -21,9 +21,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
         this.height = 300;
         this.model = model;
 
-        this.hpSprite = new Sprite(game);
-        this.hpSprite.width = this.width;
-        this.hpSprite.height = 20;
+        this.hpSprite = new HpSprite(game);
         this.hpSprite.position.x = 0;
         this.hpSprite.position.y = this.height / 2;
         this.add(hpSprite);
