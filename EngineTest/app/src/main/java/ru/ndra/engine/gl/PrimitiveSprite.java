@@ -16,13 +16,13 @@ import ru.ndra.engine.event.EventManager;
 public class PrimitiveSprite extends Primitive {
 
     // Программа
-    private int program;
-    private FloatBuffer vertexBuffer;
+    protected int program;
+    protected FloatBuffer vertexBuffer;
 
-    private int uMatrixLocation;
-    private int uTextureUnitLocation;
-    private int mPositionHandle;
-    private int textureHandle;
+    protected int uMatrixLocation;
+    protected int uTextureUnitLocation;
+    protected int mPositionHandle;
+    protected int textureHandle;
 
     public PrimitiveSprite(EventManager eventManager) {
         eventManager.on("gl/init", (Event event) -> {
@@ -30,7 +30,7 @@ public class PrimitiveSprite extends Primitive {
         });
     }
 
-    private void glInit() {
+    protected void glInit() {
 
         // Включаем прозрачность
         GLES20.glEnable(GLES20.GL_BLEND);

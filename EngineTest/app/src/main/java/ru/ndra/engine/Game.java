@@ -54,7 +54,7 @@ public class Game {
     public Game(Context context) {
         this.context = context;
 
-        glHelper = new Helper(this.eventManager);
+        glHelper = new Helper(this, this.eventManager);
 
         loader = new ResourceLoader(this);
         world = new GameObject(this);

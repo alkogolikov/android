@@ -11,6 +11,12 @@ public class CombatControlsScene extends Scene {
 
     private final Bar bar;
 
+    @Override
+    public void draw() {
+        super.draw();
+        this.game.glHelper.drawText(this.modelToScreenMatrix);
+    }
+
     public CombatControlsScene(Game game) {
 
         super(game);
@@ -56,7 +62,6 @@ public class CombatControlsScene extends Scene {
         moveForthButton.zIndex = 1000;
         moveForthButton.game.world.add(moveForthButton);
         moveForthButton.isButton = true;
-
 
     }
 
