@@ -32,9 +32,7 @@ public class PrimitiveText extends PrimitiveSprite {
         paint.setColor(Color.RED);
         paint.setTextSize(10);
         paint.setTextAlign(Paint.Align.LEFT);
-        paint.setText(Paint.Align.LEFT);
-        c.drawText("ololo", 2, 2, p);
-       // c.drawLine(0, 0, 10, 10, p);
+        c.drawText("ololo", 2, 4, paint);
 
         this.game.loader.addTexture("primitive/chars", render);
 

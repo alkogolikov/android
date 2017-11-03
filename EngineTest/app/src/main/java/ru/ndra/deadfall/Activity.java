@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import ru.ndra.engine.di.Container;
+
 public class Activity extends AppCompatActivity {
 
     @Override
@@ -11,10 +13,12 @@ public class Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        /**
-         * Создаем инстанс игры
-         */
-        Game game = new Game((Context) this);
+        Container container = new Container();
+
+        container.put(Context.class, this);
+
+        Game game = (Game) container.get(Game.class);
+
         setContentView(game.getView());
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+import ru.ndra.engine.di.Container;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
@@ -49,12 +50,21 @@ public class Game {
      */
     public Helper glHelper;
 
-    public final EventManager eventManager = new EventManager();
+    public EventManager eventManager;
 
-    public Game(Context context) {
+    public Game(
+            Context context,
+            EventManager eventManager,
+            Helper glHelper
+    ) {
+
+        Container container = new Container();
+
+        this.eventManager = eventManager;
+        this.glHelper = glHelper;
+
         this.context = context;
 
-        glHelper = new Helper(this, this.eventManager);
 
         loader = new ResourceLoader(this);
         world = new GameObject(this);
