@@ -42,7 +42,7 @@ class InjectorAbstractFactory implements FactoryInterface {
             return instance;
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed create " + token + ":" + e.getCause());
         }
     }
 }

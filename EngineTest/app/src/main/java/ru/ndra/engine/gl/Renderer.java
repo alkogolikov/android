@@ -10,7 +10,7 @@ import ru.ndra.engine.event.EventManager;
 
 public class Renderer implements android.opengl.GLSurfaceView.Renderer {
 
-    private final EventManager eventManager;
+    private EventManager eventManager;
 
     public Renderer(EventManager eventManager) {
         super();

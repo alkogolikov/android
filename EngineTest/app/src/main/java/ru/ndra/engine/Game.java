@@ -1,5 +1,7 @@
 package ru.ndra.engine;
 
+import android.util.Log;
+
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
@@ -46,7 +48,7 @@ public class Game {
     private TimeManager timeManager;
 
     @Inject
-    public void setResourceLoader(TimeManager timeManager) {
+    public void setTimeManager(TimeManager timeManager) {
         this.timeManager = timeManager;
     }
 

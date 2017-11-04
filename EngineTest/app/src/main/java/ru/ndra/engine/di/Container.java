@@ -16,6 +16,7 @@ public class Container {
     public Container() {
         this.put(Container.class.getCanonicalName(), this);
         InjectorAbstractFactory injectorAbstractFactory = new InjectorAbstractFactory(this);
+        this.abstractFactories.add(injectorAbstractFactory);
     }
 
     public Container(Container parent) {
