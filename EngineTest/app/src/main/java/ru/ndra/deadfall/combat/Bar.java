@@ -2,7 +2,8 @@ package ru.ndra.deadfall.combat;
 
 import java.util.Random;
 
-import ru.ndra.engine.*;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 
 /**
  * Created by golikov on 26.02.2017.

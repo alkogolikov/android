@@ -1,10 +1,9 @@
 package ru.ndra.deadfall;
 
 import android.graphics.PointF;
-import android.util.Log;
 
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.TouchEvent;
 
 public class MapScene extends Scene {

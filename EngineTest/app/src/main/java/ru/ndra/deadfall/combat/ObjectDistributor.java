@@ -4,8 +4,8 @@ import ru.ndra.deadfall.combat.creature.CreatureModel;
 import ru.ndra.deadfall.combat.creature.EnemySprite;
 import ru.ndra.deadfall.combat.creature.HeroModel;
 import ru.ndra.deadfall.combat.creature.HeroSprite;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 
 /**
  * Класс для распределения объектов по карте

@@ -1,12 +1,15 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gameobject;
 
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.opengl.Matrix;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
+
+import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.Viewport;
+import ru.ndra.engine.gl.Helper;
 
 /**
  * Базовый класс для всех игровых объектов
@@ -14,10 +17,9 @@ import java.util.Comparator;
  */
 public class GameObject {
 
-    /**
-     * Главный объект игры
-     */
-    public final Game game;
+    protected Viewport viewport;
+
+    protected Helper glHelper;
 
     /**
      * Коллекция дочерних объектов
@@ -50,8 +52,9 @@ public class GameObject {
      */
     private boolean isChildrenSorted = false;
 
-    public GameObject(Game game) {
-        this.game = game;
+    public GameObject(Viewport viewport, Helper glHelper) {
+        this.viewport = viewport;
+        this.glHelper = glHelper;
     }
 
     public void onClick(TouchEvent event) {
@@ -82,7 +85,7 @@ public class GameObject {
      * todo рефакторить, тут неэффетивный код
      */
     public PointF screenToModel(float x, float y) {
-        float[] src = {x / game.width * 2 - 1, -y / game.height * 2 + 1, 0, 1};
+        float[] src = {x / this.viewport.getWidth() * 2 - 1, -y / this.viewport.getHeight() * 2 + 1, 0, 1};
         float[] inverse = new float[16];
         Matrix.invertM(inverse, 0, modelToScreenMatrix, 0);
         float[] ret = new float[4];
@@ -104,7 +107,7 @@ public class GameObject {
         // Сортирую коллекцию
         if (!isChildrenSorted) {
             isChildrenSorted = true;
-            Collections.sort(children, new Comparator<GameObject>() {
+            children.sort(new Comparator<GameObject>() {
                 @Override
                 public int compare(GameObject obj1, GameObject obj2) {
                     float d = obj1.zIndex - obj2.zIndex;
@@ -159,14 +162,15 @@ public class GameObject {
 
     /**
      * Рисует линию в координатах объекта
-     * @param x1 X-координата начала линии
-     * @param y1 Y-координата начала линии
-     * @param x2 X-координата конца линии
-     * @param y2 Y-координата конца линии
+     *
+     * @param x1    X-координата начала линии
+     * @param y1    Y-координата начала линии
+     * @param x2    X-координата конца линии
+     * @param y2    Y-координата конца линии
      * @param color Цвет
      */
     public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-        game.glHelper.drawLine(modelToScreenMatrix, x1, y1, x2, y2, color);
+        this.glHelper.drawLine(modelToScreenMatrix, x1, y1, x2, y2, color);
     }
 
     public void drawRect(float x1, float y1, float x2, float y2, Color color) {

@@ -2,9 +2,7 @@ package ru.ndra.engine.gl;
 
 import android.graphics.Color;
 
-import ru.ndra.engine.Game;
-import ru.ndra.engine.Sprite;
-import ru.ndra.engine.event.EventManager;
+import ru.ndra.engine.gameobject.Sprite;
 
 public class Helper {
 

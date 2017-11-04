@@ -1,11 +1,9 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gameobject;
 
 import android.graphics.PointF;
 import android.opengl.Matrix;
 
 public class Camera {
-
-    private final Scene layer;
 
     public PointF position = new PointF(0, 0);
 
@@ -15,8 +13,7 @@ public class Camera {
 
     public float[] matrix;
 
-    public Camera(Scene layer) {
-        this.layer = layer;
+    public Camera() {
     }
 
     public void update() {

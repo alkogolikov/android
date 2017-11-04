@@ -4,20 +4,16 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-import ru.ndra.engine.di.Container;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
+import ru.ndra.engine.gameobject.GameObject;
+import ru.ndra.engine.gameobject.World;
 import ru.ndra.engine.gl.Helper;
 
 public class Game {
 
-    /**
-     * Основная активити игры
-     */
-    public Context context;
-
-    /**
+       /**
      * Загрузчик ресурсов
      */
     public ResourceLoader loader;
@@ -28,7 +24,7 @@ public class Game {
      */
     TimeManager timeManager = new TimeManager();
 
-    TouchListener touchListener = new TouchListener(this);
+   // TouchListener touchListener = new TouchListener(this);
 
     /**
      * Прямоугольник экрана в мировых координатах
@@ -42,9 +38,6 @@ public class Game {
 
     public float[] viewMatrix;
 
-    // todo убрать бы их
-    public int width, height;
-
     /**
      * Помошник для рисования примитивов
      */
@@ -52,22 +45,15 @@ public class Game {
 
     public EventManager eventManager;
 
+
     public Game(
             Context context,
             EventManager eventManager,
-            Helper glHelper
+            World world,
+            TouchListener touchListener
     ) {
 
-        Container container = new Container();
-
         this.eventManager = eventManager;
-        this.glHelper = glHelper;
-
-        this.context = context;
-
-
-        loader = new ResourceLoader(this);
-        world = new GameObject(this);
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
@@ -90,7 +76,7 @@ public class Game {
             world.draw();
         });
 
-        this.eventManager.on("gl/surface-changed", (Event event) -> {
+    /*    this.eventManager.on("gl/surface-changed", (Event event) -> {
 
             this.width = event.paramsInt.get("width");
             this.height = event.paramsInt.get("height");
@@ -117,7 +103,7 @@ public class Game {
             PointF a = world.screenToModel(0, 0);
             PointF b = world.screenToModel(width, height);
             viewport = new RectF(a.x, a.y, b.x, b.y);
-        });
+        }); */
 
 
     }

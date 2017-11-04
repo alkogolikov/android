@@ -1,8 +1,8 @@
 package ru.ndra.deadfall.inventory;
 
 import ru.ndra.deadfall.Game;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 
 public class InventoryScene extends Scene {
 

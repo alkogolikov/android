@@ -3,7 +3,7 @@ package ru.ndra.deadfall;
 import android.content.Context;
 
 import ru.ndra.deadfall.combat.CombatScene;
-import ru.ndra.engine.GameObject;
+import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gl.Helper;
 

@@ -9,7 +9,7 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.opengles.GL10;
 
 import ru.ndra.engine.Game;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 

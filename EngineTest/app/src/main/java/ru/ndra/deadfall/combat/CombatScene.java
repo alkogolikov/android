@@ -1,14 +1,9 @@
 package ru.ndra.deadfall.combat;
 
 import ru.ndra.deadfall.Game;
-import ru.ndra.deadfall.combat.creature.CreatureModel;
-import ru.ndra.deadfall.combat.creature.EnemySprite;
-import ru.ndra.deadfall.combat.creature.HeroModel;
-import ru.ndra.deadfall.combat.creature.HeroSprite;
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.event.Event;
 
 public class CombatScene extends Scene {

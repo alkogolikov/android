@@ -3,9 +3,10 @@ package ru.ndra.deadfall.combat;
 import android.view.MotionEvent;
 
 import ru.ndra.deadfall.Game;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.gameobject.World;
 
 public class CombatControlsScene extends Scene {
 
@@ -14,26 +15,26 @@ public class CombatControlsScene extends Scene {
     @Override
     public void draw() {
         super.draw();
-        this.game.glHelper.drawText(this.modelToScreenMatrix);
+        this.glHelper.drawText(this.modelToScreenMatrix);
     }
 
-    public CombatControlsScene(Game game) {
+    public CombatControlsScene(World world) {
 
-        super(game);
+        super();
 
         // Верхняя полоска со скиллами
-        bar = new Bar(game);
-        game.world.add(bar);
+        bar = new Bar();
+        world.add(bar);
 
         // Кнопки
 
         Sprite moveBackButton = new Sprite(game) {
             public void onTouch(TouchEvent event) {
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
-                    this.game.eventManager.trigger("control/move-backward");
+                    eventManager.trigger("control/move-backward");
                 }
                 if (event.action == MotionEvent.ACTION_UP) {
-                    this.game.eventManager.trigger("control/move-stop");
+                    eventManager.trigger("control/move-stop");
                 }
             }
         };

@@ -1,7 +1,6 @@
 package ru.ndra.engine;
 
 import android.graphics.PointF;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,13 +8,17 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import ru.ndra.engine.gameobject.GameObject;
+import ru.ndra.engine.gameobject.World;
+
 /**
  * Created by golikov on 24.02.2017.
  */
 
 public class TouchListener implements View.OnTouchListener {
+    private final World world;
 
-    private final Game game;
+    // private final Game game;
 
     private SparseArray<PointF>start = new SparseArray<PointF>();
 
@@ -29,8 +32,8 @@ public class TouchListener implements View.OnTouchListener {
 
     public GameObject target;
 
-    public TouchListener(Game game) {
-        this.game = game;
+    public TouchListener(World world) {
+        this.world = world;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class TouchListener implements View.OnTouchListener {
                 resetStartPoints(event);
                 drag = false;
                 multitouch = false;
-                target = game.world.hitTest(event.getX(), event.getY());
+                target = world.hitTest(event.getX(), event.getY());
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN:

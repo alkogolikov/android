@@ -1,4 +1,4 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gameobject;
 
 import android.opengl.Matrix;
 
@@ -8,10 +8,9 @@ import android.opengl.Matrix;
  */
 public class Scene extends GameObject {
 
-    public final Camera camera = new Camera(this);
+    public final Camera camera = new Camera();
 
-    public Scene(Game game) {
-        super(game);
+    public Scene() {
     }
 
     @Override

@@ -1,9 +1,16 @@
-package ru.ndra.engine;
+package ru.ndra.engine.gameobject;
 
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.Matrix;
+
+import ru.ndra.engine.Game;
+import ru.ndra.engine.ResourceLoader;
+import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.Viewport;
+import ru.ndra.engine.gameobject.GameObject;
+import ru.ndra.engine.gl.Helper;
 
 /**
  * Created by golikov on 18.02.2017.
@@ -11,6 +18,7 @@ import android.opengl.Matrix;
 
 public class Sprite extends GameObject {
 
+    private final ResourceLoader loader;
     public String texture;
 
     public float width = 1;
@@ -20,14 +28,19 @@ public class Sprite extends GameObject {
 
     public RectF textureCoords = new RectF(0, 0, 1, 1);
 
-    public Sprite(Game game) {
-        super(game);
+    public Sprite(
+            Viewport viewport,
+            Helper glHelper,
+            ResourceLoader loader
+    ) {
+        super(viewport, glHelper);
+        this.loader = loader;
     }
 
     @Override
     public void draw() {
         if(texture != null) {
-            game.glHelper.drawSprite(this);
+            this.glHelper.drawSprite(this);
         } else {
             drawRect(-width / 2, -height / 2, width / 2, height / 2, new Color());
         }
@@ -50,7 +63,7 @@ public class Sprite extends GameObject {
 
     public void setTexture(String texture) {
         this.texture = texture;
-        game.loader.addTexture(texture);
+        this.loader.addTexture(texture);
     }
 
     @Override
