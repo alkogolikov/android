@@ -8,13 +8,14 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import ru.ndra.engine.Game;
-import ru.ndra.engine.gameobject.Sprite;
+import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
+import ru.ndra.engine.gameobject.Sprite;
 
 public class PrimitiveSprite extends Primitive {
 
+    protected final ResourceLoader loader;
     // Программа
     protected int program;
     protected FloatBuffer vertexBuffer;
@@ -24,7 +25,8 @@ public class PrimitiveSprite extends Primitive {
     protected int mPositionHandle;
     protected int textureHandle;
 
-    public PrimitiveSprite(EventManager eventManager) {
+    public PrimitiveSprite(EventManager eventManager, ResourceLoader loader) {
+        this.loader = loader;
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });
@@ -129,8 +131,7 @@ public class PrimitiveSprite extends Primitive {
         // юнит текстуры
         GLES20.glUniform1i(uTextureUnitLocation, 0);
 
-        Game game = sprite.game;
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, game.loader.getTexture(sprite.texture));
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.loader.getTexture(sprite.texture));
 
         // ----------------------------------------------------------------------
 

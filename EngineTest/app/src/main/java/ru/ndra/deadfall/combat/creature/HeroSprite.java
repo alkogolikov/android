@@ -1,21 +1,23 @@
 package ru.ndra.deadfall.combat.creature;
 
-import ru.ndra.engine.Game;
 import ru.ndra.engine.event.Event;
-
+import ru.ndra.engine.event.EventManager;
 
 public class HeroSprite extends CreatureSprite {
 
-    public HeroSprite(Game game, HeroModel model) {
-        super(game, model);
+    private final EventManager eventManager;
+
+    public HeroSprite(EventManager eventManager) {
+        super();
+        this.eventManager = eventManager;
         this.setTexture("character.png");
-        game.eventManager.on("control/move-forward", (Event event) -> {
+        this.eventManager.on("control/move-forward", (Event event) -> {
             this.moveForward();
         });
-        game.eventManager.on("control/move-backward", (Event event) -> {
+        this.eventManager.on("control/move-backward", (Event event) -> {
             this.moveBackward();
         });
-        game.eventManager.on("control/move-stop", (Event event) -> {
+        this.eventManager.on("control/move-stop", (Event event) -> {
             this.moveStop();
         });
     }
@@ -25,6 +27,6 @@ public class HeroSprite extends CreatureSprite {
         super.update(dt);
         Event event = new Event("combat/camera-position");
         event.paramsFloat.put("x", this.position.x);
-        this.game.eventManager.trigger(event);
+        this.eventManager.trigger(event);
     }
 }

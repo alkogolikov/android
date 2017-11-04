@@ -35,7 +35,7 @@ class Map {
 
     // @todo сделать загрузку данных в трэде
     public void loadData() {
-        try {
+       /* try {
 
             // Загружаем карту из JSON
             InputStream is = game.context.getAssets().open("data/map.json");
@@ -72,11 +72,11 @@ class Map {
         }
 
         renderMap();
-
+        */
     }
 
     private void renderMap() {
-        int pixelCellSize = 16;
+      /*  int pixelCellSize = 16;
         Bitmap render = Bitmap.createBitmap(pixelCellSize * width, pixelCellSize * height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(render);
         Paint p = new Paint();
@@ -93,7 +93,7 @@ class Map {
             c.drawRect(cell.x * pixelCellSize, cell.y * pixelCellSize, (cell.x + 1) * pixelCellSize, (cell.y + 1) * pixelCellSize, p);
         }
 
-        game.loader.addTexture("render/map", render);
+        game.loader.addTexture("render/map", render); */
     }
 
     /**

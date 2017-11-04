@@ -7,15 +7,13 @@ import android.graphics.Paint;
 import android.opengl.GLES20;
 
 import ru.ndra.engine.Game;
+import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.event.EventManager;
 
 public class PrimitiveText extends PrimitiveSprite {
 
-    private final Game game;
-
-    public PrimitiveText(Game game, EventManager eventManager) {
-        super(eventManager);
-        this.game = game;
+    public PrimitiveText(EventManager eventManager, ResourceLoader loader) {
+        super(eventManager, loader);
     }
 
     protected void glInit() {
@@ -34,7 +32,7 @@ public class PrimitiveText extends PrimitiveSprite {
         paint.setTextAlign(Paint.Align.LEFT);
         c.drawText("ololo", 2, 4, paint);
 
-        this.game.loader.addTexture("primitive/chars", render);
+        this.loader.addTexture("primitive/chars", render);
 
     }
 
@@ -74,7 +72,7 @@ public class PrimitiveText extends PrimitiveSprite {
         // юнит текстуры
         GLES20.glUniform1i(uTextureUnitLocation, 0);
 
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, game.loader.getTexture("primitive/chars"));
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.loader.getTexture("primitive/chars"));
 
         // ----------------------------------------------------------------------
 

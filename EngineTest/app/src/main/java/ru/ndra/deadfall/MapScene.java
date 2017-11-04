@@ -9,12 +9,12 @@ import ru.ndra.engine.TouchEvent;
 public class MapScene extends Scene {
 
     public MapScene(Game game) {
-        super(game);
+        super();
 
         this.isButton = true;
 
         // А тут еще один спрайт
-        Sprite sprite = new Sprite(game) {
+        /*Sprite sprite = new Sprite() {
             @Override
             public void update(float dt) {
                 super.update(dt);
@@ -27,7 +27,7 @@ public class MapScene extends Scene {
         sprite.width = 300f * k;
         sprite.height = 300f;
         sprite.setTexture("render/map");
-        add(sprite);
+        add(sprite); */
 
     }
 

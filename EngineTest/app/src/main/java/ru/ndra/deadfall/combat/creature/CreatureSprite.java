@@ -13,7 +13,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
     public T model;
 
-    public CreatureSprite(GameObjectFactory factory) {
+    public CreatureSprite() {
 
         super();
 
@@ -21,10 +21,9 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
         this.height = 300;
         this.model = model;
 
-        this.hpSprite = (HpSprite) factory.create(HpSprite.class);
+        this.hpSprite = (HpSprite) this.add(HpSprite.class);
         this.hpSprite.position.x = 0;
         this.hpSprite.position.y = this.height / 2;
-        this.add(hpSprite);
     }
 
     /**

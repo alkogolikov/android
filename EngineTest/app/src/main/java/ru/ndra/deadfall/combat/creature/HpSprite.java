@@ -10,16 +10,15 @@ public class HpSprite extends Sprite {
     private float percent;
 
     public HpSprite(Game game) {
-        super(game);
+        super();
         this.width = 200;
         this.height = 20;
         this.setTexture("hp-void.png");
 
-        this.bar = new Sprite(game);
+        this.bar = (Sprite) this.add(Sprite.class);
         bar.width = this.width / 2;
         bar.height = this.height;
         bar.setTexture("hp.png");
-        this.add(bar);
     }
 
     /**
@@ -31,6 +30,6 @@ public class HpSprite extends Sprite {
      */
     public void setFilling(float filling) {
         this.bar.width = this.width * filling;
-        this.bar.position.x = - this.width / 2 + this.bar.width / 2;
+        this.bar.position.x = -this.width / 2 + this.bar.width / 2;
     }
 }

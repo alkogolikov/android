@@ -3,11 +3,12 @@ package ru.ndra.deadfall.combat.creature;
 import java.util.Random;
 
 import ru.ndra.engine.Game;
+import ru.ndra.engine.gameobject.GameObjectFactory;
 
 public class EnemySprite extends CreatureSprite {
 
-    public EnemySprite(Game game, CreatureModel model) {
-        super(game, model);
+    public EnemySprite() {
+        super();
         this.setTexture("enemy.png");
         this.speed = 50;
     }
