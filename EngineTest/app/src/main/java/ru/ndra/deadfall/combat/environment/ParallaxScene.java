@@ -2,25 +2,28 @@ package ru.ndra.deadfall.combat.environment;
 
 import android.graphics.Point;
 
-import ru.ndra.deadfall.Game;
+import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
+import ru.ndra.engine.gameobject.GameObjectFactory;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
-import ru.ndra.engine.event.Event;
 
 public class ParallaxScene extends Scene {
 
+    private final GameObjectFactory factory;
     private float offsetX = 0;
 
-    public ParallaxScene(EventManager eventManager) {
+    public ParallaxScene(EventManager eventManager, GameObjectFactory factory) {
         super();
+        this.factory = factory;
         eventManager.on("combat/camera-position", (Event event) -> {
             this.offsetX = event.paramsFloat.get("x");
         });
     }
 
     public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed, boolean onTop) {
-        Sprite2 sprite = new Sprite() {
+
+        class ParallaxSprite extends Sprite {
 
             float textureRight;
             boolean configured;
@@ -30,9 +33,9 @@ public class ParallaxScene extends Scene {
 
             public void update(float dt) {
                 if (!configured) {
-                    Point size = game.loader.textureSize(texture);
-                    width = game.viewport.right - game.viewport.left;
-                    position.y = game.viewport.bottom + height / 2 + bottom;
+                    Point size = this.loader.textureSize(texture);
+                    width = this.viewport.right - this.viewport.left;
+                    position.y = this.viewport.bottom + height / 2 + bottom;
                     textureRight = (float) size.y / size.x * width / height;
                     realSpeed = textureRight / width;
                     configured = true;
@@ -44,7 +47,10 @@ public class ParallaxScene extends Scene {
                 textureCoords.left = (selfOffset + ParallaxScene.this.offsetX) * realSpeed * speed;
                 textureCoords.right = textureCoords.left + textureRight;
             }
-        };
+        }
+
+        ParallaxSprite sprite = (ParallaxSprite) this.factory.create(ParallaxSprite.class);
+
         sprite.setTexture(texture);
         sprite.height = height;
         sprite.zIndex = onTop ? 1 : 0;

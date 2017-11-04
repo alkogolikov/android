@@ -22,6 +22,8 @@ public class GameObject {
 
     protected Helper glHelper;
 
+    protected GameObjectFactory gameObjectFactory;
+
     /**
      * Коллекция дочерних объектов
      */
@@ -53,11 +55,6 @@ public class GameObject {
      */
     private boolean isChildrenSorted = false;
 
-    /*public GameObject(Viewport viewport, Helper glHelper) {
-        this.viewport = viewport;
-        this.glHelper = glHelper;
-    } */
-
     @Inject
     public final void setViewport(Viewport viewport) {
         this.viewport = viewport;
@@ -66,6 +63,11 @@ public class GameObject {
     @Inject
     public final void setGlHelper(Helper glHelper) {
         this.glHelper = glHelper;
+    }
+
+    @Inject
+    public final void setGameObjectFactory(GameObjectFactory gameObjectFatory) {
+        this.gameObjectFactory = gameObjectFatory;
     }
 
     public void onClick(TouchEvent event) {
@@ -78,10 +80,17 @@ public class GameObject {
         return false;
     }
 
-    public void add(GameObject obj) {
+    public GameObject add(GameObject obj) {
         children.add(obj);
         obj.parent = this;
         isChildrenSorted = false;
+        return obj;
+    }
+
+    public GameObject add(Class klass) {
+        GameObject obj = this.gameObjectFactory.create(klass);
+        this.add(obj);
+        return obj;
     }
 
     /**
