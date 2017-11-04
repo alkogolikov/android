@@ -8,9 +8,9 @@ import ru.ndra.engine.event.Event;
 
 public class CombatScene extends Scene {
 
-    public CombatScene(Game game) {
+    public CombatScene() {
 
-        super(game);
+        super();
 
         // Добавляем параллакс
         ParallaxScene backgroundParallaxScene = new ParallaxScene(game);

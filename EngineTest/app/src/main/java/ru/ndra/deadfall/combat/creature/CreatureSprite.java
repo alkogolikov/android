@@ -1,6 +1,6 @@
 package ru.ndra.deadfall.combat.creature;
 
-import ru.ndra.engine.Game;
+import ru.ndra.engine.gameobject.GameObjectFactory;
 import ru.ndra.engine.gameobject.Sprite;
 
 
@@ -13,15 +13,15 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
     public T model;
 
-    public CreatureSprite(Game game, T model) {
+    public CreatureSprite(GameObjectFactory factory) {
 
-        super(game);
+        super();
 
         this.width = 200;
         this.height = 300;
         this.model = model;
 
-        this.hpSprite = new HpSprite(game);
+        this.hpSprite = (HpSprite) factory.create(HpSprite.class);
         this.hpSprite.position.x = 0;
         this.hpSprite.position.y = this.height / 2;
         this.add(hpSprite);
@@ -71,5 +71,9 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
         // Рассчитываем заполнение hp
         float hpFilling = this.model.getHp() / this.model.getHpMax();
         this.hpSprite.setFilling(hpFilling);
+    }
+
+    public void setModel(T model) {
+        this.model = model;
     }
 }

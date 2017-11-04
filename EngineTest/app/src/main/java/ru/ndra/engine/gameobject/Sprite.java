@@ -9,6 +9,7 @@ import ru.ndra.engine.Game;
 import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.TouchEvent;
 import ru.ndra.engine.Viewport;
+import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.gl.Helper;
 
@@ -18,7 +19,7 @@ import ru.ndra.engine.gl.Helper;
 
 public class Sprite extends GameObject {
 
-    private final ResourceLoader loader;
+    private ResourceLoader loader;
     public String texture;
 
     public float width = 1;
@@ -28,12 +29,12 @@ public class Sprite extends GameObject {
 
     public RectF textureCoords = new RectF(0, 0, 1, 1);
 
-    public Sprite(
-            Viewport viewport,
-            Helper glHelper,
-            ResourceLoader loader
-    ) {
-        super(viewport, glHelper);
+    public Sprite() {
+        super();
+    }
+
+    @Inject
+    public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
     }
 

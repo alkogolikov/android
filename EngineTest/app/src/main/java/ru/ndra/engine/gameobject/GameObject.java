@@ -9,6 +9,7 @@ import java.util.Comparator;
 
 import ru.ndra.engine.TouchEvent;
 import ru.ndra.engine.Viewport;
+import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.gl.Helper;
 
 /**
@@ -52,8 +53,18 @@ public class GameObject {
      */
     private boolean isChildrenSorted = false;
 
-    public GameObject(Viewport viewport, Helper glHelper) {
+    /*public GameObject(Viewport viewport, Helper glHelper) {
         this.viewport = viewport;
+        this.glHelper = glHelper;
+    } */
+
+    @Inject
+    public final void setViewport(Viewport viewport) {
+        this.viewport = viewport;
+    }
+
+    @Inject
+    public final void setGlHelper(Helper glHelper) {
         this.glHelper = glHelper;
     }
 

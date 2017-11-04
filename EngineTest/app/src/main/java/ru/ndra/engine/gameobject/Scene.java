@@ -11,6 +11,7 @@ public class Scene extends GameObject {
     public final Camera camera = new Camera();
 
     public Scene() {
+        super();
     }
 
     @Override
