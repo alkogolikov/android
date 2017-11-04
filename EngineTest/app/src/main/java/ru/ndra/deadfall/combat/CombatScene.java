@@ -3,12 +3,13 @@ package ru.ndra.deadfall.combat;
 import ru.ndra.deadfall.Game;
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
+import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.event.Event;
 
 public class CombatScene extends Scene {
 
-    public CombatScene() {
+    public CombatScene(EventManager eventManager) {
 
         super();
 

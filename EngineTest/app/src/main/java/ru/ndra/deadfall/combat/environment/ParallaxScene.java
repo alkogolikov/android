@@ -3,6 +3,7 @@ package ru.ndra.deadfall.combat.environment;
 import android.graphics.Point;
 
 import ru.ndra.deadfall.Game;
+import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.event.Event;
@@ -11,15 +12,15 @@ public class ParallaxScene extends Scene {
 
     private float offsetX = 0;
 
-    public ParallaxScene(Game game) {
-        super(game);
-        game.eventManager.on("combat/camera-position", (Event event) -> {
+    public ParallaxScene(EventManager eventManager) {
+        super();
+        eventManager.on("combat/camera-position", (Event event) -> {
             this.offsetX = event.paramsFloat.get("x");
         });
     }
 
     public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed, boolean onTop) {
-        Sprite sprite = new Sprite(game) {
+        Sprite2 sprite = new Sprite() {
 
             float textureRight;
             boolean configured;

@@ -2,15 +2,12 @@ package ru.ndra.deadfall.combat;
 
 import android.view.MotionEvent;
 
-import ru.ndra.deadfall.Game;
+import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.gameobject.GameObjectFactory;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
-import ru.ndra.engine.TouchEvent;
-import ru.ndra.engine.gameobject.World;
 
 public class CombatControlsScene extends Scene {
-
-    private final Bar bar;
 
     @Override
     public void draw() {
@@ -18,17 +15,21 @@ public class CombatControlsScene extends Scene {
         this.glHelper.drawText(this.modelToScreenMatrix);
     }
 
-    public CombatControlsScene(World world) {
+    /**
+     * todo Вернуть работу кнопок
+     *
+     * @param factory Фабрика игровых объектов
+     */
+    public CombatControlsScene(GameObjectFactory factory) {
 
         super();
 
         // Верхняя полоска со скиллами
-        bar = new Bar();
-        world.add(bar);
+        Bar bar = (Bar) factory.create(Bar.class);
+        this.add(bar);
 
         // Кнопки
-
-        Sprite moveBackButton = new Sprite(game) {
+        /*Sprite moveBackButton = new Sprite(game) {
             public void onTouch(TouchEvent event) {
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
                     eventManager.trigger("control/move-backward");
@@ -37,13 +38,14 @@ public class CombatControlsScene extends Scene {
                     eventManager.trigger("control/move-stop");
                 }
             }
-        };
+        }; */
+        Sprite moveBackButton = (Sprite) factory.create(Sprite.class);
         moveBackButton.width = 200;
         moveBackButton.height = 200;
         moveBackButton.position.y = -200;
         moveBackButton.position.x = -700;
         moveBackButton.zIndex = 1000;
-        moveBackButton.game.world.add(moveBackButton);
+        this.add(moveBackButton);
         moveBackButton.isButton = true;
 
         Sprite moveForthButton = new Sprite(game) {
