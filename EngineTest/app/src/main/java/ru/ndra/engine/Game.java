@@ -4,7 +4,6 @@ import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
-import ru.ndra.engine.gameobject.World;
 
 public class Game {
 
@@ -15,12 +14,12 @@ public class Game {
         this.eventManager = eventManager;
     }
 
-    public Game(
-            World world,
+    public Game() {
+       /*     World world,
             TouchListener touchListener,
             ResourceLoader loader,
             TimeManager timeManager
-    ) {
+    ) { */
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
