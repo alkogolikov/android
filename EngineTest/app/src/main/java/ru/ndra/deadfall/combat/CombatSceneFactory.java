@@ -9,8 +9,7 @@ public class CombatSceneFactory {
     public CombatSceneFactory(Container container) {
 
         // Создаем дочерний DI-контейнер со своим евент-менеджером
-        Container sceneContainer = new Container();
-        sceneContainer.setParent(container);
+        Container sceneContainer = new Container(container);
 
         // Создаем новый эвент-менеджер
         EventManager eventManager = new EventManager();
@@ -21,6 +20,9 @@ public class CombatSceneFactory {
         // Создаем новую фабрику игровых объектов и помещаем ее в дочерний контейнер
         GameObjectFactory factory = (GameObjectFactory) sceneContainer.create(GameObjectFactory.class.getCanonicalName());
         sceneContainer.put(GameObjectFactory.class.getCanonicalName(), factory);
+
+        CombatScene scene = (CombatScene) sceneContainer.get(CombatScene.class.getCanonicalName());
+
     }
 
 }

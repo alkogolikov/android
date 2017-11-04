@@ -4,6 +4,7 @@ import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
+import ru.ndra.engine.gameobject.World;
 
 public class Game {
 
@@ -14,12 +15,43 @@ public class Game {
         this.eventManager = eventManager;
     }
 
+    private DrawView drawView;
+
+    @Inject
+    public void setDrawView(DrawView drawView) {
+        this.drawView = drawView;
+    }
+
+    private World world;
+
+    @Inject
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    private TouchListener touchListener;
+
+    @Inject
+    public void setTouchListener(TouchListener touchListener) {
+        this.touchListener = touchListener;
+    }
+
+    private ResourceLoader loader;
+
+    @Inject
+    public void setResourceLoader(ResourceLoader loader) {
+        this.loader = loader;
+    }
+
+    private TimeManager timeManager;
+
+    @Inject
+    public void setResourceLoader(TimeManager timeManager) {
+        this.timeManager = timeManager;
+    }
+
+
     public Game() {
-       /*     World world,
-            TouchListener touchListener,
-            ResourceLoader loader,
-            TimeManager timeManager
-    ) { */
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
@@ -45,7 +77,7 @@ public class Game {
     }
 
     public DrawView getView() {
-        return new DrawView(this);
+        return this.drawView;
     }
 
 }

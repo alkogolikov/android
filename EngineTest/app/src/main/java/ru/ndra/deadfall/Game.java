@@ -17,7 +17,7 @@ public class Game extends ru.ndra.engine.Game {
     public Game(Container container) {
         super();
 
-        container.addFactory(CombatScene.class, CombatSceneFactory.class);
+       // container.addFactory(CombatScene.class, CombatSceneFactory.class);
 
     }
 
