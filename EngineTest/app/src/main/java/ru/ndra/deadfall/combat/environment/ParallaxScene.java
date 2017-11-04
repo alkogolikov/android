@@ -10,12 +10,10 @@ import ru.ndra.engine.gameobject.Sprite;
 
 public class ParallaxScene extends Scene {
 
-    private final GameObjectFactory factory;
     private float offsetX = 0;
 
-    public ParallaxScene(EventManager eventManager, GameObjectFactory factory) {
+    public ParallaxScene(EventManager eventManager) {
         super();
-        this.factory = factory;
         eventManager.on("combat/camera-position", (Event event) -> {
             this.offsetX = event.paramsFloat.get("x");
         });

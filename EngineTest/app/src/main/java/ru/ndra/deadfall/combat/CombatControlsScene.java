@@ -3,7 +3,7 @@ package ru.ndra.deadfall.combat;
 import android.view.MotionEvent;
 
 import ru.ndra.engine.TouchEvent;
-import ru.ndra.engine.gameobject.GameObjectFactory;
+import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 
@@ -12,24 +12,18 @@ public class CombatControlsScene extends Scene {
     @Override
     public void draw() {
         super.draw();
-        this.glHelper.drawText(this.modelToScreenMatrix);
+        //this.glHelper.drawText(this.modelToScreenMatrix);
     }
 
-    /**
-     * todo Вернуть работу кнопок
-     *
-     * @param factory Фабрика игровых объектов
-     */
-    public CombatControlsScene(GameObjectFactory factory) {
+    public CombatControlsScene(EventManager eventManager) {
 
         super();
 
         // Верхняя полоска со скиллами
-        Bar bar = (Bar) factory.create(Bar.class);
-        this.add(bar);
+        Bar bar = (Bar) this.add(Bar.class);
 
-        // Кнопки
-        /*Sprite moveBackButton = new Sprite(game) {
+        // Кнопка "Назад"
+        class MoveBackButton extends Sprite {
             public void onTouch(TouchEvent event) {
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
                     eventManager.trigger("control/move-backward");
@@ -38,32 +32,33 @@ public class CombatControlsScene extends Scene {
                     eventManager.trigger("control/move-stop");
                 }
             }
-        }; */
-        Sprite moveBackButton = (Sprite) factory.create(Sprite.class);
+        }
+
+        MoveBackButton moveBackButton = (MoveBackButton) this.add(MoveBackButton.class);
         moveBackButton.width = 200;
         moveBackButton.height = 200;
         moveBackButton.position.y = -200;
         moveBackButton.position.x = -700;
         moveBackButton.zIndex = 1000;
-        this.add(moveBackButton);
         moveBackButton.isButton = true;
 
-        Sprite moveForthButton = new Sprite(game) {
+        // Кнопка "Вперед"
+        class MoveForthButton extends Sprite {
             public void onTouch(TouchEvent event) {
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
-                    this.game.eventManager.trigger("control/move-forward");
+                    eventManager.trigger("control/move-forward");
                 }
                 if (event.action == MotionEvent.ACTION_UP) {
-                    this.game.eventManager.trigger("control/move-stop");
+                    eventManager.trigger("control/move-stop");
                 }
             }
         };
+        MoveForthButton moveForthButton = (MoveForthButton) this.add(MoveForthButton.class);
         moveForthButton.width = 200;
         moveForthButton.height = 200;
         moveForthButton.position.y = -200;
         moveForthButton.position.x = -300;
         moveForthButton.zIndex = 1000;
-        moveForthButton.game.world.add(moveForthButton);
         moveForthButton.isButton = true;
 
     }
