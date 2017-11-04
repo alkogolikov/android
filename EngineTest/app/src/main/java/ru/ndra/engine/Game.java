@@ -1,27 +1,19 @@
 package ru.ndra.engine;
 
-import android.util.Log;
-
 import ru.ndra.engine.di.Inject;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.World;
 
-public class Game {
+public class Game implements OnCreate {
 
     private EventManager eventManager;
 
     @Inject
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
-    }
-
-    private DrawView drawView;
-
-    @Inject
-    public void setDrawView(DrawView drawView) {
-        this.drawView = drawView;
     }
 
     private World world;
@@ -52,8 +44,10 @@ public class Game {
         this.timeManager = timeManager;
     }
 
-
     public Game() {
+    }
+
+    public void onCreate() {
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
@@ -76,10 +70,6 @@ public class Game {
             world.draw();
         });
 
-    }
-
-    public DrawView getView() {
-        return this.drawView;
     }
 
 }

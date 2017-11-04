@@ -39,6 +39,10 @@ class InjectorAbstractFactory implements FactoryInterface {
                 }
             }
 
+            if(instance instanceof OnCreate) {
+                ((OnCreate) instance).onCreate();
+            }
+
             return instance;
 
         } catch (Exception e) {

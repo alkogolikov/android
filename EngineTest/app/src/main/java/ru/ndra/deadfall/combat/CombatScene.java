@@ -2,15 +2,25 @@ package ru.ndra.deadfall.combat;
 
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 
-public class CombatScene extends Scene {
+public class CombatScene extends Scene implements OnCreate {
+
+    private final EventManager eventManager;
+    private final ObjectDistributor distributor;
 
     public CombatScene(EventManager eventManager, ObjectDistributor distributor) {
-
         super();
+        this.eventManager = eventManager;
+        this.distributor = distributor;
+    }
+
+
+    @Override
+    public void onCreate() {
 
         // Добавляем параллакс
         ParallaxScene backgroundParallaxScene = (ParallaxScene) this.add(ParallaxScene.class);
@@ -30,7 +40,6 @@ public class CombatScene extends Scene {
         EnvironmentCreator environmentCreator = new EnvironmentCreator(backgroundParallaxScene, foregroundParallaxScene);
 
         // Добавляем элементы управления
-        CombatControlsScene controlsScene = (CombatControlsScene) this.add(CombatControlsScene.class);
+        this.add(CombatControlsScene.class);
     }
-
 }
