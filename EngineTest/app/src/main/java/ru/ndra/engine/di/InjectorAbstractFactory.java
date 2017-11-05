@@ -1,5 +1,7 @@
 package ru.ndra.engine.di;
 
+import android.util.Log;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -39,13 +41,15 @@ class InjectorAbstractFactory implements FactoryInterface {
                 }
             }
 
-            if(instance instanceof OnCreate) {
+            if (instance instanceof OnCreate) {
                 ((OnCreate) instance).onCreate();
             }
 
             return instance;
 
         } catch (Exception e) {
+         //   Log.d("xxx", e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Failed create " + token + ":" + e.getCause());
         }
     }

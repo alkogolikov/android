@@ -10,12 +10,10 @@ import ru.ndra.engine.gameobject.Sprite;
 
 public class ParallaxScene extends Scene {
 
-    private final ResourceLoader loader;
     private float offsetX = 0;
 
-    public ParallaxScene(EventManager eventManager, ResourceLoader loader) {
+    public ParallaxScene(EventManager eventManager) {
         super();
-        this.loader = loader;
         eventManager.on("combat/camera-position", (Event event) -> {
             this.offsetX = event.paramsFloat.get("x");
         });
@@ -23,7 +21,7 @@ public class ParallaxScene extends Scene {
 
     public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed, boolean onTop) {
 
-       /* class ParallaxSprite extends Sprite {
+        class ParallaxSprite extends Sprite {
 
             float textureRight;
             boolean configured;
@@ -34,8 +32,12 @@ public class ParallaxScene extends Scene {
             public void update(float dt) {
                 if (!configured) {
                     Point size = this.loader.textureSize(texture);
-                    width = this.viewport.right - this.viewport.left;
-                    position.y = this.viewport.bottom + height / 2 + bottom;
+                    //width = this.viewport.right - this.viewport.left;
+                   // position.y = this.viewport.bottom + height / 2 + bottom;
+
+                    width = 500;
+                    position.y = 200;
+
                     textureRight = (float) size.y / size.x * width / height;
                     realSpeed = textureRight / width;
                     configured = true;
@@ -49,12 +51,11 @@ public class ParallaxScene extends Scene {
             }
         }
 
-        ParallaxSprite sprite = (ParallaxSprite) this.factory.create(ParallaxSprite.class);
-
+        ParallaxSprite sprite = (ParallaxSprite) this.add(ParallaxSprite.class);
         sprite.setTexture(texture);
         sprite.height = height;
         sprite.zIndex = onTop ? 1 : 0;
-        add(sprite); */
+
     }
 
 }

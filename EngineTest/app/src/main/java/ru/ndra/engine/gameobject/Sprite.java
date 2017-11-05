@@ -19,7 +19,7 @@ import ru.ndra.engine.gl.Helper;
 
 public class Sprite extends GameObject {
 
-    private ResourceLoader loader;
+    protected ResourceLoader loader;
     public String texture;
 
     public float width = 1;

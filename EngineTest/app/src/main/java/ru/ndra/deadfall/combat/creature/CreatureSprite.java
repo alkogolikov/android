@@ -1,12 +1,13 @@
 package ru.ndra.deadfall.combat.creature;
 
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.GameObjectFactory;
 import ru.ndra.engine.gameobject.Sprite;
 
 
-public class CreatureSprite<T extends CreatureModel> extends Sprite {
+public class CreatureSprite<T extends CreatureModel> extends Sprite implements OnCreate {
 
-    private final HpSprite hpSprite;
+    protected HpSprite hpSprite;
     private float moveDirection = 0;
 
     public float speed = 200;
@@ -14,16 +15,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
     public T model;
 
     public CreatureSprite() {
-
         super();
-
-        this.width = 200;
-        this.height = 300;
-        this.model = model;
-
-        this.hpSprite = (HpSprite) this.add(HpSprite.class);
-        this.hpSprite.position.x = 0;
-        this.hpSprite.position.y = this.height / 2;
     }
 
     /**
@@ -74,5 +66,16 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
     public void setModel(T model) {
         this.model = model;
+    }
+
+    @Override
+    public void onCreate() {
+
+        this.width = 200;
+        this.height = 300;
+
+        this.hpSprite = (HpSprite) this.add(HpSprite.class);
+        this.hpSprite.position.x = 0;
+        this.hpSprite.position.y = this.height / 2;
     }
 }

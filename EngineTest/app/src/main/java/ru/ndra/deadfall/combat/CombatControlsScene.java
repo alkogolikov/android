@@ -3,11 +3,14 @@ package ru.ndra.deadfall.combat;
 import android.view.MotionEvent;
 
 import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 
-public class CombatControlsScene extends Scene {
+public class CombatControlsScene extends Scene implements OnCreate {
+
+    private final EventManager eventManager;
 
     @Override
     public void draw() {
@@ -16,9 +19,12 @@ public class CombatControlsScene extends Scene {
     }
 
     public CombatControlsScene(EventManager eventManager) {
-
         super();
+        this.eventManager = eventManager;
+    }
 
+    @Override
+    public void onCreate() {
         // Верхняя полоска со скиллами
         Bar bar = (Bar) this.add(Bar.class);
 
@@ -60,7 +66,5 @@ public class CombatControlsScene extends Scene {
         moveForthButton.position.x = -300;
         moveForthButton.zIndex = 1000;
         moveForthButton.isButton = true;
-
     }
-
 }
