@@ -1,4 +1,4 @@
-package ru.ndra.deadfall.combat;
+package ru.ndra.deadfall.combat.controls;
 
 import java.util.Random;
 

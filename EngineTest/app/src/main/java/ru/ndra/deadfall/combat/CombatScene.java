@@ -1,5 +1,6 @@
 package ru.ndra.deadfall.combat;
 
+import ru.ndra.deadfall.combat.controls.CombatControlsScene;
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
 import ru.ndra.engine.di.OnCreate;
