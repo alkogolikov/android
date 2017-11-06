@@ -5,13 +5,9 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.Matrix;
 
-import ru.ndra.engine.Game;
 import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.TouchEvent;
-import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
-import ru.ndra.engine.gameobject.GameObject;
-import ru.ndra.engine.gl.Helper;
 
 public class Sprite extends GameObject {
 
@@ -25,10 +21,6 @@ public class Sprite extends GameObject {
 
     public RectF textureCoords = new RectF(0, 0, 1, 1);
 
-    public Sprite() {
-        super();
-    }
-
     @Inject
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
@@ -36,7 +28,7 @@ public class Sprite extends GameObject {
 
     @Override
     public void draw() {
-        if(texture != null) {
+        if (texture != null) {
             this.glHelper.drawSprite(this);
         } else {
             drawRect(-width / 2, -height / 2, width / 2, height / 2, new Color());
@@ -72,8 +64,8 @@ public class Sprite extends GameObject {
 
     public GameObject hitTest(float x, float y) {
 
-        GameObject ret = super.hitTest(x ,y);
-        if(ret != null) {
+        GameObject ret = super.hitTest(x, y);
+        if (ret != null) {
             return ret;
         }
 
@@ -87,10 +79,6 @@ public class Sprite extends GameObject {
 
         return null;
     }
-
-
-
-
 
 
 }
