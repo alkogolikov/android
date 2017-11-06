@@ -12,12 +12,6 @@ public class CombatControlsScene extends Scene implements OnCreate {
 
     private final EventManager eventManager;
 
-    @Override
-    public void draw() {
-        super.draw();
-        //this.glHelper.drawText(this.modelToScreenMatrix);
-    }
-
     public CombatControlsScene(EventManager eventManager) {
         super();
         this.eventManager = eventManager;
@@ -26,10 +20,10 @@ public class CombatControlsScene extends Scene implements OnCreate {
     @Override
     public void onCreate() {
         // Верхняя полоска со скиллами
-        Bar bar = (Bar) this.add(Bar.class);
+        //Bar bar = (Bar) this.add(Bar.class);
 
         // Кнопка "Назад"
-        class MoveBackButton extends Sprite {
+        /*class MoveBackButton extends Sprite {
             public void onTouch(TouchEvent event) {
                 if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_POINTER_DOWN) {
                     eventManager.trigger("control/move-backward");
@@ -65,6 +59,6 @@ public class CombatControlsScene extends Scene implements OnCreate {
         moveForthButton.position.y = -200;
         moveForthButton.position.x = -300;
         moveForthButton.zIndex = 1000;
-        moveForthButton.isButton = true;
+        moveForthButton.isButton = true; */
     }
 }

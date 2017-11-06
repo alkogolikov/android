@@ -2,26 +2,43 @@ package ru.ndra.deadfall.combat;
 
 import java.util.Random;
 
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 
-public class Bar extends Scene {
+public class Bar extends Scene implements OnCreate {
 
-    private final Sprite bar;
+    public class RunnerSprite extends Sprite {
+        private int direction = 1;
+
+        public void update(float dt) {
+            float speed = bar.width / 3;
+            this.position.x += direction * speed * dt;
+            if (position.x > bar.width / 2) {
+                direction = -1;
+            }
+            if (position.x < -bar.width / 2) {
+                direction = 1;
+            }
+        }
+    };
+
+    private Sprite bar;
+
     private Sprite runner;
 
     public Bar() {
-
         super();
-        zIndex = 10;
+        //zIndex = 10;
+    }
 
-        this.bar = (Sprite) this.add(Sprite.class);
+    @Override
+    public void onCreate() {
+        /*this.bar = (Sprite) this.add(Sprite.class);
         bar.width = 1000;
         bar.height = 100;
         bar.position.y = 400;
-
-        reset();
-
+        reset(); */
     }
 
     public void createSkills() {
@@ -39,20 +56,7 @@ public class Bar extends Scene {
     public void reset() {
         bar.clear();
         createSkills();
-        class RunnerSprite extends Sprite {
-            private int direction = 1;
 
-            public void update(float dt) {
-                float speed = bar.width / 3;
-                this.position.x += direction * speed * dt;
-                if (position.x > bar.width / 2) {
-                    direction = -1;
-                }
-                if (position.x < -bar.width / 2) {
-                    direction = 1;
-                }
-            }
-        };
 
         this.runner = (Sprite) this.add(RunnerSprite.class);
         this.runner.width = 20;

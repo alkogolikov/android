@@ -1,7 +1,5 @@
 package ru.ndra.deadfall.combat;
 
-import android.graphics.Color;
-
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
 import ru.ndra.engine.di.OnCreate;
@@ -40,8 +38,8 @@ public class CombatScene extends Scene implements OnCreate {
 
         EnvironmentCreator environmentCreator = new EnvironmentCreator(backgroundParallaxScene, foregroundParallaxScene);
 
-     /*   // Добавляем элементы управления
-        this.add(CombatControlsScene.class); */
+        // Добавляем элементы управления
+        //this.add(CombatControlsScene.class);
     }
 
 }

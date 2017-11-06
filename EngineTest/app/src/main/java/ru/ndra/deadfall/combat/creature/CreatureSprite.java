@@ -1,7 +1,6 @@
 package ru.ndra.deadfall.combat.creature;
 
 import ru.ndra.engine.di.OnCreate;
-import ru.ndra.engine.gameobject.GameObjectFactory;
 import ru.ndra.engine.gameobject.Sprite;
 
 
@@ -13,10 +12,6 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
     public float speed = 200;
 
     public T model;
-
-    public CreatureSprite() {
-        super();
-    }
 
     /**
      * Существо идет вперед
