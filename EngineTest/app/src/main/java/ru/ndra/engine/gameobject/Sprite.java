@@ -13,10 +13,6 @@ import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.gl.Helper;
 
-/**
- * Created by golikov on 18.02.2017.
- */
-
 public class Sprite extends GameObject {
 
     protected ResourceLoader loader;
@@ -58,7 +54,6 @@ public class Sprite extends GameObject {
         };
         Matrix.translateM(modelToScreenMatrix, 0, position.x, position.y, 0);
         Matrix.rotateM(modelToScreenMatrix, 0, rotation, 0, 0, 1);
-        //Matrix.scaleM(modelToScreenMatrix, 0, width, height, 1);
         Matrix.multiplyMM(modelToScreenMatrix, 0, parent.modelToScreenMatrix, 0, modelToScreenMatrix, 0);
     }
 

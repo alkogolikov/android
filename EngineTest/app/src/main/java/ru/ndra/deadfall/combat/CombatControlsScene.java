@@ -20,7 +20,8 @@ public class CombatControlsScene extends Scene implements OnCreate {
     @Override
     public void onCreate() {
         // Верхняя полоска со скиллами
-        //Bar bar = (Bar) this.add(Bar.class);
+        Bar bar = (Bar) this.add(Bar.class);
+        bar.position.y = 400;
 
         // Кнопка "Назад"
         /*class MoveBackButton extends Sprite {

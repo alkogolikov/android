@@ -10,6 +10,7 @@ import java.util.Comparator;
 import ru.ndra.engine.TouchEvent;
 import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
+import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gl.Helper;
 
 /**
@@ -23,6 +24,8 @@ public class GameObject {
     protected Helper glHelper;
 
     protected GameObjectFactory gameObjectFactory;
+
+    public final EventManager events = new EventManager();
 
     /**
      * Коллекция дочерних объектов

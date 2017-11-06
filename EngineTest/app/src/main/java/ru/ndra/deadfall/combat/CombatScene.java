@@ -39,7 +39,7 @@ public class CombatScene extends Scene implements OnCreate {
         EnvironmentCreator environmentCreator = new EnvironmentCreator(backgroundParallaxScene, foregroundParallaxScene);
 
         // Добавляем элементы управления
-        //this.add(CombatControlsScene.class);
+        this.add(CombatControlsScene.class);
     }
 
 }
