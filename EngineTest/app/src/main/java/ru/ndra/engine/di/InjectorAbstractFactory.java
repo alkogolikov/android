@@ -1,7 +1,5 @@
 package ru.ndra.engine.di;
 
-import android.util.Log;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -20,9 +18,10 @@ class InjectorAbstractFactory implements FactoryInterface {
             Class xclass = Class.forName(token);
 
             // Получаем конструктор
+            //Constructor ctors[] = xclass.getConstructors();
             Constructor ctors[] = xclass.getConstructors();
             if (ctors.length != 1) {
-                throw new RuntimeException("Class must have only one constructor");
+                throw new RuntimeException("Class must have only one constructor. " + ctors.length + " have.");
             }
             Constructor ctor = ctors[0];
 
@@ -48,7 +47,7 @@ class InjectorAbstractFactory implements FactoryInterface {
             return instance;
 
         } catch (Exception e) {
-         //   Log.d("xxx", e.getMessage());
+            //   Log.d("xxx", e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("Failed create " + token + ":" + e.getCause());
         }

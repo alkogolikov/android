@@ -14,7 +14,7 @@ public class GameObjectFactory {
     }
 
     public GameObject create(Class xclass) {
-        return (GameObject) this.container.create(xclass.getCanonicalName());
+        return (GameObject) this.container.create(xclass.getName());
     }
 
 }

@@ -14,7 +14,7 @@ public class Container {
     Container parent;
 
     public Container() {
-        this.put(Container.class.getCanonicalName(), this);
+        this.put(Container.class.getName(), this);
         InjectorAbstractFactory injectorAbstractFactory = new InjectorAbstractFactory(this);
         this.abstractFactories.add(injectorAbstractFactory);
     }
@@ -80,7 +80,7 @@ public class Container {
         Object arguments[] = new Object[argumentTypes.length];
         int n = 0;
         for (Class argumentType : argumentTypes) {
-            Object argument = this.get(argumentType.getCanonicalName());
+            Object argument = this.get(argumentType.getName());
             arguments[n] = argument;
             n++;
         }
@@ -127,7 +127,7 @@ public class Container {
      * @return Сервис
      */
     public Object get(Class xclass) {
-        return this.get(xclass.getCanonicalName());
+        return this.get(xclass.getName());
     }
 
     /**

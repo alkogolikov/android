@@ -105,7 +105,7 @@ public class GameObject {
      * todo рефакторить, тут неэффетивный код
      */
     public PointF screenToModel(float x, float y) {
-        float[] src = {x / this.viewport.getWidth() * 2 - 1, -y / this.viewport.getHeight() * 2 + 1, 0, 1};
+        float[] src = {x / this.viewport.getScreenWidth() * 2 - 1, -y / this.viewport.getScreenHeight() * 2 + 1, 0, 1};
         float[] inverse = new float[16];
         Matrix.invertM(inverse, 0, modelToScreenMatrix, 0);
         float[] ret = new float[4];

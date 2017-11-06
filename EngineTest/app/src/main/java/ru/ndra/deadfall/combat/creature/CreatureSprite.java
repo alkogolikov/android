@@ -61,7 +61,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
 
         // Рассчитываем заполнение hp
         float hpFilling = this.model.getHp() / this.model.getHpMax();
-        this.hpSprite.setFilling(hpFilling);
+//        this.hpSprite.setFilling(hpFilling);
     }
 
     public void setModel(T model) {

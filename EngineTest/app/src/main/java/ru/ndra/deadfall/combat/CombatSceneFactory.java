@@ -21,7 +21,7 @@ public class CombatSceneFactory {
         GameObjectFactory factory = (GameObjectFactory) sceneContainer.create(GameObjectFactory.class.getCanonicalName());
         sceneContainer.put(GameObjectFactory.class.getCanonicalName(), factory); */
 
-        CombatScene scene = (CombatScene) container.get(CombatScene.class.getCanonicalName());
+        CombatScene scene = (CombatScene) container.get(CombatScene.class.getName());
 
     }
 

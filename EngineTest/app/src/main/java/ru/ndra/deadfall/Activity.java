@@ -15,7 +15,7 @@ public class Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Container container = new Container();
-        container.put(Context.class.getCanonicalName(), this);
+        container.put(Context.class.getName(), this);
         //   container.addFactory(CombatScene.class.getCanonicalName(), CombatSceneFactory.class);
 
         Game game = (Game) container.get(Game.class);
