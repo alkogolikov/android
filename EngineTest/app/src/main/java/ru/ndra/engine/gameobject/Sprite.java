@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.TouchEvent;
@@ -56,6 +57,8 @@ public class Sprite extends GameObject {
 
     @Override
     public void onTouch(TouchEvent event) {
+        super.onTouch(event);
+        this.events.trigger(event);
        /* PointF p1 = parent.screenToModel(0, 0);
         PointF p2 = parent.screenToModel(event.pan.x, event.pan.y);
         position.x -= p1.x - p2.x;
