@@ -4,10 +4,9 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.Matrix;
-import android.util.Log;
 
 import ru.ndra.engine.ResourceLoader;
-import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.di.Inject;
 
 public class Sprite extends GameObject {

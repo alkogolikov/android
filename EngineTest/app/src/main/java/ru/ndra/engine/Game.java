@@ -6,6 +6,7 @@ import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.World;
+import ru.ndra.engine.touch.TouchListener;
 
 public class Game implements OnCreate {
 

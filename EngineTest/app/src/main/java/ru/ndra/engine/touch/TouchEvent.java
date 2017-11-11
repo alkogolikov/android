@@ -1,4 +1,4 @@
-package ru.ndra.engine;
+package ru.ndra.engine.touch;
 
 import android.graphics.PointF;
 import android.view.MotionEvent;

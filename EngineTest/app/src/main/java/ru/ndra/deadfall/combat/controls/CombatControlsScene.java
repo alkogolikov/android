@@ -2,11 +2,9 @@ package ru.ndra.deadfall.combat.controls;
 
 import android.view.MotionEvent;
 
-import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.di.OnCreate;
-import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
-import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 

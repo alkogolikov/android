@@ -7,7 +7,7 @@ import android.opengl.Matrix;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import ru.ndra.engine.TouchEvent;
+import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.EventManager;
