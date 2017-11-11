@@ -27,8 +27,8 @@ public class ResourceLoader {
     private HashMap<String, Bitmap> texturesToCreate = new HashMap<String, Bitmap>();
     private HashMap<String, Point> textureSize = new HashMap<>();
 
-    public ResourceLoader(Game game) {
-        this.context = game.context;
+    public ResourceLoader(Context context) {
+        this.context = context;
     }
 
     /**

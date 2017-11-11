@@ -1,63 +1,54 @@
 package ru.ndra.engine;
 
-import android.content.Context;
-import android.graphics.PointF;
-import android.graphics.RectF;
-
+import ru.ndra.engine.di.Inject;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
-import ru.ndra.engine.gl.Helper;
+import ru.ndra.engine.gameobject.World;
+import ru.ndra.engine.touch.TouchListener;
 
-public class Game {
+public class Game implements OnCreate {
 
-    /**
-     * Основная активити игры
-     */
-    public Context context;
+    private EventManager eventManager;
 
-    /**
-     * Загрузчик ресурсов
-     */
-    public ResourceLoader loader;
+    @Inject
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+    }
 
-    /**
-     * Менеджер времени, управляет шагом и скоростью игры
-     * Считает FPS
-     */
-    TimeManager timeManager = new TimeManager();
+    private World world;
 
-    TouchListener touchListener = new TouchListener(this);
+    @Inject
+    public void setWorld(World world) {
+        this.world = world;
+    }
 
-    /**
-     * Прямоугольник экрана в мировых координатах
-     */
-    public RectF viewport;
+    private TouchListener touchListener;
 
-    /**
-     * Основной игровой объект
-     */
-    public GameObject world;
+    @Inject
+    public void setTouchListener(TouchListener touchListener) {
+        this.touchListener = touchListener;
+    }
 
-    public float[] viewMatrix;
+    private ResourceLoader loader;
 
-    // todo убрать бы их
-    public int width, height;
+    @Inject
+    public void setResourceLoader(ResourceLoader loader) {
+        this.loader = loader;
+    }
 
-    /**
-     * Помошник для рисования примитивов
-     */
-    public Helper glHelper;
+    private TimeManager timeManager;
 
-    public final EventManager eventManager = new EventManager();
+    @Inject
+    public void setTimeManager(TimeManager timeManager) {
+        this.timeManager = timeManager;
+    }
 
-    public Game(Context context) {
-        this.context = context;
+    public Game() {
+    }
 
-        glHelper = new Helper(this, this.eventManager);
-
-        loader = new ResourceLoader(this);
-        world = new GameObject(this);
+    public void onCreate() {
 
         this.eventManager.on("engine/tick", (Event event) -> {
 
@@ -65,7 +56,7 @@ public class Game {
             // Делаем это в самом начале, чтобы
             timeManager.update();
 
-            this.loader.inOpenglThread();
+            loader.inOpenglThread();
             if (!loader.isLoaded()) {
                 throw new Stop();
             }
@@ -80,40 +71,6 @@ public class Game {
             world.draw();
         });
 
-        this.eventManager.on("gl/surface-changed", (Event event) -> {
-
-            this.width = event.paramsInt.get("width");
-            this.height = event.paramsInt.get("height");
-
-            // Расчитываем вью-матрицу
-            float w = 1, h = 1;
-            if (width > height) {
-                w = (float) height / width;
-            } else {
-                h = (float) width / height;
-            }
-
-            // Создаем матрицу вида
-            // 500 = 1000 / 2 - чтобы размеры объектов задавались в разумных числах
-            viewMatrix = new float[]{
-                    w / 500, 0, 0, 0,
-                    0, h / 500, 0, 0,
-                    0, 0, 1, 0,
-                    0, 0, 0, 1,
-            };
-
-            world.modelToScreenMatrix = viewMatrix;
-
-            PointF a = world.screenToModel(0, 0);
-            PointF b = world.screenToModel(width, height);
-            viewport = new RectF(a.x, a.y, b.x, b.y);
-        });
-
-
-    }
-
-    public DrawView getView() {
-        return new DrawView(this);
     }
 
 }

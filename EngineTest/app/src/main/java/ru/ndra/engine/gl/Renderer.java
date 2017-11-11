@@ -10,7 +10,7 @@ import ru.ndra.engine.event.EventManager;
 
 public class Renderer implements android.opengl.GLSurfaceView.Renderer {
 
-    private final EventManager eventManager;
+    private EventManager eventManager;
 
     public Renderer(EventManager eventManager) {
         super();
@@ -18,7 +18,7 @@ public class Renderer implements android.opengl.GLSurfaceView.Renderer {
     }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
-        GLES20.glClearColor(0, 0, 0, 1.0f);
+        GLES20.glClearColor(0, 0, 255, 1.0f);
         this.eventManager.trigger("gl/init");
     }
 

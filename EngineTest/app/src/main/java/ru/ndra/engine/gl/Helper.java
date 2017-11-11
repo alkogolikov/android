@@ -2,20 +2,21 @@ package ru.ndra.engine.gl;
 
 import android.graphics.Color;
 
-import ru.ndra.engine.Game;
-import ru.ndra.engine.Sprite;
-import ru.ndra.engine.event.EventManager;
+import ru.ndra.engine.gameobject.Sprite;
 
 public class Helper {
 
-    private final PrimitiveText primitiveText;
+    //private final PrimitiveText primitiveText;
     private PrimitiveLine primitiveLine;
     private PrimitiveSprite primitiveSprite;
 
-    public Helper(Game game, EventManager eventManager) {
-        this.primitiveLine = new PrimitiveLine(eventManager);
-        this.primitiveSprite = new PrimitiveSprite(eventManager);
-        this.primitiveText = new PrimitiveText(game, eventManager);
+    public Helper(
+            PrimitiveLine primitiveLine,
+            PrimitiveSprite primitiveSprite
+    ) {
+        this.primitiveLine = primitiveLine;
+        this.primitiveSprite = primitiveSprite;
+        //this.primitiveText = new PrimitiveText(game, eventManager);
     }
 
     public void drawLine(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
@@ -27,7 +28,7 @@ public class Helper {
     }
 
     public void drawText(float[] matrix) {
-        this.primitiveText.draw(matrix);
+       // this.primitiveText.draw(matrix);
     }
 
 }

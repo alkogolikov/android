@@ -1,21 +1,19 @@
 package ru.ndra.deadfall.inventory;
 
 import ru.ndra.deadfall.Game;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 
 public class InventoryScene extends Scene {
 
-    public InventoryScene(Game game) {
+    public InventoryScene() {
 
-        super(game);
+        super();
 
         // ГГ
-        Sprite sprite = new Sprite(game);
+        Sprite sprite = (Sprite) this.add(Sprite.class);
         sprite.width = 200;
         sprite.height = 200;
         sprite.setTexture("character.png");
-        add(sprite);
-
     }
 }

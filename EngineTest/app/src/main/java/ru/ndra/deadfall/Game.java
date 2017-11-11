@@ -1,22 +1,24 @@
 package ru.ndra.deadfall;
 
-import android.content.Context;
-
 import ru.ndra.deadfall.combat.CombatScene;
-import ru.ndra.engine.GameObject;
+import ru.ndra.engine.di.OnCreate;
+import ru.ndra.engine.gameobject.GameObject;
+import ru.ndra.engine.gameobject.World;
 
-public class Game extends ru.ndra.engine.Game {
+public class Game extends ru.ndra.engine.Game implements OnCreate {
 
-    public final Map map;
+    private World world;
 
-    public Game(Context context) {
-        super(context);
-
-        map = new Map(this);
-
-        GameObject scene = new CombatScene(this);
-        world.add(scene);
-
+    public Game(World world) {
+        super();
+        this.world = world;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        world.add(CombatScene.class);
+    }
+
 
 }

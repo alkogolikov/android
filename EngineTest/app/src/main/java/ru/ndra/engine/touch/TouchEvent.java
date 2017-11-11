@@ -1,9 +1,11 @@
-package ru.ndra.engine;
+package ru.ndra.engine.touch;
 
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
-public class TouchEvent {
+import ru.ndra.engine.event.Event;
+
+public class TouchEvent extends Event {
 
     public int action;
     private float x[];
@@ -15,6 +17,7 @@ public class TouchEvent {
     public PointF pan = new PointF();
 
     public TouchEvent(MotionEvent event, TouchListener listener) {
+        super("touch");
         this.action = event.getAction() & MotionEvent.ACTION_MASK;
         this.x = new float[event.getPointerCount()];
         this.y = new float[event.getPointerCount()];

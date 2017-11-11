@@ -1,47 +1,46 @@
 package ru.ndra.deadfall.combat;
 
-import ru.ndra.deadfall.Game;
-import ru.ndra.deadfall.combat.creature.CreatureModel;
-import ru.ndra.deadfall.combat.creature.EnemySprite;
-import ru.ndra.deadfall.combat.creature.HeroModel;
-import ru.ndra.deadfall.combat.creature.HeroSprite;
+import ru.ndra.deadfall.combat.controls.CombatControlsScene;
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
-import ru.ndra.engine.Scene;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.Event;
+import ru.ndra.engine.event.EventManager;
+import ru.ndra.engine.gameobject.Scene;
 
-public class CombatScene extends Scene {
+public class CombatScene extends Scene implements OnCreate {
 
-    public CombatScene(Game game) {
+    private final EventManager eventManager;
+    private final ObjectDistributor distributor;
 
-        super(game);
+    public CombatScene(EventManager eventManager, ObjectDistributor distributor) {
+        super();
+        this.eventManager = eventManager;
+        this.distributor = distributor;
+    }
+
+    @Override
+    public void onCreate() {
 
         // Добавляем параллакс
-        ParallaxScene backgroundParallaxScene = new ParallaxScene(game);
-        this.add(backgroundParallaxScene);
+        ParallaxScene backgroundParallaxScene = (ParallaxScene) this.add(ParallaxScene.class);
 
         // Добавляем сцену с объектами (персонаж, враги, мобы и т.п.)
-        Scene objectsScene = new Scene(game);
-        game.eventManager.on("combat/camera-position", (Event event) -> {
+        Scene objectsScene = (Scene) this.add(Scene.class);
+        eventManager.on("combat/camera-position", (Event event) -> {
             objectsScene.camera.position.x = event.paramsFloat.get("x");
         });
-        this.add(objectsScene);
 
         // Располагаем на ней объекты
-        ObjectDistributor distributor = new ObjectDistributor();
         distributor.distribute(objectsScene);
 
         // Добавляем параллакс переднего плана
-        ParallaxScene foregroundParallaxScene = new ParallaxScene(game);
-        this.add(foregroundParallaxScene);
+        ParallaxScene foregroundParallaxScene = (ParallaxScene) this.add(ParallaxScene.class);
 
         EnvironmentCreator environmentCreator = new EnvironmentCreator(backgroundParallaxScene, foregroundParallaxScene);
 
         // Добавляем элементы управления
-        CombatControlsScene controlsScene = new CombatControlsScene(game);
-        this.add(controlsScene);
-
+        this.add(CombatControlsScene.class);
     }
 
 }

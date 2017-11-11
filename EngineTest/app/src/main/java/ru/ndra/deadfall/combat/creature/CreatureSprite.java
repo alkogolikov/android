@@ -1,31 +1,17 @@
 package ru.ndra.deadfall.combat.creature;
 
-import ru.ndra.engine.Game;
-import ru.ndra.engine.Sprite;
+import ru.ndra.engine.di.OnCreate;
+import ru.ndra.engine.gameobject.Sprite;
 
 
-public class CreatureSprite<T extends CreatureModel> extends Sprite {
+public class CreatureSprite<T extends CreatureModel> extends Sprite implements OnCreate {
 
-    private final HpSprite hpSprite;
+    protected HpSprite hpSprite;
     private float moveDirection = 0;
 
     public float speed = 200;
 
     public T model;
-
-    public CreatureSprite(Game game, T model) {
-
-        super(game);
-
-        this.width = 200;
-        this.height = 300;
-        this.model = model;
-
-        this.hpSprite = new HpSprite(game);
-        this.hpSprite.position.x = 0;
-        this.hpSprite.position.y = this.height / 2;
-        this.add(hpSprite);
-    }
 
     /**
      * Существо идет вперед
@@ -70,6 +56,21 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite {
 
         // Рассчитываем заполнение hp
         float hpFilling = this.model.getHp() / this.model.getHpMax();
-        this.hpSprite.setFilling(hpFilling);
+//        this.hpSprite.setFilling(hpFilling);
+    }
+
+    public void setModel(T model) {
+        this.model = model;
+    }
+
+    @Override
+    public void onCreate() {
+
+        this.width = 200;
+        this.height = 300;
+
+        this.hpSprite = (HpSprite) this.add(HpSprite.class);
+        this.hpSprite.position.x = 0;
+        this.hpSprite.position.y = this.height / 2;
     }
 }

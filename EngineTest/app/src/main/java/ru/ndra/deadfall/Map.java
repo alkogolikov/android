@@ -35,7 +35,7 @@ class Map {
 
     // @todo сделать загрузку данных в трэде
     public void loadData() {
-        try {
+       /* try {
 
             // Загружаем карту из JSON
             InputStream is = game.context.getAssets().open("data/map.json");
@@ -72,19 +72,19 @@ class Map {
         }
 
         renderMap();
-
+        */
     }
 
     private void renderMap() {
-        int pixelCellSize = 16;
+      /*  int pixelCellSize = 16;
         Bitmap render = Bitmap.createBitmap(pixelCellSize * width, pixelCellSize * height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(render);
         Paint p = new Paint();
         p.setColor(Color.RED);
-        //c.PrimitiveLine(0, 0, render.getWidth() - 1, 0, p);
-        //c.PrimitiveLine(render.getWidth()- 1, 0, render.getWidth()- 1, render.getHeight(), p);
-        //c.PrimitiveLine(render.getWidth()- 1, render.getHeight() - 1, 0, render.getHeight(), p);
-        //c.PrimitiveLine(0, render.getHeight() - 1, 0, 0, p);
+        //c.PrimitiveLine(0, 0, render.getScreenWidth() - 1, 0, p);
+        //c.PrimitiveLine(render.getScreenWidth()- 1, 0, render.getScreenWidth()- 1, render.getScreenHeight(), p);
+        //c.PrimitiveLine(render.getScreenWidth()- 1, render.getScreenHeight() - 1, 0, render.getScreenHeight(), p);
+        //c.PrimitiveLine(0, render.getScreenHeight() - 1, 0, 0, p);
 
         Iterator itr = cells.entrySet().iterator();
         while (itr.hasNext()) {
@@ -93,7 +93,7 @@ class Map {
             c.drawRect(cell.x * pixelCellSize, cell.y * pixelCellSize, (cell.x + 1) * pixelCellSize, (cell.y + 1) * pixelCellSize, p);
         }
 
-        game.loader.addTexture("render/map", render);
+        game.loader.addTexture("render/map", render); */
     }
 
     /**

@@ -1,30 +1,39 @@
 package ru.ndra.deadfall.combat.creature;
 
-import ru.ndra.engine.Game;
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.Event;
+import ru.ndra.engine.event.EventManager;
 
+public class HeroSprite extends CreatureSprite implements OnCreate {
 
-public class HeroSprite extends CreatureSprite {
+    protected EventManager eventManager;
 
-    public HeroSprite(Game game, HeroModel model) {
-        super(game, model);
+    public HeroSprite(EventManager eventManager) {
+        super();
+        this.eventManager = eventManager;
+    }
+
+   public void onCreate() {
+
+        super.onCreate();
+
         this.setTexture("character.png");
-        game.eventManager.on("control/move-forward", (Event event) -> {
+        this.eventManager.on("control/move-forward", (Event event) -> {
             this.moveForward();
         });
-        game.eventManager.on("control/move-backward", (Event event) -> {
+        this.eventManager.on("control/move-backward", (Event event) -> {
             this.moveBackward();
         });
-        game.eventManager.on("control/move-stop", (Event event) -> {
+        this.eventManager.on("control/move-stop", (Event event) -> {
             this.moveStop();
         });
     }
 
-    @Override
+   /*  @Override
     public void update(float dt) {
         super.update(dt);
         Event event = new Event("combat/camera-position");
         event.paramsFloat.put("x", this.position.x);
-        this.game.eventManager.trigger(event);
-    }
+        this.eventManager.trigger(event);
+    } */
 }
