@@ -12,18 +12,16 @@ public class TouchEvent extends Event {
     private float y[];
     private int[] ids;
     private final MotionEvent event;
-    private final TouchListener listener;
 
     public PointF pan = new PointF();
 
-    public TouchEvent(MotionEvent event, TouchListener listener) {
+    TouchEvent(MotionEvent event) {
         super("touch");
         this.action = event.getAction() & MotionEvent.ACTION_MASK;
         this.x = new float[event.getPointerCount()];
         this.y = new float[event.getPointerCount()];
         this.ids = new int[event.getPointerCount()];
         this.event = event;
-        this.listener = listener;
         for (int i = 0; i < event.getPointerCount(); i++) {
             this.x[i] = event.getX(i);
             this.y[i] = event.getY(i);

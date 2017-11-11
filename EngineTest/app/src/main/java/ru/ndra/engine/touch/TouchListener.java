@@ -16,21 +16,20 @@ import ru.ndra.engine.gameobject.World;
  */
 
 public class TouchListener implements View.OnTouchListener {
-    private final World world;
 
-    // private final Game game;
+    private final World world;
 
     private SparseArray<PointF>start = new SparseArray<PointF>();
 
-    int dragThreshold = 20;
+    private int dragThreshold = 20;
 
-    boolean drag = false;
+    private boolean drag = false;
 
-    boolean multitouch = false;
+    private boolean multitouch = false;
 
-    private ArrayList<TouchEvent> motionEvents = new ArrayList<>();
+    private final ArrayList<TouchEvent> motionEvents = new ArrayList<>();
 
-    public GameObject target;
+    private GameObject target;
 
     public TouchListener(World world) {
         this.world = world;
@@ -40,7 +39,7 @@ public class TouchListener implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
 
         synchronized(motionEvents) {
-            motionEvents.add(new TouchEvent(event, this));
+            motionEvents.add(new TouchEvent(event));
         }
 
         return true;
@@ -73,7 +72,7 @@ public class TouchListener implements View.OnTouchListener {
         }
     }
 
-    public void prepareEvent(TouchEvent event) {
+    private void prepareEvent(TouchEvent event) {
         switch (event.action) {
 
             // Нажатие первым пальцем
