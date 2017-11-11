@@ -133,14 +133,7 @@ public class GameObject {
             children.sort(new Comparator<GameObject>() {
                 @Override
                 public int compare(GameObject obj1, GameObject obj2) {
-                    float d = obj1.zIndex - obj2.zIndex;
-                    if (d < 0) {
-                        return -1;
-                    }
-                    if (d > 0) {
-                        return 1;
-                    }
-                    return 0;
+                    return (int) Math.signum(obj1.zIndex - obj2.zIndex);
                 }
             });
         }
@@ -166,13 +159,18 @@ public class GameObject {
     }
 
     /**
-     * Трейсит точку
+     * Проверяет, попадает ли точка [x,y] этот объект
+     * Cам по себе класс GameObject не реализует попадания, а лишь проверяет попадание в дочерний объект
      */
     public GameObject hitTest(float x, float y) {
 
         int len = children.size();
+        // Проходим по объектам в обратном порядке
+        // Те объекты, которые были отрисованы последними,
+        // должны рассматриваться для попадания первыми
         for (int i = len - 1; i >= 0; i--) {
             GameObject obj = children.get(i);
+            // Учитываем только кнопки
             if (obj.isButton) {
                 GameObject target = obj.hitTest(x, y);
                 if (target != null) {
