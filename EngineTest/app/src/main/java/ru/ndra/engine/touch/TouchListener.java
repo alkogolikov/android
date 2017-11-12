@@ -8,6 +8,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.gameobject.World;
 
@@ -17,25 +18,28 @@ import ru.ndra.engine.gameobject.World;
 
 public class TouchListener implements View.OnTouchListener {
 
-    private final World world;
+    private final EventManager eventManager;
 
-    private SparseArray<PointF>start = new SparseArray<PointF>();
+    //   private final World world;
 
-    private int dragThreshold = 20;
+    //private SparseArray<PointF>start = new SparseArray<PointF>();
 
-    private boolean drag = false;
+//    private int dragThreshold = 20;
 
-    private boolean multitouch = false;
+  //  private boolean drag = false;
+
+    //private boolean multitouch = false;
 
     private final ArrayList<TouchEvent> motionEvents = new ArrayList<>();
 
-    private GameObject target;
-
-    public TouchListener(World world) {
-        this.world = world;
+    public TouchListener(EventManager eventManager) {
+       this.eventManager = eventManager;
     }
 
-    @Override
+    /**
+     * Обработку касаний выполняем не сразу, а складываем события в массив
+     * Эти события будут обработаны в основном трэде в свое время
+     */
     public boolean onTouch(View v, MotionEvent event) {
 
         synchronized(motionEvents) {
@@ -45,13 +49,18 @@ public class TouchListener implements View.OnTouchListener {
         return true;
     }
 
+    /**
+     * Непосредственная обработка событий
+     */
     public void processTouchEvents() {
         synchronized(motionEvents) {
             ListIterator<TouchEvent> eitr = motionEvents.listIterator();
             while (eitr.hasNext()) {
 
-                TouchEvent event = eitr.next();
-                prepareEvent(event);
+                this.eventManager.trigger(eitr.next());
+
+               // TouchEvent event = eitr.next();
+               /* prepareEvent(event);
 
                 if(target != null) {
                     target.onTouch(event);
@@ -65,14 +74,14 @@ public class TouchListener implements View.OnTouchListener {
                     }
                     drag = false;
                     target = null;
-                }
+                } */
 
             }
             motionEvents.clear();
         }
     }
 
-    private void prepareEvent(TouchEvent event) {
+   /* private void prepareEvent(TouchEvent event) {
         switch (event.action) {
 
             // Нажатие первым пальцем
@@ -152,13 +161,13 @@ public class TouchListener implements View.OnTouchListener {
         }
     }
 
-    /**
+
      * Возвращает точку поседение между двумя пальцами
-     */
+
     private PointF midPoint(TouchEvent event) {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         return new PointF(x / 2, y / 2);
-    }
+    }*/
 
 }

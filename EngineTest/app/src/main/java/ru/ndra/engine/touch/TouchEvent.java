@@ -8,67 +8,29 @@ import ru.ndra.engine.event.Event;
 public class TouchEvent extends Event {
 
     public int action;
-    private float x[];
-    private float y[];
-    private int[] ids;
-    private final MotionEvent event;
-
+    private MotionEvent originalEvent;
     public PointF pan = new PointF();
+    public Pointer[] pointers;
 
     TouchEvent(MotionEvent event) {
         super("touch");
         this.action = event.getAction() & MotionEvent.ACTION_MASK;
-        this.x = new float[event.getPointerCount()];
-        this.y = new float[event.getPointerCount()];
-        this.ids = new int[event.getPointerCount()];
-        this.event = event;
-        for (int i = 0; i < event.getPointerCount(); i++) {
-            this.x[i] = event.getX(i);
-            this.y[i] = event.getY(i);
-            this.ids[i] = event.getPointerId(i);
+        this.originalEvent = event;
+
+        this.pointers = new Pointer[this.originalEvent.getPointerCount()];
+        for (int i = 0; i < this.originalEvent.getPointerCount(); i++) {
+            this.pointers[i] = new Pointer(
+                    this.originalEvent.getX(i),
+                    this.originalEvent.getY(i)
+            );
+        }
+
+    }
+
+    public class Pointer {
+        public Pointer(float x, float y) {
         }
     }
 
-    /**
-     * @return Возвращает x-координату нажатия
-     * Если касание несколькими пальцами, используется первый палец
-     */
-    public float getX() {
-        return x[0];
-    }
-
-    /**
-     * @return Возвращает y-координату нажатия
-     * Если касание несколькими пальцами, используется первый палец
-     */
-    public float getY() {
-        return y[0];
-    }
-
-    public int getPointerId(int i) {
-        return ids[i];
-    }
-
-    /**
-     * Возвращает количество пальцев, касающихся экрана
-     *
-     * @return integer
-     */
-    public float getPointerCount() {
-        return this.x.length;
-    }
-
-    public float getX(int i) {
-        return this.x[i];
-    }
-
-    public float getY(int i) {
-        return this.y[i];
-    }
-
-    public void doPan(float x, float y) {
-        pan.x = x;
-        pan.y = y;
-    }
 
 }

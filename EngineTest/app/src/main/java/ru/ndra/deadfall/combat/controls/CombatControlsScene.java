@@ -1,8 +1,5 @@
 package ru.ndra.deadfall.combat.controls;
 
-import android.view.MotionEvent;
-
-import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
@@ -30,7 +27,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
         moveBackButton.position.x = -700;
         moveBackButton.isButton = true;
 
-        moveBackButton.events.on("touch", event -> {
+        /*moveBackButton.events.on("touch", event -> {
 
             TouchEvent touchEevent = (TouchEvent) event;
 
@@ -40,7 +37,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
             if (touchEevent.action == MotionEvent.ACTION_UP) {
                 eventManager.trigger("control/move-stop");
             }
-        });
+        }); */
 
         // Кнопка "Вперед"
         /*class MoveForthButton extends Sprite {

@@ -6,6 +6,7 @@ import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.World;
+import ru.ndra.engine.touch.TouchKeeper;
 import ru.ndra.engine.touch.TouchListener;
 
 public class Game implements OnCreate {
@@ -39,6 +40,11 @@ public class Game implements OnCreate {
     @Inject
     public void setTimeManager(TimeManager timeManager) {
         this.timeManager = timeManager;
+    }
+
+    @Inject
+    public void initTouchKeeper(TouchKeeper keeper) {
+        // Просто инициализируем TouchKeeper  при помощи DI
     }
 
     public Game() {
