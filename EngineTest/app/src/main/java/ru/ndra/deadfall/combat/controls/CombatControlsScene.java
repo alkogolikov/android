@@ -9,9 +9,21 @@ public class CombatControlsScene extends Scene implements OnCreate {
 
     private final EventManager eventManager;
 
+    private Button moveBackButton;
+
     public CombatControlsScene(EventManager eventManager) {
         super();
         this.eventManager = eventManager;
+    }
+
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        if(this.moveBackButton.isPressed()) {
+            eventManager.trigger("control/move-backward");
+        } else {
+            eventManager.trigger("control/move-stop");
+        }
     }
 
     @Override
@@ -20,12 +32,14 @@ public class CombatControlsScene extends Scene implements OnCreate {
         Bar bar = (Bar) this.add(Bar.class);
         bar.position.y = 400;
 
-        Sprite moveBackButton = (Sprite) this.add(Sprite.class);
-        moveBackButton.width = 200;
-        moveBackButton.height = 200;
-        moveBackButton.position.y = -200;
-        moveBackButton.position.x = -700;
-        moveBackButton.isButton = true;
+        this.moveBackButton = (Button) this.add(Button.class);
+        this.moveBackButton.width = 200;
+        this.moveBackButton.height = 200;
+        this.moveBackButton.position.y = -200;
+        this.moveBackButton.position.x = -700;
+        this.moveBackButton.isButton = true;
+
+
 
         /*moveBackButton.events.on("touch", event -> {
 

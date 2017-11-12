@@ -28,7 +28,11 @@ public class TouchEvent extends Event {
     }
 
     public class Pointer {
+        public final float x;
+        public final float y;
         public Pointer(float x, float y) {
+            this.x = x;
+            this.y = y;
         }
     }
 
