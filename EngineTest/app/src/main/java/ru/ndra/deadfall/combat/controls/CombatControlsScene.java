@@ -3,6 +3,7 @@ package ru.ndra.deadfall.combat.controls;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Text;
 
 public class CombatControlsScene extends Scene implements OnCreate {
 
@@ -32,7 +33,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
             pressed = true;
         }
 
-        if(!pressed) {
+        if (!pressed) {
             eventManager.trigger("control/move-stop");
         }
     }
@@ -56,5 +57,10 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.moveForthButton.position.y = -200;
         this.moveForthButton.position.x = -300;
         this.moveForthButton.zIndex = 1000;
+
+        Text text = (Text) this.add(Text.class);
+        text.width = 100;
+        text.height = 100;
+
     }
 }

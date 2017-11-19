@@ -20,15 +20,6 @@ public class World extends GameObject {
     }
 
     @Override
-    public void draw() {
-        super.draw();
-        // todo убрать линии
-        this.drawLine(-100, -100, 100, 100, new Color());
-        float size = 100;
-        this.drawRect(-size, -size, size, size, new Color());
-    }
-
-    @Override
     public void update(float dt) {
         super.update(dt);
         this.modelToScreenMatrix = viewport.viewMatrix;

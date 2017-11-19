@@ -18,7 +18,15 @@ import java.util.Map;
 
 public class ResourceLoader {
 
+    /**
+     * Контекст приложения
+     * Нужен для загрузки ресурсов
+     */
     private Context context;
+
+    /**
+     * Трэд для загрузки картинок
+     */
     private LoadThread thread;
     private ArrayList<String> bitmapsToLoad = new ArrayList<String>();
     private HashMap<String, Integer> textures = new HashMap<String, Integer>();

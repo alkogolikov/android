@@ -59,6 +59,7 @@ public class Sprite extends GameObject {
      * @param x x-координата точки
      * @param y y-координата точки
      * @return Возвращает объект, в который попала точка (или null, если попадания нет)
+     * @todo нет проверки на то что объект - кнопка
      */
     public GameObject hitTest(float x, float y) {
 
