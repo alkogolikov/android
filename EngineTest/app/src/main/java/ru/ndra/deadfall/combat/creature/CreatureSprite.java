@@ -2,6 +2,7 @@ package ru.ndra.deadfall.combat.creature;
 
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.Sprite;
+import ru.ndra.engine.gameobject.Text;
 
 
 public class CreatureSprite<T extends CreatureModel> extends Sprite implements OnCreate {
@@ -12,6 +13,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
     public float speed = 200;
 
     public T model;
+    private Text text;
 
     /**
      * Существо идет вперед
@@ -57,6 +59,8 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
         // Рассчитываем заполнение hp
         float hpFilling = this.model.getHp() / this.model.getHpMax();
         this.hpSprite.setFilling(hpFilling);
+
+        this.text.setText("hp: " + Math.round(this.model.getHp()));
     }
 
     public void setModel(T model) {
@@ -72,5 +76,9 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
         this.hpSprite = (HpSprite) this.add(HpSprite.class);
         this.hpSprite.position.x = 0;
         this.hpSprite.position.y = this.height / 2;
+
+        this.text = (Text) this.add(Text.class);
+        this.text.position.y = this.height / 2 + 50;
+
     }
 }

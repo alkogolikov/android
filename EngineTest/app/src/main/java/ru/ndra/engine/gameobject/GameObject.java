@@ -25,6 +25,9 @@ public class GameObject {
 
     protected GameObjectFactory gameObjectFactory;
 
+    /**
+     * Локальные события объекта
+     */
     public final EventManager events = new EventManager();
 
     /**
@@ -73,12 +76,6 @@ public class GameObject {
         this.gameObjectFactory = gameObjectFatory;
     }
 
-    public void onClick(TouchEvent event) {
-    }
-
-    public void onTouch(TouchEvent event) {
-    }
-
     public boolean isButton() {
         return false;
     }
@@ -90,6 +87,11 @@ public class GameObject {
         return obj;
     }
 
+    /**
+     * Создает и добавляет дочерний объект
+     * @param klass Класс объекта
+     * @return Объект
+     */
     public GameObject add(Class klass) {
         GameObject obj = this.gameObjectFactory.create(klass);
         this.add(obj);
@@ -98,9 +100,18 @@ public class GameObject {
 
     /**
      * Убирает все дочерние элементы
+     * @todo Сделать метод удаления отдельного объекта
+     * @todo Вызывать триггер удаления
      */
     public void clear() {
         children.clear();
+    }
+
+    /**
+     * @todo реализовать
+     */
+    public void remove() {
+
     }
 
     /**
