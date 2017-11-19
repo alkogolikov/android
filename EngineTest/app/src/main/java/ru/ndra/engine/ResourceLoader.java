@@ -60,15 +60,6 @@ public class ResourceLoader {
 
     public void addTexture(String name, Bitmap bitmap) {
         synchronized (this) {
-            if (bitmapsToLoad.contains(name)) {
-                return;
-            }
-            if (textures.containsKey(name)) {
-                return;
-            }
-            if (textures.containsKey(name)) {
-                return;
-            }
             texturesToCreate.put(name, bitmap);
         }
     }
@@ -90,6 +81,7 @@ public class ResourceLoader {
 
     /**
      * Возвращает идентификатор текстуры по имени изображения
+     *
      * @param name имя изображения
      * @return идентификатор текстуры
      */
@@ -106,6 +98,7 @@ public class ResourceLoader {
 
     /**
      * Флаг, показывающий что загружены все текстуры
+     *
      * @return
      */
     boolean isLoaded() {
@@ -136,6 +129,13 @@ public class ResourceLoader {
             }
             String name = (String) entry.getKey();
             Bitmap bitmap = (Bitmap) entry.getValue();
+
+            // Удаляем текстуру, если по данному имени уже есть текстура
+            if (this.textures.containsKey(name)) {
+                int[] textures = new int[1];
+                textures[0] = this.textures.get(name);
+                GLES20.glDeleteTextures(1, textures, 0);
+            }
 
             final int[] textureIds = new int[1];
             GLES20.glGenTextures(1, textureIds, 0);

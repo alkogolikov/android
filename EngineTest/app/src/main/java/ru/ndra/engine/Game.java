@@ -69,6 +69,7 @@ public class Game implements OnCreate {
         this.eventManager.on("engine/tick", (Event event) -> {
             // Обновляем слои
             world.updateSelfAndChildren(timeManager.dt());
+            loader.inOpenglThread();
             world.beforeDraw();
             world.draw();
         });

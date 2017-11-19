@@ -6,16 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import ru.ndra.engine.di.OnCreate;
-
-public class Text extends Sprite implements OnCreate {
+public class Text extends Sprite {
 
     public float pixelSize = 5;
 
-    @Override
-    public void onCreate() {
-
-        String text = "Привед я текст------------- sss";
+    public void setText(String text) {
 
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
@@ -34,5 +29,11 @@ public class Text extends Sprite implements OnCreate {
 
         loader.addTexture("xxx", bitmap);
         this.setTexture("xxx");
+    }
+
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        this.setText("Привед " + Math.random());
     }
 }
