@@ -13,7 +13,7 @@ public class HeroSprite extends CreatureSprite implements OnCreate {
         this.eventManager = eventManager;
     }
 
-   public void onCreate() {
+    public void onCreate() {
 
         super.onCreate();
 
@@ -29,11 +29,10 @@ public class HeroSprite extends CreatureSprite implements OnCreate {
         });
     }
 
-   /*  @Override
     public void update(float dt) {
         super.update(dt);
         Event event = new Event("combat/camera-position");
         event.paramsFloat.put("x", this.position.x);
         this.eventManager.trigger(event);
-    } */
+    }
 }

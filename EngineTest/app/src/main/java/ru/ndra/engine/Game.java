@@ -6,43 +6,45 @@ import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.World;
+import ru.ndra.engine.touch.TouchKeeper;
 import ru.ndra.engine.touch.TouchListener;
 
 public class Game implements OnCreate {
 
     private EventManager eventManager;
+    private World world;
+    private TouchListener touchListener;
+    private ResourceLoader loader;
+    private TimeManager timeManager;
 
     @Inject
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
     }
 
-    private World world;
-
     @Inject
     public void setWorld(World world) {
         this.world = world;
     }
-
-    private TouchListener touchListener;
 
     @Inject
     public void setTouchListener(TouchListener touchListener) {
         this.touchListener = touchListener;
     }
 
-    private ResourceLoader loader;
-
     @Inject
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
     }
 
-    private TimeManager timeManager;
-
     @Inject
     public void setTimeManager(TimeManager timeManager) {
         this.timeManager = timeManager;
+    }
+
+    @Inject
+    public void initTouchKeeper(TouchKeeper keeper) {
+        // Просто инициализируем TouchKeeper  при помощи DI
     }
 
     public Game() {

@@ -30,7 +30,7 @@ public class GameObject {
     /**
      * Коллекция дочерних объектов
      */
-    private ArrayList<GameObject> children = new ArrayList<>();
+    public ArrayList<GameObject> children = new ArrayList<>();
 
     /**
      * Родительский объект
