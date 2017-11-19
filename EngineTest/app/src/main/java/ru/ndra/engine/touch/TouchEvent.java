@@ -8,7 +8,7 @@ import ru.ndra.engine.event.Event;
 public class TouchEvent extends Event {
 
     public int action;
-    private MotionEvent originalEvent;
+    public MotionEvent originalEvent;
     public PointF pan = new PointF();
     public Pointer[] pointers;
 
@@ -27,7 +27,7 @@ public class TouchEvent extends Event {
 
     }
 
-    public class Pointer {
+    public static class Pointer {
         public final float x;
         public final float y;
         public Pointer(float x, float y) {

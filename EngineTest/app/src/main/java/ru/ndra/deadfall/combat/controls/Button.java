@@ -14,10 +14,7 @@ public class Button extends Sprite {
     }
 
     public boolean isPressed() {
-        if (this.touchKeeper.getLastEvent() == null) {
-            return false;
-        }
-        for (TouchEvent.Pointer pointer : this.touchKeeper.getLastEvent().pointers) {
+        for (TouchEvent.Pointer pointer : this.touchKeeper.pointers) {
             if (this.hitTest(pointer.x, pointer.y) == this) {
                 return true;
             }
