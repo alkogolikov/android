@@ -54,23 +54,24 @@ public class Sprite extends GameObject {
         this.loader.addTexture(texture);
     }
 
-    @Override
-    public void onTouch(TouchEvent event) {
-        super.onTouch(event);
-        this.events.trigger(event);
-       /* PointF p1 = parent.screenToModel(0, 0);
-        PointF p2 = parent.screenToModel(event.pan.x, event.pan.y);
-        position.x -= p1.x - p2.x;
-        position.y -= p1.y - p2.y; */
-    }
-
+    /**
+     * Тест попадания точки в прямоугольник спрайта
+     * @param x x-координата точки
+     * @param y y-координата точки
+     * @return Возвращает объект, в который попала точка (или null, если попадания нет)
+     */
     public GameObject hitTest(float x, float y) {
 
+        // Дня начала вызомер родительский метод
+        // Он проверит попадание в дочерние объекты
+        // Если объект, в который попало, найден, вернем его.
         GameObject ret = super.hitTest(x, y);
         if (ret != null) {
             return ret;
         }
 
+        // Если мы дошли до сюда, попадания в дочерние обхекты не было
+        // Проверим попадание в сам объект
         PointF model = screenToModel(x, y);
         if (model.x > -width / 2
                 & model.y > -height / 2

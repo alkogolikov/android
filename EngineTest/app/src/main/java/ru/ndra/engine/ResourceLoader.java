@@ -5,8 +5,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
@@ -68,9 +66,12 @@ public class ResourceLoader {
     }
 
     /**
-     * todo заменить run() на start()
+     * Запускает трэд для загрузки изображений
+     * Если трэд уже сущетвует, ничего не делаем
+     * В самом трэде будут загружены изображения из ассетов, но текстуры их них
+     * мыбдем создавать в трэде OpenGl (это можно сделать только там)
      */
-    public void startThread() {
+    private void startThread() {
         synchronized (this) {
             if (thread == null) {
                 thread = new LoadThread();
@@ -79,8 +80,13 @@ public class ResourceLoader {
         }
     }
 
+    /**
+     * Возвращает идентификатор текстуры по имени изображения
+     * @param name имя изображения
+     * @return идентификатор текстуры
+     */
     public int getTexture(String name) {
-        if(!textures.containsKey(name)) {
+        if (!textures.containsKey(name)) {
             throw new RuntimeException("Cannot get bitmap: " + name);
         }
         return textures.get(name);
@@ -90,8 +96,12 @@ public class ResourceLoader {
         return this.textureSize.get(name);
     }
 
-    public boolean isLoaded() {
-        synchronized(this) {
+    /**
+     * Флаг, показывающий что загружены все текстуры
+     * @return
+     */
+    boolean isLoaded() {
+        synchronized (this) {
             if (!bitmapsToLoad.isEmpty()) {
                 return false;
             }
@@ -104,13 +114,13 @@ public class ResourceLoader {
 
     /**
      * Метод, который вызывается в трэде OpenGL для создания тексур
-     * (Мы не можем моздавать текстуры в других трэдах)
+     * (Мы не можем создавать текстуры в других трэдах)
      */
     synchronized public void inOpenglThread() {
         while (true) {
 
             Map.Entry<String, Bitmap> entry;
-            synchronized(this) {
+            synchronized (this) {
                 if (texturesToCreate.isEmpty()) {
                     break;
                 }
@@ -126,6 +136,8 @@ public class ResourceLoader {
                 throw new RuntimeException("Texture allocate failed");
             }
 
+            Log.d("deadfall-engine", "Allocate texture id = " + textureIds[0]);
+
             // настройка объекта текстуры
             GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureIds[0]);
@@ -135,19 +147,21 @@ public class ResourceLoader {
 
             GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
 
+            // Сохраняем размер текстуры
             textureSize.put(name, new Point(bitmap.getWidth(), bitmap.getHeight()));
 
+            // Освобождаем битмап
             bitmap.recycle();
 
-            // сброс target
+            // Сброс target
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
 
-            synchronized(this) {
+            synchronized (this) {
                 textures.put(name, textureIds[0]);
                 texturesToCreate.remove(name);
             }
 
-            Log.d("xxx", "Loading in opengl thread " + name);
+            Log.d("deadfall-engine", "Loading in opengl thread " + name);
         }
 
     }
@@ -157,12 +171,12 @@ public class ResourceLoader {
         @Override
         public void run() {
 
-            Log.d("xxx", "load thread started");
+            Log.d("deadfall-engine", "load thread started");
 
             // Загружаем картинки
             Iterator<String> itr = bitmapsToLoad.iterator();
 
-            while(!bitmapsToLoad.isEmpty()) {
+            while (!bitmapsToLoad.isEmpty()) {
                 String name = bitmapsToLoad.get(0);
                 String filePath = "graphics/" + name;
                 try {
@@ -184,7 +198,7 @@ public class ResourceLoader {
             }
 
             thread = null;
-            Log.d("xxx", "load thread finished");
+            Log.d("deadfall-engine", "Load thread finished");
         }
 
 
