@@ -59,8 +59,6 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.moveForthButton.zIndex = 1000;
 
         Text text = (Text) this.add(Text.class);
-        text.width = 100;
-        text.height = 100;
 
     }
 }
