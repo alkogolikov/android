@@ -11,7 +11,9 @@ import ru.ndra.engine.di.Inject;
 
 public class Text extends Sprite {
 
-    public float pixelSize = 5;
+    public float textSize = 30;
+
+    public float fontSize = 11;
 
     public int paddingPixels = 1;
 
@@ -24,10 +26,9 @@ public class Text extends Sprite {
 
     public void setText(String text) {
 
-
         Paint paint = new Paint();
         paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTextSize(11);
+        paint.setTextSize(this.fontSize);
 
         Rect bounds = new Rect();
         paint.getTextBounds(text, 0, text.length(), bounds);
@@ -44,8 +45,10 @@ public class Text extends Sprite {
         paint.setShadowLayer(1, 0, 0, Color.BLACK);
         c.drawText(text, -bounds.left + this.paddingPixels, -bounds.top + this.paddingPixels, paint);
 
-        this.width = (bounds.width() + this.paddingPixels * 2) * this.pixelSize;
-        this.height = (bounds.height() + this.paddingPixels  * 2) * this.pixelSize;
+        float sizeMultiplier = this.textSize / this.fontSize;
+
+        this.width = (bounds.width() + this.paddingPixels * 2) * sizeMultiplier;
+        this.height = (bounds.height() + this.paddingPixels * 2) * sizeMultiplier;
 
         loader.addTexture(textureId, bitmap);
         this.setTexture(textureId);

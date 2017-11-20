@@ -41,10 +41,15 @@ public class Sprite extends GameObject {
     public float rotation = 0;
 
     public int align = Sprite.ALIGN_CENTER;
+    public int valign = Sprite.VALIGN_CENTER;
 
     public static final int ALIGN_CENTER = 0;
     public static final int ALIGN_LEFT = 1;
     public static final int ALIGN_RIGHT = 2;
+
+    public static final int VALIGN_CENTER = 0;
+    public static final int VALIGN_TOP = 1;
+    public static final int VALIGN_BOTTOM = 2;
 
     /**
      * Координаты текстуры спрайта
@@ -59,10 +64,21 @@ public class Sprite extends GameObject {
     public RectF getRect() {
 
         RectF rect = new RectF();
-        rect.top = -this.height / 2;
-        rect.bottom = this.height / 2;
 
-        switch (align) {
+        // @todo сделать valign bottom
+        switch (this.valign) {
+            default:
+            case Sprite.VALIGN_CENTER:
+                rect.top = -this.height / 2;
+                rect.bottom = this.height / 2;
+                break;
+            case Sprite.VALIGN_TOP:
+                rect.top = -this.height;
+                rect.bottom = 0;
+                break;
+        }
+
+        switch (this.align) {
             default:
             case Sprite.ALIGN_CENTER:
                 rect.left = -this.width / 2;
