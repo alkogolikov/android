@@ -2,6 +2,7 @@ package ru.ndra.deadfall.console;
 
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.gameobject.Scene;
+import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.gameobject.Text;
 
 public class ConsoleScene extends Scene {
@@ -18,6 +19,7 @@ public class ConsoleScene extends Scene {
     public void addMessage(String message) {
         Text text = (Text) this.add(Text.class);
         text.setText(message);
+        text.align = Sprite.ALIGN_RIGHT;
         text.position.y = this.index * this.lineHeight;
         this.index++;
     }

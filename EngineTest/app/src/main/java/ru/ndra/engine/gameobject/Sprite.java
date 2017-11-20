@@ -10,14 +10,45 @@ import ru.ndra.engine.di.Inject;
 
 public class Sprite extends GameObject {
 
+    /**
+     * Загрузчик
+     */
     protected ResourceLoader loader;
+
+    /**
+     * Имя текстуры
+     */
     public String texture;
 
+    /**
+     * Ширина спрайта
+     */
     public float width = 1;
+
+    /**
+     * Высота спрайта
+     */
     public float height = 1;
+
+    /**
+     * ПОзиция спрайта
+     */
     public PointF position = new PointF(0, 0);
+
+    /**
+     * Вращениеспрайта
+     */
     public float rotation = 0;
 
+    public int align = Sprite.ALIGN_CENTER;
+
+    public static final int ALIGN_CENTER = 0;
+    public static final int ALIGN_LEFT = 1;
+    public static final int ALIGN_RIGHT = 2;
+
+    /**
+     * Координаты текстуры спрайта
+     */
     public RectF textureCoords = new RectF(0, 0, 1, 1);
 
     @Inject
@@ -26,12 +57,28 @@ public class Sprite extends GameObject {
     }
 
     public RectF getRect() {
-        return new RectF(
-                -this.width / 2,
-                -this.height / 2,
-                this.width / 2,
-                this.height / 2
-        );
+
+        RectF rect = new RectF();
+        rect.top = -this.height / 2;
+        rect.bottom = this.height / 2;
+
+        switch (align) {
+            default:
+            case Sprite.ALIGN_CENTER:
+                rect.left = -this.width / 2;
+                rect.right = this.width / 2;
+                break;
+            case Sprite.ALIGN_LEFT:
+                rect.left = 0;
+                rect.right = this.width;
+                break;
+            case Sprite.ALIGN_RIGHT:
+                rect.left = -this.width;
+                rect.right = 0;
+                break;
+        }
+
+        return rect;
     }
 
     @Override
