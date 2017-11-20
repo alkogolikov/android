@@ -12,6 +12,9 @@ import ru.ndra.engine.di.Inject;
 public class Text extends Sprite {
 
     public float pixelSize = 5;
+
+    public int paddingPixels = 1;
+
     private String textureId;
 
     @Inject
@@ -21,20 +24,28 @@ public class Text extends Sprite {
 
     public void setText(String text) {
 
+
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(11);
 
         Rect bounds = new Rect();
         paint.getTextBounds(text, 0, text.length(), bounds);
 
-        Bitmap bitmap = Bitmap.createBitmap(bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(
+                bounds.width() + this.paddingPixels * 2,
+                bounds.height() + this.paddingPixels * 2,
+                Bitmap.Config.ARGB_8888
+        );
         Canvas c = new Canvas(bitmap);
-        c.drawText(text, -bounds.left, -bounds.top, paint);
 
-        this.width = bounds.width() * this.pixelSize;
-        this.height = bounds.height() * this.pixelSize;
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setShadowLayer(1, 0, 0, Color.BLACK);
+        c.drawText(text, -bounds.left + this.paddingPixels, -bounds.top + this.paddingPixels, paint);
+
+        this.width = (bounds.width() + this.paddingPixels * 2) * this.pixelSize;
+        this.height = (bounds.height() + this.paddingPixels  * 2) * this.pixelSize;
 
         loader.addTexture(textureId, bitmap);
         this.setTexture(textureId);

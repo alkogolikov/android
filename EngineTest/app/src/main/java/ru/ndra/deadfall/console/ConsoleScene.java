@@ -19,7 +19,7 @@ public class ConsoleScene extends Scene {
     public void addMessage(String message) {
         Text text = (Text) this.add(Text.class);
         text.setText(message);
-        text.align = Sprite.ALIGN_RIGHT;
+        text.align = Sprite.ALIGN_LEFT;
         text.position.y = this.index * this.lineHeight;
         this.index++;
     }
