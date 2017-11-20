@@ -1,5 +1,6 @@
 package ru.ndra.engine.gl;
 
+import android.graphics.RectF;
 import android.opengl.GLES20;
 
 import java.nio.ByteBuffer;
@@ -11,7 +12,6 @@ import javax.microedition.khronos.opengles.GL10;
 import ru.ndra.engine.ResourceLoader;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
-import ru.ndra.engine.gameobject.Sprite;
 
 public class PrimitiveSprite extends Primitive {
 
@@ -95,7 +95,7 @@ public class PrimitiveSprite extends Primitive {
 
     }
 
-    public void draw(Sprite sprite) {
+    public void draw(RectF geometry, RectF textureCoords, String texture, float[] matrix) {
 
         GLES20.glUseProgram(program);
 
@@ -105,10 +105,10 @@ public class PrimitiveSprite extends Primitive {
 
         // Обновляем в бефере координаты текстуры
         float[] triangleCoords = {
-                -sprite.width / 2, sprite.height / 2, sprite.textureCoords.left, sprite.textureCoords.top,
-                -sprite.width / 2, -sprite.height / 2, sprite.textureCoords.left, sprite.textureCoords.bottom,
-                sprite.width / 2, sprite.height / 2, sprite.textureCoords.right, sprite.textureCoords.top,
-                sprite.width / 2, -sprite.height / 2, sprite.textureCoords.right, sprite.textureCoords.bottom,
+                geometry.left, geometry.bottom, textureCoords.left, textureCoords.top,
+                geometry.left, geometry.top, textureCoords.left, textureCoords.bottom,
+                geometry.right, geometry.bottom, textureCoords.right, textureCoords.top,
+                geometry.right, geometry.top, textureCoords.right, textureCoords.bottom,
         };
         vertexBuffer.rewind();
         // Передаем указатель на данные вершин
@@ -131,13 +131,13 @@ public class PrimitiveSprite extends Primitive {
         // юнит текстуры
         GLES20.glUniform1i(uTextureUnitLocation, 0);
 
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.loader.getTexture(sprite.texture));
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.loader.getTexture(texture));
 
         // ----------------------------------------------------------------------
 
         // Пуляем матрицу
 
-        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, sprite.modelToScreenMatrix, 0);
+        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
 
         // -----------------------------------------------------------------------
 

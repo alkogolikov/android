@@ -6,7 +6,6 @@ import android.graphics.RectF;
 import android.opengl.Matrix;
 
 import ru.ndra.engine.ResourceLoader;
-import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.di.Inject;
 
 public class Sprite extends GameObject {
@@ -24,6 +23,15 @@ public class Sprite extends GameObject {
     @Inject
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
+    }
+
+    public RectF getRect() {
+        return new RectF(
+                -this.width / 2,
+                -this.height / 2,
+                this.width / 2,
+                this.height / 2
+        );
     }
 
     @Override
@@ -56,6 +64,7 @@ public class Sprite extends GameObject {
 
     /**
      * Тест попадания точки в прямоугольник спрайта
+     *
      * @param x x-координата точки
      * @param y y-координата точки
      * @return Возвращает объект, в который попала точка (или null, если попадания нет)

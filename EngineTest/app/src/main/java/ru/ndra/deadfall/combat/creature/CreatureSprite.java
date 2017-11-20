@@ -13,7 +13,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
     public float speed = 200;
 
     public T model;
-    private Text text;
+    //private Text text;
 
     /**
      * Существо идет вперед
@@ -60,7 +60,7 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
         float hpFilling = this.model.getHp() / this.model.getHpMax();
         this.hpSprite.setFilling(hpFilling);
 
-        this.text.setText("hp: " + Math.round(this.model.getHp()));
+      //  this.text.setText("hp: " + Math.round(this.model.getHp()));
     }
 
     public void setModel(T model) {
@@ -77,8 +77,8 @@ public class CreatureSprite<T extends CreatureModel> extends Sprite implements O
         this.hpSprite.position.x = 0;
         this.hpSprite.position.y = this.height / 2;
 
-        this.text = (Text) this.add(Text.class);
-        this.text.position.y = this.height / 2 + 50;
+       // this.text = (Text) this.add(Text.class);
+        //this.text.position.y = this.height / 2 + 50;
 
     }
 }

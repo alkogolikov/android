@@ -6,7 +6,6 @@ import ru.ndra.engine.gameobject.Sprite;
 
 public class Helper {
 
-    //private final PrimitiveText primitiveText;
     private PrimitiveLine primitiveLine;
     private PrimitiveSprite primitiveSprite;
 
@@ -16,7 +15,6 @@ public class Helper {
     ) {
         this.primitiveLine = primitiveLine;
         this.primitiveSprite = primitiveSprite;
-        //this.primitiveText = new PrimitiveText(game, eventManager);
     }
 
     public void drawLine(float[] matrix, float x1, float y1, float x2, float y2, Color color) {
@@ -24,11 +22,12 @@ public class Helper {
     }
 
     public void drawSprite(Sprite sprite) {
-        this.primitiveSprite.draw(sprite);
-    }
-
-    public void drawText(float[] matrix) {
-       // this.primitiveText.draw(matrix);
+        this.primitiveSprite.draw(
+                sprite.getRect(),
+                sprite.textureCoords,
+                sprite.texture,
+                sprite.modelToScreenMatrix
+        );
     }
 
 }
