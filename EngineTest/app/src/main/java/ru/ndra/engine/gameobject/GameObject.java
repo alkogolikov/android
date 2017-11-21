@@ -7,7 +7,6 @@ import android.opengl.Matrix;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.EventManager;
@@ -89,6 +88,7 @@ public class GameObject {
 
     /**
      * Создает и добавляет дочерний объект
+     *
      * @param klass Класс объекта
      * @return Объект
      */
@@ -100,18 +100,21 @@ public class GameObject {
 
     /**
      * Убирает все дочерние элементы
-     * @todo Сделать метод удаления отдельного объекта
-     * @todo Вызывать триггер удаления
      */
     public void clear() {
-        children.clear();
+        for (GameObject obj : this.children) {
+            this.remove(obj);
+        }
     }
 
     /**
-     * @todo реализовать
+     * Удаляет элемент
      */
-    public void remove() {
-
+    public void remove(GameObject obj) {
+        obj.events.trigger("remove.pre");
+        obj.clear();
+        this.children.remove(obj);
+        obj.events.trigger("remove.post");
     }
 
     /**

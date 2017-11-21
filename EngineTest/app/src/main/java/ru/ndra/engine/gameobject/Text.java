@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import ru.ndra.engine.IdHelper;
 import ru.ndra.engine.di.Inject;
 
+// @todo сдеать очистку текстуры при удалении объекта
 public class Text extends Sprite {
 
     public float textSize = 30;
