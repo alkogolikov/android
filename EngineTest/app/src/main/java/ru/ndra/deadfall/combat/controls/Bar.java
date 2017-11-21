@@ -28,7 +28,7 @@ public class Bar extends Sprite implements OnCreate {
         Random rand = new Random();
         int len = 5;
         for (int i = 0; i < len; i++) {
-            Sprite skill = (Sprite) this.add(Sprite.class);
+            Sprite skill = (Sprite) this.bar.add(Sprite.class);
             skill.width = rand.nextFloat() * 60 + 10;
             skill.height = 90;
             skill.position.x = (rand.nextFloat() - .5f) * bar.width;
@@ -37,6 +37,9 @@ public class Bar extends Sprite implements OnCreate {
 
     public void reset() {
         this.createSkills();
+        if (this.runner != null) {
+            this.remove(this.runner);
+        }
         this.runner = (Runner) this.add(Runner.class);
         this.runner.width = 20;
         this.runner.position.x = -bar.width / 2;

@@ -96,28 +96,31 @@ public class CreatureModel {
      * @param dt интервал, на который нужно обновить
      */
     public void update(float dt) {
-
         this.secondCummulative += dt;
         if (this.secondCummulative >= 1) {
             this.secondCummulative -= 1;
             this.handleSecond();
         }
-
-        this.hp += this.
-
-                hpRegenPerSecond() * dt;
-        if (this.hp > this.
-
-                getHpMax())
-
-        {
-            this.hp = this.getHpMax();
-        }
     }
 
+    /**
+     * Ежесекундное действие
+     */
     private void handleSecond() {
-        if (this instanceof HeroModel){
-            this.consoleService.sendMessage("tick");
+        this.addHP(this.hpRegenPerSecond());
+    }
+
+    /**
+     * Добавляет существу hp
+     * @param dhp количество добавляемого hp
+     */
+    private void addHP(float dhp) {
+        this.hp += dhp;
+        if (this.hp > this.getHpMax()) {
+            this.hp = this.getHpMax();
+        }
+        if (this instanceof HeroModel) {
+            this.consoleService.sendMessage("hp +" + dhp);
         }
     }
 }

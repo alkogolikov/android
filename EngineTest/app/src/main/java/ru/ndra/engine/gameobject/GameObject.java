@@ -6,6 +6,7 @@ import android.opengl.Matrix;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
@@ -102,7 +103,9 @@ public class GameObject {
      * Убирает все дочерние элементы
      */
     public void clear() {
-        for (GameObject obj : this.children) {
+        List<GameObject> toRemove = new ArrayList<>();
+        toRemove.addAll(this.children);
+        for (GameObject obj : toRemove) {
             this.remove(obj);
         }
     }

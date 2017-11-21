@@ -1,9 +1,14 @@
 package ru.ndra.deadfall.combat.controls;
 
+import android.graphics.PointF;
+import android.view.MotionEvent;
+
+import ru.ndra.deadfall.console.ConsoleService;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Text;
+import ru.ndra.engine.touch.TouchEvent;
 
 public class CombatControlsScene extends Scene implements OnCreate {
 
@@ -11,10 +16,26 @@ public class CombatControlsScene extends Scene implements OnCreate {
 
     private Button moveBackButton;
     private Button moveForthButton;
+    private Bar bar;
 
-    public CombatControlsScene(EventManager eventManager) {
+    public CombatControlsScene(EventManager eventManager, ConsoleService console) {
         super();
         this.eventManager = eventManager;
+        this.eventManager.on("touch", event -> {
+            TouchEvent tevent = (TouchEvent) event;
+            if (tevent.action == MotionEvent.ACTION_POINTER_DOWN || tevent.action == MotionEvent.ACTION_DOWN) {
+                int index = tevent.originalEvent.getActionIndex();
+                TouchEvent.Pointer pointer = tevent.pointers[index];
+                PointF point = this.screenToModel(pointer.x, pointer.y);
+                if (point.x > 0) {
+                    this.handleClick();
+                }
+            }
+        });
+    }
+
+    private void handleClick() {
+        this.bar.reset();
     }
 
     @Override
@@ -41,8 +62,8 @@ public class CombatControlsScene extends Scene implements OnCreate {
     @Override
     public void onCreate() {
         // Верхняя полоска со скиллами
-        Bar bar = (Bar) this.add(Bar.class);
-        bar.position.y = 400;
+        this.bar = (Bar) this.add(Bar.class);
+        this.bar.position.y = 400;
 
         this.moveBackButton = (Button) this.add(Button.class);
         this.moveBackButton.width = 200;
@@ -59,6 +80,5 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.moveForthButton.zIndex = 1000;
 
         Text text = (Text) this.add(Text.class);
-
     }
 }

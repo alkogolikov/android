@@ -24,17 +24,16 @@ public class TouchEvent extends Event {
                     this.originalEvent.getY(i)
             );
         }
-
     }
 
     public static class Pointer {
         public final float x;
         public final float y;
+
         public Pointer(float x, float y) {
             this.x = x;
             this.y = y;
         }
     }
-
 
 }
