@@ -18,8 +18,8 @@ public class CombatSceneFactory {
         sceneContainer.put(EventManager.class.getCanonicalName(), eventManager);
 
         // Создаем новую фабрику игровых объектов и помещаем ее в дочерний контейнер
-        GameObjectFactory factory = (GameObjectFactory) sceneContainer.create(GameObjectFactory.class.getCanonicalName());
-        sceneContainer.put(GameObjectFactory.class.getCanonicalName(), factory); */
+        ModelFactory factory = (ModelFactory) sceneContainer.create(ModelFactory.class.getCanonicalName());
+        sceneContainer.put(ModelFactory.class.getCanonicalName(), factory); */
 
         CombatScene scene = (CombatScene) container.get(CombatScene.class.getName());
 

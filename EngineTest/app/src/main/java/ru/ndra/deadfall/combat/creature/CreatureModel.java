@@ -1,10 +1,18 @@
 package ru.ndra.deadfall.combat.creature;
 
 import ru.ndra.deadfall.AttackEvent;
+import ru.ndra.deadfall.console.ConsoleService;
 
 public class CreatureModel {
 
+    private final ConsoleService consoleService;
     private float hp;
+    private float secondCummulative = 0;
+
+    public CreatureModel(ConsoleService consoleService) {
+        super();
+        this.consoleService = consoleService;
+    }
 
     /**
      * @return Живо ли существо?
@@ -88,9 +96,28 @@ public class CreatureModel {
      * @param dt интервал, на который нужно обновить
      */
     public void update(float dt) {
-        this.hp += this.hpRegenPerSecond() * dt;
-        if (this.hp > this.getHpMax()) {
+
+        this.secondCummulative += dt;
+        if (this.secondCummulative >= 1) {
+            this.secondCummulative -= 1;
+            this.handleSecond();
+        }
+
+        this.hp += this.
+
+                hpRegenPerSecond() * dt;
+        if (this.hp > this.
+
+                getHpMax())
+
+        {
             this.hp = this.getHpMax();
+        }
+    }
+
+    private void handleSecond() {
+        if (this instanceof HeroModel){
+            this.consoleService.sendMessage("tick");
         }
     }
 }
