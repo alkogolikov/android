@@ -1,13 +1,17 @@
-package ru.ndra.deadfall.combat.creature;
+package ru.ndra.deadfall.model;
+
+import java.util.ArrayList;
 
 import ru.ndra.deadfall.AttackEvent;
 import ru.ndra.deadfall.console.ConsoleService;
+import ru.ndra.deadfall.skill.Skill;
 
 public class CreatureModel {
 
     private final ConsoleService consoleService;
     private float hp;
     private float secondCummulative = 0;
+    private ArrayList<Skill> skills = new ArrayList<>();
 
     public CreatureModel(ConsoleService consoleService) {
         super();
@@ -43,35 +47,6 @@ public class CreatureModel {
         return 10f;
     }
 
- /*   public float mana() {
-        return 0;
-    }
-
-    public float manaMax() {
-        return 0;
-    }
-
-    public float manaRegen() {
-        return 0;
-    }
-
-    public float strength() {
-        return 100;
-    }
-
-    public float dexterity() {
-        return 0;
-    }
-
-    public float agility() {
-        return 0;
-    }
-
-    public float magic() {
-        return 100;
-    }
-    */
-
     /**
      * Возвращает коллекцию баффов / дебаффов существа
      */
@@ -82,8 +57,8 @@ public class CreatureModel {
     /**
      * Возвращает коллекцию скиллов существа
      */
-    public void skills() {
-
+    public ArrayList<Skill> skills() {
+        return this.skills;
     }
 
     public final void takeDamage(AttackEvent event) {

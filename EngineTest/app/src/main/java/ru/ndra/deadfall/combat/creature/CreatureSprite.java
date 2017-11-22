@@ -1,8 +1,8 @@
 package ru.ndra.deadfall.combat.creature;
 
+import ru.ndra.deadfall.model.CreatureModel;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.Sprite;
-import ru.ndra.engine.gameobject.Text;
 
 
 public class CreatureSprite<T extends CreatureModel> extends Sprite implements OnCreate {

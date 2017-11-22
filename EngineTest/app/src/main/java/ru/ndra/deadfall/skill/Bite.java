@@ -1,7 +1,7 @@
 package ru.ndra.deadfall.skill;
 
 import ru.ndra.deadfall.AttackEvent;
-import ru.ndra.deadfall.combat.creature.CreatureModel;
+import ru.ndra.deadfall.model.CreatureModel;
 
 /**
  * Умение укуса5

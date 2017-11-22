@@ -1,10 +1,10 @@
 package ru.ndra.deadfall.combat;
 
-import ru.ndra.deadfall.combat.creature.EnemyModel;
+import ru.ndra.deadfall.model.EnemyModel;
 import ru.ndra.deadfall.combat.creature.EnemySprite;
-import ru.ndra.deadfall.combat.creature.HeroModel;
+import ru.ndra.deadfall.model.HeroModel;
 import ru.ndra.deadfall.combat.creature.HeroSprite;
-import ru.ndra.deadfall.combat.creature.ModelFactory;
+import ru.ndra.deadfall.model.ModelFactory;
 import ru.ndra.engine.gameobject.Scene;
 
 /**

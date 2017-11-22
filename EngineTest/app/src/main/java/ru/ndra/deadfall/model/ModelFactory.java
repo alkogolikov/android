@@ -1,4 +1,4 @@
-package ru.ndra.deadfall.combat.creature;
+package ru.ndra.deadfall.model;
 
 import ru.ndra.engine.di.Container;
 

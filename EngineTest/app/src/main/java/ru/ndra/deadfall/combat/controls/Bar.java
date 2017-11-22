@@ -33,7 +33,6 @@ public class Bar extends Sprite implements OnCreate {
     public void createSkills() {
         bar.clear();
         Random rand = new Random();
-        int len = 5;
         for (int i = 0; i < len; i++) {
             Sprite skill = (Sprite) this.bar.add(Sprite.class);
             skill.width = rand.nextFloat() * 60 + 10;
@@ -62,7 +61,6 @@ public class Bar extends Sprite implements OnCreate {
         super.update(dt);
 
         float speed = this.width / 3;
-        Log.d("xxx", "speed " + speed);
         this.runner.position.x += speed * dt * direction;
         if (runner.position.x > this.width / 2) {
             direction = -1;
