@@ -24,7 +24,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.eventManager.on("touch", event -> {
             TouchEvent tevent = (TouchEvent) event;
             if (tevent.action == MotionEvent.ACTION_POINTER_DOWN || tevent.action == MotionEvent.ACTION_DOWN) {
-                int index = tevent.originalEvent.getActionIndex();
+                int index = tevent.actionIndex;
                 TouchEvent.Pointer pointer = tevent.pointers[index];
                 PointF point = this.screenToModel(pointer.x, pointer.y);
                 if (point.x > 0) {
@@ -63,7 +63,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
     public void onCreate() {
         // Верхняя полоска со скиллами
         this.bar = (Bar) this.add(Bar.class);
-        this.bar.position.y = -400;
+        this.bar.position.y = 0;
 
         this.moveBackButton = (Button) this.add(Button.class);
         this.moveBackButton.width = 200;
@@ -76,7 +76,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.moveForthButton.width = 200;
         this.moveForthButton.height = 200;
         this.moveForthButton.position.y = -200;
-        this.moveForthButton.position.x = -300;
+        this.moveForthButton.position.x = -500;
         this.moveForthButton.zIndex = 1000;
 
         Text text = (Text) this.add(Text.class);
