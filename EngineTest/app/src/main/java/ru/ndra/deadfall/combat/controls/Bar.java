@@ -12,8 +12,20 @@ public class Bar extends Sprite implements OnCreate {
 
     private Sprite bar;
 
+    /**
+     * Спрайт бегунка
+     */
     private Runner runner;
+
+    /**
+     * Модель игрока
+     */
     private HeroModel heroModel;
+
+    /**
+     * Направление бегунка
+     */
+    private int runnerDirection = 1;
 
     public Bar() {
         super();
@@ -37,7 +49,10 @@ public class Bar extends Sprite implements OnCreate {
         reset();
     }
 
-    public void createSkills() {
+    /**
+     * Пересоздает скиллы
+     */
+    private void createSkills() {
         bar.clear();
         ArrayList<SkillSprite> skills = new ArrayList<>();
         for (Skill skill : this.heroModel.skills()) {
@@ -59,25 +74,23 @@ public class Bar extends Sprite implements OnCreate {
             this.remove(this.runner);
         }
         this.runner = (Runner) this.add(Runner.class);
-        this.runner.width = 20;
+        this.runner.width = 10;
         this.runner.position.x = -bar.width / 2;
         this.runner.height = bar.height;
         this.runner.setTexture("hp.png");
     }
-
-    private int direction = 1;
 
     @Override
     public void update(float dt) {
         super.update(dt);
 
         float speed = this.width / 3;
-        this.runner.position.x += speed * dt * direction;
+        this.runner.position.x += speed * dt * runnerDirection;
         if (runner.position.x > this.width / 2) {
-            direction = -1;
+            runnerDirection = -1;
         }
         if (runner.position.x < -this.width / 2) {
-            direction = 1;
+            runnerDirection = 1;
         }
     }
 

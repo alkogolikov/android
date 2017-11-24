@@ -28,13 +28,16 @@ public class CombatControlsScene extends Scene implements OnCreate {
                 TouchEvent.Pointer pointer = tevent.pointers[index];
                 PointF point = this.screenToModel(pointer.x, pointer.y);
                 if (point.x > 0) {
-                    this.handleClick();
+                    this.handleSkillClick();
                 }
             }
         });
     }
 
-    private void handleClick() {
+    /**
+     * Клик по правой половине (использовать умение)
+     */
+    private void handleSkillClick() {
         this.bar.reset();
     }
 
