@@ -1,6 +1,6 @@
 package ru.ndra.deadfall.combat.controls;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 import ru.ndra.deadfall.model.HeroModel;
 import ru.ndra.deadfall.skill.Skill;
@@ -39,14 +39,18 @@ public class Bar extends Sprite implements OnCreate {
 
     public void createSkills() {
         bar.clear();
-        Random rand = new Random();
+        ArrayList<SkillSprite> skills = new ArrayList<>();
         for (Skill skill : this.heroModel.skills()) {
             SkillSprite skillSprite = (SkillSprite) this.bar.add(SkillSprite.class);
             skillSprite.setColor(skill.barColor());
-            skillSprite.width = this.width  * skill.barWidth();
+            skillSprite.width = this.width * skill.barWidth();
             skillSprite.height = 100;
-            skillSprite.position.x = (rand.nextFloat() - .5f) * bar.width;
+            skills.add(skillSprite);
         }
+
+        SkillDistributor distributor = new SkillDistributor();
+        distributor.distribute(skills, this.width);
+
     }
 
     public void reset() {

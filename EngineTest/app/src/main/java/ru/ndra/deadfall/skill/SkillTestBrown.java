@@ -13,5 +13,9 @@ public class SkillTestBrown extends Skill {
         return Skill.COLOR_BROWN;
     }
 
+    @Override
+    public float barWidth() {
+        return 1f / 7;
+    }
 
 }

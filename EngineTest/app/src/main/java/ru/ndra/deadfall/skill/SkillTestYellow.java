@@ -13,5 +13,10 @@ public class SkillTestYellow extends Skill {
         return Skill.COLOR_YELLOW;
     }
 
+    @Override
+    public float barWidth() {
+        return 1f / 35;
+    }
+
 
 }
