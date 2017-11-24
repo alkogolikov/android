@@ -3,10 +3,13 @@ package ru.ndra.deadfall.combat.controls;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SkillDistributor {
 
     public void distribute(ArrayList<SkillSprite> sprites, float totalWidth) {
+
+        Collections.shuffle(sprites);
 
         // Считаем сколько места занимают все скиллы
         float filledWidth = 0;
