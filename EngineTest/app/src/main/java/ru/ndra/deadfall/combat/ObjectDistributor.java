@@ -1,5 +1,8 @@
 package ru.ndra.deadfall.combat;
 
+import java.util.Random;
+
+import ru.ndra.deadfall.combat.creature.LeechSprite;
 import ru.ndra.deadfall.model.EnemyModel;
 import ru.ndra.deadfall.combat.creature.EnemySprite;
 import ru.ndra.deadfall.model.HeroModel;
@@ -32,11 +35,22 @@ public class ObjectDistributor {
         // Вражина
         for (int i = 0; i < 6; i++) {
             EnemyModel enemyModel = (EnemyModel) this.modelFactory.create(EnemyModel.class);
-            EnemySprite enemy = (EnemySprite) objectsScene.add(EnemySprite.class);
+            EnemySprite enemy = (EnemySprite) objectsScene.add(this.randomClass());
             enemy.setModel(enemyModel);
             enemy.position.y = -330;
             enemy.position.x = (float) (Math.random() * 3000 - 1000);
         }
-
     }
+
+    public Class randomClass() {
+        Random rand = new Random();
+        switch(rand.nextInt(2)) {
+            default:
+            case 0:
+                return EnemySprite.class;
+            case 1:
+                return LeechSprite.class;
+        }
+    }
+
 }

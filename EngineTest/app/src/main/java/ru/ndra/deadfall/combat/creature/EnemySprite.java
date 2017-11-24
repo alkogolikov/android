@@ -12,7 +12,7 @@ public class EnemySprite extends CreatureSprite {
 
     public void onCreate() {
         super.onCreate();
-        this.setTexture("enemy.png");
+        this.setTexture("creature/enemy.png");
         this.speed = 50;
     }
 
