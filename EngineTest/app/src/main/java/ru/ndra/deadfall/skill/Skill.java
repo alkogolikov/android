@@ -16,7 +16,7 @@ public abstract class Skill {
     public static final int COLOR_YELLOW = 4;
     public static final int COLOR_BROWN = 5;
 
-    abstract public void useInCombat(CreatureModel target);
+    abstract public void useInCombat();
 
     /**
      * Возвращает ширину полоски умения

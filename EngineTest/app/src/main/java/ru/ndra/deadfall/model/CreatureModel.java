@@ -2,7 +2,7 @@ package ru.ndra.deadfall.model;
 
 import java.util.ArrayList;
 
-import ru.ndra.deadfall.AttackEvent;
+import ru.ndra.deadfall.skill.AttackEvent;
 import ru.ndra.deadfall.console.ConsoleService;
 import ru.ndra.deadfall.skill.Skill;
 

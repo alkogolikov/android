@@ -1,4 +1,4 @@
-package ru.ndra.deadfall;
+package ru.ndra.deadfall.skill;
 
 /**
  * Created by golikov on 26.02.2017.

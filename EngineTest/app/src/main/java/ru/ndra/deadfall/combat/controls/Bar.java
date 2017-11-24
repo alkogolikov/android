@@ -41,10 +41,10 @@ public class Bar extends Sprite implements OnCreate {
         bar.clear();
         Random rand = new Random();
         for (Skill skill : this.heroModel.skills()) {
-            Sprite skillSprite = (Sprite) this.bar.add(Sprite.class);
+            SkillSprite skillSprite = (SkillSprite) this.bar.add(SkillSprite.class);
+            skillSprite.setColor(skill.barColor());
             skillSprite.width = this.width  * skill.barWidth();
             skillSprite.height = 100;
-            skillSprite.setTexture("hp.png");
             skillSprite.position.x = (rand.nextFloat() - .5f) * bar.width;
         }
     }

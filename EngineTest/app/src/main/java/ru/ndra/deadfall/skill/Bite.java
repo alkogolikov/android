@@ -1,6 +1,5 @@
 package ru.ndra.deadfall.skill;
 
-import ru.ndra.deadfall.AttackEvent;
 import ru.ndra.deadfall.model.CreatureModel;
 
 /**
@@ -15,14 +14,15 @@ public class Bite extends Skill {
         this.owner = owner;
     }
 
-    public void useInCombat(CreatureModel target) {
-        AttackEvent event = new AttackEvent();
-       // event.addDamage(AttackEvent.TYPE_MELEE, owner.strength() / 10);
-        target.takeDamage(event);
+    public void useInCombat() {
+        // AttackEvent event = new AttackEvent();
+        // event.addDamage(AttackEvent.TYPE_MELEE, owner.strength() / 10);
+        // target.takeDamage(event);
     }
 
-    public String description() {
-        return "Target takes damage 1/10 of attacker's strenegth";
+    public int barColor() {
+        return Skill.COLOR_RED;
     }
+
 
 }
