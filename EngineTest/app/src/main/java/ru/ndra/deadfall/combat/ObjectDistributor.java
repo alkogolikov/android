@@ -13,16 +13,17 @@ import ru.ndra.engine.gameobject.Scene;
 public class ObjectDistributor {
 
     private final ModelFactory modelFactory;
+    private final HeroModel heroModel;
 
-    public ObjectDistributor(ModelFactory modelFactory) {
+    public ObjectDistributor(ModelFactory modelFactory, HeroModel heroModel) {
         super();
         this.modelFactory = modelFactory;
+        this.heroModel = heroModel;
     }
 
     public void distribute(Scene objectsScene) {
 
         // ГГ
-        HeroModel heroModel = (HeroModel) this.modelFactory.create(HeroModel.class);
         HeroSprite hero = (HeroSprite) objectsScene.add(HeroSprite.class);
         hero.setModel(heroModel);
         hero.position.y = -330;

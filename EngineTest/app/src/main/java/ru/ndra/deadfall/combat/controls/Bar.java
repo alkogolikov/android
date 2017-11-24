@@ -1,9 +1,10 @@
 package ru.ndra.deadfall.combat.controls;
 
-import android.util.Log;
-
 import java.util.Random;
 
+import ru.ndra.deadfall.model.HeroModel;
+import ru.ndra.deadfall.skill.Skill;
+import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.Sprite;
 
@@ -12,9 +13,15 @@ public class Bar extends Sprite implements OnCreate {
     private Sprite bar;
 
     private Runner runner;
+    private HeroModel heroModel;
 
     public Bar() {
         super();
+    }
+
+    @Inject
+    public void setHeroModel(HeroModel heroModel) {
+        this.heroModel = heroModel;
     }
 
     @Override
@@ -33,12 +40,12 @@ public class Bar extends Sprite implements OnCreate {
     public void createSkills() {
         bar.clear();
         Random rand = new Random();
-        for (int i = 0; i < len; i++) {
-            Sprite skill = (Sprite) this.bar.add(Sprite.class);
-            skill.width = rand.nextFloat() * 60 + 10;
-            skill.height = 100;
-            skill.setTexture("hp.png");
-            skill.position.x = (rand.nextFloat() - .5f) * bar.width;
+        for (Skill skill : this.heroModel.skills()) {
+            Sprite skillSprite = (Sprite) this.bar.add(Sprite.class);
+            skillSprite.width = this.width  * skill.barWidth();
+            skillSprite.height = 100;
+            skillSprite.setTexture("hp.png");
+            skillSprite.position.x = (rand.nextFloat() - .5f) * bar.width;
         }
     }
 
