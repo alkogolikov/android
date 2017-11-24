@@ -38,7 +38,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
      * Клик по правой половине (использовать умение)
      */
     private void handleSkillClick() {
-        this.bar.reset();
+        this.bar.tryToUseSkill();
     }
 
     @Override

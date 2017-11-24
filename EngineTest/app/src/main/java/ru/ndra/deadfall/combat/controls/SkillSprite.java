@@ -8,6 +8,8 @@ import ru.ndra.engine.gameobject.Sprite;
 
 public class SkillSprite extends Sprite implements OnCreate {
 
+    private Skill skill;
+
     public void onCreate() {
         this.setTexture("skill/color_bar.png");
     }
@@ -29,4 +31,11 @@ public class SkillSprite extends Sprite implements OnCreate {
         return colorToTexturePosition.get(colorIndex);
     }
 
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
 }

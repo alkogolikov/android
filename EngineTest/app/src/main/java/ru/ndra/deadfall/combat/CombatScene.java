@@ -30,14 +30,6 @@ public class CombatScene extends Scene implements OnCreate {
     }
 
     @Override
-    public void update(float dt) {
-        super.update(dt);
-        if (Math.random() < .01) {
-            this.consoleService.sendMessage(Math.random() + "");
-        }
-    }
-
-    @Override
     public void onCreate() {
 
         // Добавляем параллакс

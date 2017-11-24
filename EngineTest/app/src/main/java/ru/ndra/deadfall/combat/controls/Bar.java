@@ -1,11 +1,15 @@
 package ru.ndra.deadfall.combat.controls;
 
+import android.graphics.RectF;
+
 import java.util.ArrayList;
 
+import ru.ndra.deadfall.console.ConsoleService;
 import ru.ndra.deadfall.model.HeroModel;
 import ru.ndra.deadfall.skill.Skill;
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.di.OnCreate;
+import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.gameobject.Sprite;
 
 public class Bar extends Sprite implements OnCreate {
@@ -27,6 +31,8 @@ public class Bar extends Sprite implements OnCreate {
      */
     private int runnerDirection = 1;
 
+    private ConsoleService consoleService;
+
     public Bar() {
         super();
     }
@@ -34,6 +40,11 @@ public class Bar extends Sprite implements OnCreate {
     @Inject
     public void setHeroModel(HeroModel heroModel) {
         this.heroModel = heroModel;
+    }
+
+    @Inject
+    public void setConsoleService(ConsoleService consoleService) {
+        this.consoleService = consoleService;
     }
 
     @Override
@@ -59,6 +70,7 @@ public class Bar extends Sprite implements OnCreate {
             SkillSprite skillSprite = (SkillSprite) this.bar.add(SkillSprite.class);
             skillSprite.setColor(skill.barColor());
             skillSprite.width = this.width * skill.barWidth();
+            skillSprite.setSkill(skill);
             skillSprite.height = 100;
             skills.add(skillSprite);
         }
@@ -94,4 +106,29 @@ public class Bar extends Sprite implements OnCreate {
         }
     }
 
+    public void tryToUseSkill() {
+        Skill skill = this.getHoveredSkill();
+        if(skill != null) {
+            //this.consoleService.sendMessage(skill.getClass().getCanonicalName());
+            skill.useInCombat();
+        }
+        this.reset();
+    }
+
+    /**
+     * @return Скилл, на котором находится бегунок в данный момент
+     */
+    private Skill getHoveredSkill() {
+        for(GameObject child: this.bar.children) {
+            if(child instanceof SkillSprite) {
+                SkillSprite skillSprite = (SkillSprite) child;
+                float left = skillSprite.position.x - skillSprite.width / 2;
+                float right = skillSprite.position.x + skillSprite.width / 2;
+                if(this.runner.position.x > left & this.runner.position.x < right) {
+                    return skillSprite.getSkill();
+                }
+            }
+        }
+        return null;
+    }
 }

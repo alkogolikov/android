@@ -44,7 +44,7 @@ public class CreatureModel {
      * @return Регенерация HP за секунду
      */
     public float hpRegenPerSecond() {
-        return 10f;
+        return .1f;
     }
 
     /**
@@ -89,13 +89,10 @@ public class CreatureModel {
      * Добавляет существу hp
      * @param dhp количество добавляемого hp
      */
-    private void addHP(float dhp) {
+    public void addHP(float dhp) {
         this.hp += dhp;
         if (this.hp > this.getHpMax()) {
             this.hp = this.getHpMax();
-        }
-        if (this instanceof HeroModel) {
-            this.consoleService.sendMessage("hp +" + dhp);
         }
     }
 }

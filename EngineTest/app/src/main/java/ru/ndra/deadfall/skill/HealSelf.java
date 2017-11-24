@@ -5,7 +5,6 @@ import ru.ndra.deadfall.model.CreatureModel;
 /**
  * Умение самолечения
  */
-
 public class HealSelf extends Skill {
 
     public final CreatureModel owner;
@@ -15,7 +14,7 @@ public class HealSelf extends Skill {
     }
 
     public void useInCombat() {
-
+        this.owner.addHP(20);
     }
 
     public int barColor() {
