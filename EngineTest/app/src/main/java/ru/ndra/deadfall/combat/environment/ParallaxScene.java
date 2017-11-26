@@ -19,7 +19,7 @@ public class ParallaxScene extends Scene {
         });
     }
 
-    public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed, boolean onTop) {
+    public void addParallax(final String texture, float height, final float bottom, final float speed, float selfSpeed) {
         ParallaxSprite sprite = (ParallaxSprite) this.add(ParallaxSprite.class);
         sprite.setTexture(texture);
         sprite.height = height;
@@ -27,7 +27,6 @@ public class ParallaxScene extends Scene {
         sprite.selfSpeed = selfSpeed;
         sprite.bottom = bottom;
         sprite.position.x = this.camera.position.x;
-        sprite.zIndex = onTop ? 1 : 0;
     }
 
 }

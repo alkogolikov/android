@@ -1,0 +1,32 @@
+{
+  "scene": {
+    "background": [
+      {
+        "texture": "plane1.png",
+        "height": 1000,
+        "bottom": 0,
+        "speed": 0.1125
+      },
+      {
+        "texture": "plane2.png",
+        "height": 1000,
+        "bottom": 0,
+        "speed": 0.2
+      }
+    ],
+    "foreground": [
+      {
+        "texture": "plane3.png",
+        "height": 1000,
+        "bottom": 0,
+        "speed": 0.4
+      },
+      {
+        "texture": "plane4.png",
+        "height": 1000,
+        "bottom": 0,
+        "speed": 1
+      }
+    ]
+  }
+}

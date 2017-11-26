@@ -1,7 +1,5 @@
 package ru.ndra.deadfall.combat;
 
-import android.util.Log;
-
 import ru.ndra.deadfall.combat.controls.CombatControlsScene;
 import ru.ndra.deadfall.combat.environment.EnvironmentCreator;
 import ru.ndra.deadfall.combat.environment.ParallaxScene;
@@ -17,16 +15,19 @@ public class CombatScene extends Scene implements OnCreate {
     private final EventManager eventManager;
     private final ObjectDistributor distributor;
     private final ConsoleService consoleService;
+    private final EnvironmentCreator environmentCreator;
 
     public CombatScene(
             EventManager eventManager,
             ObjectDistributor distributor,
+            EnvironmentCreator environmentCreator,
             ConsoleService consoleService
     ) {
         super();
         this.eventManager = eventManager;
         this.distributor = distributor;
         this.consoleService = consoleService;
+        this.environmentCreator = environmentCreator;
     }
 
     @Override
@@ -47,7 +48,11 @@ public class CombatScene extends Scene implements OnCreate {
         // Добавляем параллакс переднего плана
         ParallaxScene foregroundParallaxScene = (ParallaxScene) this.add(ParallaxScene.class);
 
-        EnvironmentCreator environmentCreator = new EnvironmentCreator(backgroundParallaxScene, foregroundParallaxScene);
+        this.environmentCreator.createEnveronment(
+                "foothills",
+                backgroundParallaxScene,
+                foregroundParallaxScene
+        );
 
         // Добавляем элементы управления
         this.add(CombatControlsScene.class);
