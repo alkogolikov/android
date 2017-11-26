@@ -34,16 +34,10 @@
     ],
     "foreground": [
       {
-        "texture": "plane3.png",
-        "height": 1000,
-        "bottom": 0,
-        "speed": 0.4
-      },
-      {
-        "texture": "plane4.png",
-        "height": 1000,
-        "bottom": 0,
-        "speed": 1
+        "texture": "plane6.png",
+        "height": 168,
+        "bottom": -50,
+        "speed": 1.875
       }
     ]
   }

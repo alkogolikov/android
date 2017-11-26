@@ -27,19 +27,16 @@ public class EnvironmentCreator {
 
         try {
             JSONObject obj = new JSONObject(json);
-            JSONArray backgroundArray = obj.getJSONObject("scene")
-                    .getJSONArray("background");
-
-            for (int i = 0; i < backgroundArray.length(); i++) {
-                JSONObject backgroundObject = backgroundArray.getJSONObject(i);
-                backgroundScene.addParallax(
-                        "map/" + name + "/" + backgroundObject.getString("texture"),
-                        (float) backgroundObject.getDouble("height"),
-                        (float) backgroundObject.getDouble("bottom"),
-                        (float) backgroundObject.getDouble("speed"),
-                        0
-                );
-            }
+            this.fillLayers(
+                    name,
+                    backgroundScene,
+                    obj.getJSONObject("scene").getJSONArray("background")
+            );
+            this.fillLayers(
+                    name,
+                    foregroundScene,
+                    obj.getJSONObject("scene").getJSONArray("foreground")
+            );
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -64,8 +61,17 @@ public class EnvironmentCreator {
 
     }
 
-    public void fillLayers() {
-        
+    public void fillLayers(String name, ParallaxScene scene, JSONArray backgroundArray) throws JSONException {
+        for (int i = 0; i < backgroundArray.length(); i++) {
+            JSONObject backgroundObject = backgroundArray.getJSONObject(i);
+            scene.addParallax(
+                    "map/" + name + "/" + backgroundObject.getString("texture"),
+                    (float) backgroundObject.getDouble("height"),
+                    (float) backgroundObject.getDouble("bottom"),
+                    (float) backgroundObject.getDouble("speed"),
+                    0
+            );
+        }
     }
 
     public void createForest(ParallaxScene background, ParallaxScene foreground) {
