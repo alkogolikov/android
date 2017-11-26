@@ -37,13 +37,40 @@ public class EnvironmentCreator {
                     foregroundScene,
                     obj.getJSONObject("scene").getJSONArray("foreground")
             );
+
+
+            this.createWeather(
+                    obj.getJSONObject("scene").getJSONObject("weather"),
+                    backgroundScene,
+                    foregroundScene
+            );
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        this.createMyst(backgroundScene, foregroundScene);
     }
 
+    public void createWeather(
+            JSONObject weather,
+            ParallaxScene backgroundScene,
+            ParallaxScene foregroundScene
+    ) {
+        try {
+            if (Math.random() < weather.getDouble("myst")) {
+                this.createMyst(backgroundScene, foregroundScene);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Создает туман
+     *
+     * @param backgroundScene
+     * @param foregroundScene
+     */
     private void createMyst(
             ParallaxScene backgroundScene,
             ParallaxScene foregroundScene
