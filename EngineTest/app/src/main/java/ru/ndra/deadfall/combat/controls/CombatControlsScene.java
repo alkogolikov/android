@@ -66,7 +66,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
     public void onCreate() {
         // Верхняя полоска со скиллами
         this.bar = (Bar) this.add(Bar.class);
-        this.bar.position.y = 0;
+        this.bar.position.y = -450;
 
         this.moveBackButton = (Button) this.add(Button.class);
         this.moveBackButton.width = 200;

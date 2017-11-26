@@ -47,6 +47,7 @@ public class EnvironmentCreator {
        /* backgroundScene.addParallax("map/foothills/plane4.png", 200 * 3, 500, .1125f, 0);
         background.addParallax("map/foothills/plane3.png", 108 * 3, 400, .1875f, 0, false);
         background.addParallax("map/foothills/plane2.png", 69 * 3, 370, .375f, 0, false);
+
         background.addParallax("map/foothills/plane1.png", 145 * 3, 0, .625f, 0, false);
         background.addParallax("map/foothills/plane5.png", 74 * 3, 0, 1, 0, false);
 
@@ -61,6 +62,10 @@ public class EnvironmentCreator {
 
         //  this.createBog(background, foreground);
 
+    }
+
+    public void fillLayers() {
+        
     }
 
     public void createForest(ParallaxScene background, ParallaxScene foreground) {
