@@ -49,7 +49,7 @@ public class CombatScene extends Scene implements OnCreate {
         ParallaxScene foregroundParallaxScene = (ParallaxScene) this.add(ParallaxScene.class);
 
         this.environmentCreator.createEnveronment(
-                "foothills",
+                "forest",
                 backgroundParallaxScene,
                 foregroundParallaxScene
         );
@@ -59,7 +59,6 @@ public class CombatScene extends Scene implements OnCreate {
 
         // Добавляем консоль
         this.add(ConsoleScene.class);
-
     }
 
 }

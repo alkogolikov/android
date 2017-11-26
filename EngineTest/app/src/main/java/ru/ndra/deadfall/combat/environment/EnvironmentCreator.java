@@ -27,23 +27,28 @@ public class EnvironmentCreator {
 
         try {
             JSONObject obj = new JSONObject(json);
+
             this.fillLayers(
                     name,
                     backgroundScene,
                     obj.getJSONObject("scene").getJSONArray("background")
             );
-            this.fillLayers(
-                    name,
-                    foregroundScene,
-                    obj.getJSONObject("scene").getJSONArray("foreground")
-            );
 
+            if (obj.getJSONObject("scene").has("foreground")) {
+                this.fillLayers(
+                        name,
+                        foregroundScene,
+                        obj.getJSONObject("scene").getJSONArray("foreground")
+                );
+            }
 
-            this.createWeather(
-                    obj.getJSONObject("scene").getJSONObject("weather"),
-                    backgroundScene,
-                    foregroundScene
-            );
+            if (obj.getJSONObject("scene").has("weather")) {
+                this.createWeather(
+                        obj.getJSONObject("scene").getJSONObject("weather"),
+                        backgroundScene,
+                        foregroundScene
+                );
+            }
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -106,13 +111,6 @@ public class EnvironmentCreator {
         background.addParallax("map/forest/plane2.png", 1000, 0, .4f, 0, false);
         background.addParallax("map/foothills/plane5.png", 74 * 3, 0, 1, 0, false);
         foreground.addParallax("map/foothills/plane6.png", 56 * 3, -50, 1.875f, 0, true); */
-    }
-
-    public void createBog(ParallaxScene background, ParallaxScene foreground) {
-        /*background.addParallax("map/bog/plane1.png", 1000, 0, .1125f, 0, false);
-        background.addParallax("map/bog/plane2.png", 1000, 0, .2f, 0, false);
-        background.addParallax("map/bog/plane3.png", 1000, 0, .4f, 0, false);
-        background.addParallax("map/bog/plane4.png", 1000, 0, 1, 0, false); */
     }
 
     /**

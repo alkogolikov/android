@@ -8,13 +8,13 @@
         "speed": 0.1125
       },
       {
-        "texture": "plane2.png",
+        "texture": "plane3.png",
         "height": 1000,
         "bottom": 0,
         "speed": 0.2
       },
       {
-        "texture": "plane3.png",
+        "texture": "plane2.png",
         "height": 1000,
         "bottom": 0,
         "speed": 0.4
@@ -25,6 +25,9 @@
         "bottom": 0,
         "speed": 1
       }
-    ]
+    ],
+    "weather": {
+      "myst": 0.5
+    }
   }
 }
