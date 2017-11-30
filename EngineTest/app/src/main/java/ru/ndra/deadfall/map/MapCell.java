@@ -1,4 +1,4 @@
-package ru.ndra.deadfall;
+package ru.ndra.deadfall.map;
 
 import org.json.JSONException;
 import org.json.JSONObject;

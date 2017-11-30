@@ -1,19 +1,10 @@
-package ru.ndra.deadfall;
+package ru.ndra.deadfall.map;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.Iterator;
+
+import ru.ndra.deadfall.Game;
 
 /**
  * Класс для работы с картой
