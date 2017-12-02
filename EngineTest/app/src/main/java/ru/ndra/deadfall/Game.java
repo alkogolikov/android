@@ -1,6 +1,7 @@
 package ru.ndra.deadfall;
 
 import ru.ndra.deadfall.combat.CombatScene;
+import ru.ndra.deadfall.console.ConsoleScene;
 import ru.ndra.deadfall.map.MapScene;
 import ru.ndra.deadfall.route.Router;
 import ru.ndra.engine.di.OnCreate;
@@ -27,6 +28,10 @@ public class Game extends ru.ndra.engine.Game implements OnCreate {
         this.router.addRoute("combat", CombatScene.class);
         this.router.addRoute("map", MapScene.class);
         this.router.navigate("map");
+
+        // Добавляем консоль
+        world.add(ConsoleScene.class);
+
     }
 
 

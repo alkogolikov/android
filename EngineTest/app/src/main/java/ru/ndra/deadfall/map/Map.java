@@ -3,33 +3,41 @@ package ru.ndra.deadfall.map;
 import android.content.Context;
 import android.util.Pair;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-import ru.ndra.deadfall.Game;
+import ru.ndra.deadfall.console.ConsoleService;
 
 /**
  * Класс для работы с картой
  */
 public class Map {
 
-    private HashMap<Pair<Integer,Integer>, MapCell> cells = new HashMap<>();
+    private final Context context;
+    private HashMap<Pair<Integer, Integer>, MapCell> cells = new HashMap<>();
 
     public int width;
 
     public int height;
 
-    public Map(Context context) {
-        //loadData();
+    public Map(Context context, ConsoleService console) {
+        this.context = context;
+        this.loadData();
+        console.sendMessage("map loading");
     }
 
     // @todo сделать загрузку данных в трэде
     public void loadData() {
-       /* try {
+        try {
 
             // Загружаем карту из JSON
-            InputStream is = game.context.getAssets().open("data/map.json");
+            InputStream is = this.context.getAssets().open("data/map.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -43,9 +51,9 @@ public class Map {
             // Создаем ячейки карты
             JSONArray mapData = obj.getJSONArray("cells");
             for (int i = 0; i < mapData.length(); i++) {
-                MapCell cell = addCell(mapData.getJSONObject(i));
-                width = Math.max(width, cell.x + 1);
-                height = Math.max(height, cell.y + 1);
+                MapCell cell = this.addCell(mapData.getJSONObject(i));
+                // width = Math.max(width, cell.x + 1);
+                //   height = Math.max(height, cell.y + 1);
             }
 
             this.width = width;
@@ -62,8 +70,14 @@ public class Map {
             throw new RuntimeException("JSON load failed");
         }
 
-        renderMap();
-        */
+        //renderMap();
+
+    }
+
+    private MapCell addCell(JSONObject jsonObject) {
+        MapCell cell = new MapCell(jsonObject);
+        this.cells.put(new Pair<Integer, Integer>(1, 2), cell);
+        return cell;
     }
 
     private void renderMap() {

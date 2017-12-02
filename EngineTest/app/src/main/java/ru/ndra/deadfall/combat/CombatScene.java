@@ -14,7 +14,7 @@ public class CombatScene extends Scene implements OnCreate {
 
     private final EventManager eventManager;
     private final ObjectDistributor distributor;
-    private final ConsoleService consoleService;
+//    private final ConsoleService consoleService;
     private final EnvironmentCreator environmentCreator;
 
     public CombatScene(
@@ -26,7 +26,7 @@ public class CombatScene extends Scene implements OnCreate {
         super();
         this.eventManager = eventManager;
         this.distributor = distributor;
-        this.consoleService = consoleService;
+       // this.consoleService = consoleService;
         this.environmentCreator = environmentCreator;
     }
 
@@ -57,8 +57,6 @@ public class CombatScene extends Scene implements OnCreate {
         // Добавляем элементы управления
         this.add(CombatControlsScene.class);
 
-        // Добавляем консоль
-        this.add(ConsoleScene.class);
     }
 
 }
