@@ -1,6 +1,10 @@
 package ru.ndra.deadfall.map;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Pair;
 
 import org.json.JSONArray;
@@ -11,8 +15,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import ru.ndra.deadfall.console.ConsoleService;
+import ru.ndra.engine.ResourceLoader;
 
 /**
  * Класс для работы с картой
@@ -21,17 +27,17 @@ public class Map {
 
     private final Context context;
     private final ConsoleService console;
+    private ResourceLoader loader;
     private HashMap<Pair<Integer, Integer>, MapCell> cells = new HashMap<>();
 
-    public int width;
+    public int width = 0;
+    public int height = 0;
 
-    public int height;
-
-    public Map(Context context, ConsoleService console) {
+    public Map(Context context, ConsoleService console, ResourceLoader loader) {
         this.context = context;
         this.console = console;
+        this.loader = loader;
         this.loadData();
-        console.sendMessage("map loading");
     }
 
     // @todo сделать загрузку данных в трэде
@@ -47,19 +53,13 @@ public class Map {
             String json = new String(buffer, "UTF-8");
             JSONObject obj = new JSONObject(json);
 
-            int width = 0;
-            int height = 0;
-
             // Создаем ячейки карты
             JSONArray mapData = obj.getJSONArray("cells");
             for (int i = 0; i < mapData.length(); i++) {
                 MapCell cell = this.addCell(mapData.getJSONObject(i));
-                // width = Math.max(width, cell.x + 1);
-                //   height = Math.max(height, cell.y + 1);
+                this.width = Math.max(this.width, cell.coords.first + 1);
+                this.height = Math.max(this.height, cell.coords.second + 1);
             }
-
-            this.width = width;
-            this.height = height;
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -72,8 +72,8 @@ public class Map {
             throw new RuntimeException("JSON load failed");
         }
 
-        //renderMap();
-
+        console.sendMessage("map loaded " + this.width + ":" + this.height);
+        this.renderMap();
     }
 
     private MapCell addCell(JSONObject jsonObject) throws JSONException {
@@ -84,8 +84,11 @@ public class Map {
     }
 
     private void renderMap() {
-      /*  int pixelCellSize = 16;
-        Bitmap render = Bitmap.createBitmap(pixelCellSize * width, pixelCellSize * height, Bitmap.Config.ARGB_8888);
+        int pixelCellSize = 16;
+        Bitmap render = Bitmap.createBitmap(
+                pixelCellSize * this.width,
+                pixelCellSize * this.height,
+                Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(render);
         Paint p = new Paint();
         p.setColor(Color.RED);
@@ -98,10 +101,17 @@ public class Map {
         while (itr.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry) itr.next();
             MapCell cell = (MapCell) pair.getValue();
-            c.drawRect(cell.x * pixelCellSize, cell.y * pixelCellSize, (cell.x + 1) * pixelCellSize, (cell.y + 1) * pixelCellSize, p);
+            c.drawRect(
+                    cell.coords.first * pixelCellSize,
+                    cell.coords.second * pixelCellSize,
+                    (cell.coords.first + 1) * pixelCellSize,
+                    (cell.coords.second + 1) * pixelCellSize,
+                    p
+            );
         }
 
-        game.loader.addTexture("render/map", render); */
+        this.loader.addTexture("render/map", render);
+        this.console.sendMessage("map rendered");
     }
 
 }
