@@ -135,7 +135,7 @@ public class Sprite extends GameObject {
      */
     public GameObject hitTest(float x, float y) {
 
-        // Дня начала вызомер родительский метод
+        // Дня начала вызомим родительский метод
         // Он проверит попадание в дочерние объекты
         // Если объект, в который попало, найден, вернем его.
         GameObject ret = super.hitTest(x, y);

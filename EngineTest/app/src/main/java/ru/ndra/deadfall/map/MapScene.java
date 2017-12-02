@@ -22,6 +22,7 @@ public class MapScene extends Scene implements OnCreate {
         Sprite map = (Sprite) this.add(Sprite.class);
         map.width = 500;
         map.height = 500;
+        map.isButton = true;
         map.setTexture("render/map");
     }
 
