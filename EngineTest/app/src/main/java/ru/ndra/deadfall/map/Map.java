@@ -20,6 +20,7 @@ import ru.ndra.deadfall.console.ConsoleService;
 public class Map {
 
     private final Context context;
+    private final ConsoleService console;
     private HashMap<Pair<Integer, Integer>, MapCell> cells = new HashMap<>();
 
     public int width;
@@ -28,6 +29,7 @@ public class Map {
 
     public Map(Context context, ConsoleService console) {
         this.context = context;
+        this.console = console;
         this.loadData();
         console.sendMessage("map loading");
     }
@@ -74,9 +76,10 @@ public class Map {
 
     }
 
-    private MapCell addCell(JSONObject jsonObject) {
+    private MapCell addCell(JSONObject jsonObject) throws JSONException {
         MapCell cell = new MapCell(jsonObject);
-        this.cells.put(new Pair<Integer, Integer>(1, 2), cell);
+        this.console.sendMessage("add cell " + cell.coords.first + ":" + cell.coords.second);
+        this.cells.put(cell.coords, cell);
         return cell;
     }
 

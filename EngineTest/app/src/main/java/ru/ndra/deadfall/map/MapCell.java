@@ -1,5 +1,8 @@
 package ru.ndra.deadfall.map;
 
+import android.util.Pair;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -8,8 +11,10 @@ import org.json.JSONObject;
 
 public class MapCell {
 
-    public MapCell(JSONObject data) {
+    public final Pair<Integer, Integer> coords;
 
+    public MapCell(JSONObject data) throws JSONException {
+        this.coords = new Pair<>(data.getInt("x"), data.getInt("y"));
     }
 
 }
