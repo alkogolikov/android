@@ -20,8 +20,9 @@ public class MapScene extends Scene implements OnCreate {
         Text text = (Text) this.add(Text.class);
         text.setText("Карта");
         Sprite map = (Sprite) this.add(Sprite.class);
-        map.width = 100;
-        map.height = 100;
+        map.width = 500;
+        map.height = 500;
         map.setTexture("render/map");
     }
+
 }
