@@ -1,5 +1,8 @@
 package ru.ndra.deadfall.map;
 
+import android.content.Context;
+import android.util.Pair;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -9,19 +12,16 @@ import ru.ndra.deadfall.Game;
 /**
  * Класс для работы с картой
  */
-class Map {
+public class Map {
 
-    private Game game;
-
-    private HashMap<String, MapCell> cells = new HashMap<String, MapCell>();
+    private HashMap<Pair<Integer,Integer>, MapCell> cells = new HashMap<>();
 
     public int width;
 
     public int height;
 
-    public Map(Game game) {
-        this.game = game;
-        loadData();
+    public Map(Context context) {
+        //loadData();
     }
 
     // @todo сделать загрузку данных в трэде
@@ -85,28 +85,6 @@ class Map {
         }
 
         game.loader.addTexture("render/map", render); */
-    }
-
-    /**
-     * Добавляет ячейку в карту
-     * Используется загрузчиком карты
-     */
-    private MapCell addCell(JSONObject data) {
-        MapCell cell = new MapCell(this, data);
-        String key = cell.x + ":" + cell.y;
-        cells.put(key, cell);
-        return cell;
-    }
-
-    /**
-     * Возвращает ячейку карты с заданными координатами
-     */
-    public MapCell cell(int x, int y) {
-        MapCell cell = cells.get(x + ":" + y);
-        if (cell == null) {
-            cell = new MapCell(this, x, y);
-        }
-        return cell;
     }
 
 }
