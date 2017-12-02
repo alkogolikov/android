@@ -8,6 +8,7 @@ import ru.ndra.engine.event.Stop;
 import ru.ndra.engine.gameobject.World;
 import ru.ndra.engine.touch.TouchKeeper;
 import ru.ndra.engine.touch.TouchListener;
+import ru.ndra.engine.touch.TouchTest;
 
 public class Game implements OnCreate {
 
@@ -45,6 +46,11 @@ public class Game implements OnCreate {
     @Inject
     public void initTouchKeeper(TouchKeeper keeper) {
         // Просто инициализируем TouchKeeper  при помощи DI
+    }
+
+    @Inject
+    public void initTouchTest(TouchTest test) {
+        // Просто инициализируем TouchTest  при помощи DI
     }
 
     public Game() {

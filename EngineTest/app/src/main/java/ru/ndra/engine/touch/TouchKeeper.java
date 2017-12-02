@@ -19,6 +19,7 @@ public class TouchKeeper {
 
     private void handleTouchEvent(TouchEvent event) {
 
+        // todo заменить на .clear()
         this.pointers = new ArrayList<>();
         for (int i = 0; i < event.originalEvent.getPointerCount(); i++) {
 

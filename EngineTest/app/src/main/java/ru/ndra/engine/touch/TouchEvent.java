@@ -31,6 +31,7 @@ public class TouchEvent extends Event {
     }
 
     public static class Pointer {
+
         public final float x;
         public final float y;
 
