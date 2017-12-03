@@ -25,7 +25,7 @@ public class TouchTest {
 
     private void handleTouchEvent(TouchEvent event) {
         TouchEvent.Pointer pointer = event.pointers[event.actionIndex];
-        GameObject target = this.world.hitTest(pointer.x, pointer.y);
+        GameObject target = this.world.hitTest(0, 0);
         this.console.sendMessage(event.getName() + " " + pointer.x + ":" + pointer.y + " " + (target != null ? "*" : "."));
     }
 

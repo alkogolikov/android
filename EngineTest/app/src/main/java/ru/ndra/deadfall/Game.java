@@ -27,7 +27,7 @@ public class Game extends ru.ndra.engine.Game implements OnCreate {
         this.router.setContainer(routerContainer);
         this.router.addRoute("combat", CombatScene.class);
         this.router.addRoute("map", MapScene.class);
-        this.router.navigate("map");
+        this.router.navigate("combat");
 
         // Добавляем консоль
         world.add(ConsoleScene.class);

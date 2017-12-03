@@ -1,6 +1,5 @@
 package ru.ndra.engine.gameobject;
 
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
@@ -22,7 +21,7 @@ public class World extends GameObject {
     @Override
     public void update(float dt) {
         super.update(dt);
-        this.modelToScreenMatrix = viewport.viewMatrix;
+        this.matrix = viewport.viewMatrix;
 
         PointF a = this.screenToModel(0, 0);
         PointF b = this.screenToModel(viewport.getScreenWidth(), viewport.getScreenHeight());

@@ -10,6 +10,8 @@ public class MapScene extends Scene implements OnCreate {
 
     private Map map;
 
+    Sprite mapSprite;
+
     @Inject
     public void setMap(Map map) {
         this.map = map;
@@ -19,11 +21,16 @@ public class MapScene extends Scene implements OnCreate {
     public void onCreate() {
         Text text = (Text) this.add(Text.class);
         text.setText("Карта");
-        Sprite map = (Sprite) this.add(Sprite.class);
-        map.width = 500;
-        map.height = 500;
-        map.isButton = true;
-        map.setTexture("render/map");
+        this.mapSprite = (Sprite) this.add(Sprite.class);
+        this.mapSprite.width = 500;
+        this.mapSprite.height = 500;
+        this.mapSprite.isButton = true;
+        this.mapSprite.setTexture("render/map");
     }
 
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        this.mapSprite.rotation += .1;
+    }
 }

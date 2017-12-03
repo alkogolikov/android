@@ -42,7 +42,7 @@ public class GameObject {
 
     public boolean isButton = false;
 
-    public float[] modelToScreenMatrix = new float[]{
+    public float[] matrix = new float[]{
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
@@ -127,7 +127,7 @@ public class GameObject {
     public PointF screenToModel(float x, float y) {
         float[] src = {x / this.viewport.getScreenWidth() * 2 - 1, -y / this.viewport.getScreenHeight() * 2 + 1, 0, 1};
         float[] inverse = new float[16];
-        Matrix.invertM(inverse, 0, modelToScreenMatrix, 0);
+        Matrix.invertM(inverse, 0, matrix, 0);
         float[] ret = new float[4];
         Matrix.multiplyMV(ret, 0, inverse, 0, src, 0);
         return new PointF(ret[0], ret[1]);
@@ -208,7 +208,7 @@ public class GameObject {
      * @param color Цвет
      */
     public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-        this.glHelper.drawLine(modelToScreenMatrix, x1, y1, x2, y2, color);
+        this.glHelper.drawLine(matrix, x1, y1, x2, y2, color);
     }
 
     public void drawRect(float x1, float y1, float x2, float y2, Color color) {

@@ -109,15 +109,15 @@ public class Sprite extends GameObject {
 
     public void beforeDraw() {
         super.beforeDraw();
-        modelToScreenMatrix = new float[]{
+        matrix = new float[]{
                 1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1,
         };
-        Matrix.translateM(modelToScreenMatrix, 0, position.x, position.y, 0);
-        Matrix.rotateM(modelToScreenMatrix, 0, rotation, 0, 0, 1);
-        Matrix.multiplyMM(modelToScreenMatrix, 0, parent.modelToScreenMatrix, 0, modelToScreenMatrix, 0);
+        Matrix.translateM(matrix, 0, position.x, position.y, 0);
+        Matrix.rotateM(matrix, 0, rotation, 0, 0, 1);
+        Matrix.multiplyMM(matrix, 0, parent.matrix, 0, matrix, 0);
     }
 
     public void setTexture(String texture) {
@@ -145,7 +145,8 @@ public class Sprite extends GameObject {
 
         // Если мы дошли до сюда, попадания в дочерние обхекты не было
         // Проверим попадание в сам объект
-        PointF model = screenToModel(x, y);
+        // PointF model = screenToModel(x, y);
+        PointF model = new PointF(x, y);
         if (model.x > -width / 2
                 & model.y > -height / 2
                 & model.x < width / 2
