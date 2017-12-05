@@ -24,7 +24,7 @@ public class MapScene extends Scene implements OnCreate {
         this.mapSprite = (Sprite) this.add(Sprite.class);
         this.mapSprite.width = 500;
         this.mapSprite.height = 500;
-        this.mapSprite.isButton = true;
+        this.mapSprite.hitTestEnabled = true;
         this.mapSprite.setTexture("render/map");
     }
 

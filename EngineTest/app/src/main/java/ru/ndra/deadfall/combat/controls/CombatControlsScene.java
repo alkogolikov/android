@@ -3,7 +3,7 @@ package ru.ndra.deadfall.combat.controls;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
-import ru.ndra.deadfall.console.ConsoleService;
+import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gameobject.Scene;
@@ -18,7 +18,10 @@ public class CombatControlsScene extends Scene implements OnCreate {
     private Button moveForthButton;
     private Bar bar;
 
-    public CombatControlsScene(EventManager eventManager, ConsoleService console) {
+    public CombatControlsScene(
+            EventManager eventManager,
+            Viewport viewport
+    ) {
         super();
         this.eventManager = eventManager;
         this.eventManager.on("touch", event -> {
@@ -26,7 +29,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
             if (tevent.action == MotionEvent.ACTION_POINTER_DOWN || tevent.action == MotionEvent.ACTION_DOWN) {
                 int index = tevent.actionIndex;
                 TouchEvent.Pointer pointer = tevent.pointers[index];
-                PointF point = this.screenToModel(pointer.x, pointer.y);
+                PointF point = viewport.screenToModel(pointer.x, pointer.y);
                 if (point.x > 0) {
                     this.handleSkillClick();
                 }
@@ -73,7 +76,7 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.moveBackButton.height = 200;
         this.moveBackButton.position.y = -200;
         this.moveBackButton.position.x = -700;
-        this.moveBackButton.isButton = true;
+        this.moveBackButton.hitTestEnabled = true;
 
         this.moveForthButton = (Button) this.add(Button.class);
         this.moveForthButton.width = 200;

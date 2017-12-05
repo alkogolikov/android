@@ -21,7 +21,7 @@ public class Scene extends GameObject {
         camera.update();
 
         // Обновляем матрицу
-        Matrix.multiplyMM(matrix, 0, parent.matrix, 0, camera.matrix, 0);
+        Matrix.multiplyMM(transformMatrix, 0, parent.transformMatrix, 0, camera.matrix, 0);
 
         super.beforeDraw();
     }

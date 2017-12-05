@@ -1,14 +1,11 @@
 package ru.ndra.engine.gameobject;
 
 import android.graphics.Color;
-import android.graphics.PointF;
-import android.opengl.Matrix;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.event.EventManager;
 import ru.ndra.engine.gl.Helper;
@@ -19,7 +16,7 @@ import ru.ndra.engine.gl.Helper;
  */
 public class GameObject {
 
-    protected Viewport viewport;
+  //  protected Viewport viewport;
 
     protected Helper glHelper;
 
@@ -40,9 +37,9 @@ public class GameObject {
      */
     public GameObject parent;
 
-    public boolean isButton = false;
+    public boolean hitTestEnabled = false;
 
-    public float[] matrix = new float[]{
+    public float[] transformMatrix = new float[]{
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
@@ -62,11 +59,6 @@ public class GameObject {
     private boolean isChildrenSorted = false;
 
     @Inject
-    public final void setViewport(Viewport viewport) {
-        this.viewport = viewport;
-    }
-
-    @Inject
     public final void setGlHelper(Helper glHelper) {
         this.glHelper = glHelper;
     }
@@ -74,10 +66,6 @@ public class GameObject {
     @Inject
     public final void setGameObjectFactory(GameObjectFactory gameObjectFatory) {
         this.gameObjectFactory = gameObjectFatory;
-    }
-
-    public boolean isButton() {
-        return false;
     }
 
     public GameObject add(GameObject obj) {
@@ -123,15 +111,15 @@ public class GameObject {
     /**
      * Преобразует экранные координаты в координаты модели
      * todo рефакторить, тут неэффетивный код
-     */
+
     public PointF screenToModel(float x, float y) {
         float[] src = {x / this.viewport.getScreenWidth() * 2 - 1, -y / this.viewport.getScreenHeight() * 2 + 1, 0, 1};
         float[] inverse = new float[16];
-        Matrix.invertM(inverse, 0, matrix, 0);
+        Matrix.invertM(inverse, 0, transformMatrix, 0);
         float[] ret = new float[4];
         Matrix.multiplyMV(ret, 0, inverse, 0, src, 0);
         return new PointF(ret[0], ret[1]);
-    }
+    } */
 
     public void draw() {
         // Рисуем дочерние объекты
@@ -188,7 +176,7 @@ public class GameObject {
         for (int i = len - 1; i >= 0; i--) {
             GameObject obj = children.get(i);
             // Учитываем только кнопки
-            if (obj.isButton) {
+            if (obj.hitTestEnabled) {
                 GameObject target = obj.hitTest(x, y);
                 if (target != null) {
                     return target;
@@ -208,7 +196,7 @@ public class GameObject {
      * @param color Цвет
      */
     public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-        this.glHelper.drawLine(matrix, x1, y1, x2, y2, color);
+        this.glHelper.drawLine(transformMatrix, x1, y1, x2, y2, color);
     }
 
     public void drawRect(float x1, float y1, float x2, float y2, Color color) {

@@ -109,15 +109,15 @@ public class Sprite extends GameObject {
 
     public void beforeDraw() {
         super.beforeDraw();
-        matrix = new float[]{
+        transformMatrix = new float[]{
                 1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1,
         };
-        Matrix.translateM(matrix, 0, position.x, position.y, 0);
-        Matrix.rotateM(matrix, 0, rotation, 0, 0, 1);
-        Matrix.multiplyMM(matrix, 0, parent.matrix, 0, matrix, 0);
+        Matrix.translateM(transformMatrix, 0, position.x, position.y, 0);
+        Matrix.rotateM(transformMatrix, 0, rotation, 0, 0, 1);
+        Matrix.multiplyMM(transformMatrix, 0, parent.transformMatrix, 0, transformMatrix, 0);
     }
 
     public void setTexture(String texture) {

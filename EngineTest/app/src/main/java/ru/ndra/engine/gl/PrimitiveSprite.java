@@ -10,23 +10,31 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.opengles.GL10;
 
 import ru.ndra.engine.ResourceLoader;
+import ru.ndra.engine.Viewport;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
 public class PrimitiveSprite extends Primitive {
 
     protected final ResourceLoader loader;
+    private final Viewport viewport;
     // Программа
     protected int program;
     protected FloatBuffer vertexBuffer;
 
     protected int uMatrixLocation;
+    protected int uMatrixViewLocation;
     protected int uTextureUnitLocation;
     protected int mPositionHandle;
     protected int textureHandle;
 
-    public PrimitiveSprite(EventManager eventManager, ResourceLoader loader) {
+    public PrimitiveSprite(
+            EventManager eventManager,
+            ResourceLoader loader,
+            Viewport viewport
+    ) {
         this.loader = loader;
+        this.viewport = viewport;
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });
@@ -42,10 +50,11 @@ public class PrimitiveSprite extends Primitive {
         String vertexShaderCode =
                 "attribute vec2 vPosition;" +
                         "uniform mat4 u_Matrix;" +
+                        "uniform mat4 u_MatrixView;" +
                         "attribute vec2 a_Texture;" +
                         "varying vec2 v_Texture;" +
                         "void main() {" +
-                        "  gl_Position = u_Matrix * vec4(vPosition, 0.0, 1.0);" +
+                        "  gl_Position = u_MatrixView * u_Matrix *  vec4(vPosition, 0.0, 1.0);" +
                         "  v_Texture = a_Texture;" +
                         "}";
 
@@ -79,6 +88,7 @@ public class PrimitiveSprite extends Primitive {
         GLES20.glUseProgram(program);
 
         uMatrixLocation = GLES20.glGetUniformLocation(program, "u_Matrix");
+        uMatrixViewLocation = GLES20.glGetUniformLocation(program, "u_MatrixView");
         uTextureUnitLocation = GLES20.glGetUniformLocation(program, "u_TextureUnit");
 
         textureHandle = GLES20.glGetAttribLocation(program, "a_Texture");
@@ -138,6 +148,7 @@ public class PrimitiveSprite extends Primitive {
         // Пуляем матрицу
 
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
+        GLES20.glUniformMatrix4fv(uMatrixViewLocation, 1, false, this.viewport.viewMatrix, 0);
 
         // -----------------------------------------------------------------------
 

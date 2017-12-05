@@ -21,10 +21,10 @@ public class World extends GameObject {
     @Override
     public void update(float dt) {
         super.update(dt);
-        this.matrix = viewport.viewMatrix;
+       // this.transformMatrix = viewport.viewMatrix;
 
-        PointF a = this.screenToModel(0, 0);
-        PointF b = this.screenToModel(viewport.getScreenWidth(), viewport.getScreenHeight());
+        PointF a = this.viewport.screenToModel(0, 0);
+        PointF b = this.viewport.screenToModel(viewport.getScreenWidth(), viewport.getScreenHeight());
         this.viewRect = new RectF(a.x, a.y, b.x, b.y);
 
     }

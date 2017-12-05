@@ -26,7 +26,7 @@ public class Helper {
                 sprite.getRect(),
                 sprite.textureCoords,
                 sprite.texture,
-                sprite.matrix
+                sprite.transformMatrix
         );
     }
 

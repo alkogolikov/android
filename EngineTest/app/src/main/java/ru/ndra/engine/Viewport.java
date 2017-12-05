@@ -1,22 +1,22 @@
 package ru.ndra.engine;
 
+import android.graphics.PointF;
+
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
 public class Viewport {
 
-    private final EventManager eventManager;
     private int screenWidth;
     private int screenHeight;
+
     public float[] viewMatrix;
 
     public Viewport(
             EventManager eventManager
     ) {
 
-        this.eventManager = eventManager;
-
-        this.eventManager.on("gl/surface-changed", (Event event) -> {
+        eventManager.on("gl/surface-changed", (Event event) -> {
 
             this.screenWidth = event.paramsInt.get("width");
             this.screenHeight = event.paramsInt.get("height");
@@ -42,12 +42,26 @@ public class Viewport {
 
     }
 
-
+    /**
+     * @return Ширина экрана в пикселях
+     */
     public int getScreenWidth() {
         return this.screenWidth;
     }
 
+    /**
+     * @return Высота экрана в пикселях
+     */
     public int getScreenHeight() {
         return this.screenHeight;
     }
+
+    public PointF modelToScreen(float x, float y) {
+        return new PointF(0, 0);
+    }
+
+    public PointF screenToModel(float x, float y) {
+        return new PointF(0, 0);
+    }
+
 }
