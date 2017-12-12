@@ -23,6 +23,7 @@ public class ConsoleScene extends Scene implements OnCreate {
     @Inject
     public void setConsoleService(ConsoleService consoleService) {
         consoleService.registerConsoleScene(this);
+        this.addMessage("xxxxxxx");
     }
 
     @Inject
@@ -42,7 +43,7 @@ public class ConsoleScene extends Scene implements OnCreate {
             text.setText(message);
             text.align = Sprite.ALIGN_LEFT;
             text.valign = Sprite.VALIGN_TOP;
-            text.position.x = this.world.viewRect.left + this.padding;
+            //    text.position.x = this.world.viewRect.left + this.padding;
             this.removeExcess();
             this.rearrangeMessages();
         }
@@ -52,7 +53,9 @@ public class ConsoleScene extends Scene implements OnCreate {
     private void rearrangeMessages() {
         int index = 0;
         for (GameObject obj : this.children) {
-            ((Sprite) obj).position.y = this.world.viewRect.top - index * this.lineHeight - this.padding;
+            // float top = this.world.viewRect.top;
+            float top = 0;
+            ((Sprite) obj).position.y = top - index * this.lineHeight - this.padding;
             index++;
         }
     }

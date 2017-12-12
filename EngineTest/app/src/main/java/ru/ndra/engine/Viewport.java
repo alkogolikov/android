@@ -1,6 +1,7 @@
 package ru.ndra.engine;
 
 import android.graphics.PointF;
+import android.opengl.Matrix;
 
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
@@ -56,12 +57,39 @@ public class Viewport {
         return this.screenHeight;
     }
 
+    /**
+     * Преобразует координаты модели в экранные
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public PointF modelToScreen(float x, float y) {
-        return new PointF(0, 0);
+        float[] result = new float[2];
+        float[] src = {x, y};
+        Matrix.multiplyMV(result, 0, this.viewMatrix, 0, src, 0);
+        return new PointF(result[0], result[1]);
     }
 
+    /**
+     * Преобразует экранные координаты в координаты модели
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public PointF screenToModel(float x, float y) {
-        return new PointF(0, 0);
+
+        x = (x / this.getScreenHeight() - .5f) * 2;
+        y = (y / this.getScreenHeight() - .5f) * 2;
+
+        float[] inverse = new float[16];
+        Matrix.invertM(inverse, 0, this.viewMatrix, 0);
+
+        float[] result = new float[4];
+        float[] src = {x, y, 0, 0};
+        Matrix.multiplyMV(result, 0, inverse, 0, src, 0);
+        return new PointF(result[0], result[1]);
     }
 
 }
