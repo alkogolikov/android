@@ -2,12 +2,13 @@ package ru.ndra.deadfall.combat.environment;
 
 import android.graphics.Point;
 
+import ru.ndra.engine.Viewport;
 import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.gameobject.World;
 
 public class ParallaxSprite extends Sprite {
 
-    private final World world;
+    private Viewport viewport;
 
     private boolean configured;
 
@@ -39,16 +40,16 @@ public class ParallaxSprite extends Sprite {
      */
     public float selfSpeed;
 
-    public ParallaxSprite(World world) {
+    public ParallaxSprite(Viewport viewport) {
         super();
-        this.world = world;
+        this.viewport = viewport;
     }
 
     public void update(float dt) {
         if (!configured) {
             Point size = this.loader.textureSize(texture);
-            width = this.world.viewRect.right - this.world.viewRect.left;
-            position.y = this.world.viewRect.bottom + height / 2 + this.bottom;
+            width = this.viewport.viewRect.right - this.viewport.viewRect.left;
+            position.y = this.viewport.viewRect.bottom + height / 2 + this.bottom;
             textureRight = (float) size.y / size.x * width / height;
             realSpeed = textureRight / width;
             configured = true;

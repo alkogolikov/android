@@ -2,13 +2,13 @@ package ru.ndra.deadfall.console;
 
 import java.util.ArrayList;
 
+import ru.ndra.engine.Viewport;
 import ru.ndra.engine.di.Inject;
 import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.GameObject;
 import ru.ndra.engine.gameobject.Scene;
 import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.gameobject.Text;
-import ru.ndra.engine.gameobject.World;
 
 public class ConsoleScene extends Scene implements OnCreate {
 
@@ -16,19 +16,18 @@ public class ConsoleScene extends Scene implements OnCreate {
 
     private float padding = 20;
 
-    private World world;
     private boolean created;
     private ArrayList<String> pendingMessages = new ArrayList<>();
+    private Viewport viewport;
 
     @Inject
     public void setConsoleService(ConsoleService consoleService) {
         consoleService.registerConsoleScene(this);
-        this.addMessage("xxxxxxx");
     }
 
     @Inject
-    public void setWorld(World world) {
-        this.world = world;
+    public void setWorld(Viewport viewport) {
+        this.viewport = viewport;
     }
 
     public void addMessage(String message) {
@@ -43,7 +42,7 @@ public class ConsoleScene extends Scene implements OnCreate {
             text.setText(message);
             text.align = Sprite.ALIGN_LEFT;
             text.valign = Sprite.VALIGN_TOP;
-            //    text.position.x = this.world.viewRect.left + this.padding;
+            text.position.x = this.viewport.viewRect.left + this.padding;
             this.removeExcess();
             this.rearrangeMessages();
         }
@@ -53,8 +52,7 @@ public class ConsoleScene extends Scene implements OnCreate {
     private void rearrangeMessages() {
         int index = 0;
         for (GameObject obj : this.children) {
-            // float top = this.world.viewRect.top;
-            float top = 0;
+            float top = this.viewport.viewRect.top;
             ((Sprite) obj).position.y = top - index * this.lineHeight - this.padding;
             index++;
         }

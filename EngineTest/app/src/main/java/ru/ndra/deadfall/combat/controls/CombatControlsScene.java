@@ -30,12 +30,8 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.eventManager.on("touch", event -> {
             TouchEvent tevent = (TouchEvent) event;
             if (tevent.action == MotionEvent.ACTION_POINTER_DOWN || tevent.action == MotionEvent.ACTION_DOWN) {
-
                 int index = tevent.actionIndex;
                 TouchEvent.Pointer pointer = tevent.pointers[index];
-
-                consoleService.sendMessage(pointer.x + " : " + pointer.y);
-
                 PointF point = viewport.screenToModel(pointer.x, pointer.y);
                 if (point.x > 0) {
                     this.handleSkillClick();
