@@ -108,19 +108,6 @@ public class GameObject {
         obj.events.trigger("remove.post");
     }
 
-    /**
-     * Преобразует экранные координаты в координаты модели
-     * todo рефакторить, тут неэффетивный код
-
-    public PointF screenToModel(float x, float y) {
-        float[] src = {x / this.viewport.getScreenWidth() * 2 - 1, -y / this.viewport.getScreenHeight() * 2 + 1, 0, 1};
-        float[] inverse = new float[16];
-        Matrix.invertM(inverse, 0, transformMatrix, 0);
-        float[] ret = new float[4];
-        Matrix.multiplyMV(ret, 0, inverse, 0, src, 0);
-        return new PointF(ret[0], ret[1]);
-    } */
-
     public void draw() {
         // Рисуем дочерние объекты
         int len = children.size();
@@ -200,10 +187,10 @@ public class GameObject {
     }
 
     public void drawRect(float x1, float y1, float x2, float y2, Color color) {
-        drawLine(x1, y1, x2, y1, color);
-        drawLine(x2, y1, x2, y2, color);
-        drawLine(x2, y2, x1, y2, color);
-        drawLine(x1, y2, x1, y1, color);
+        this.drawLine(x1, y1, x2, y1, color);
+        this.drawLine(x2, y1, x2, y2, color);
+        this.drawLine(x2, y2, x1, y2, color);
+        this.drawLine(x1, y2, x1, y1, color);
     }
 
 }

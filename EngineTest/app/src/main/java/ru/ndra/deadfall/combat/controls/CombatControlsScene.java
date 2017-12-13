@@ -75,8 +75,8 @@ public class CombatControlsScene extends Scene implements OnCreate {
         this.bar.position.y = -450;
 
         this.moveBackButton = (Button) this.add(Button.class);
-        this.moveBackButton.width = 200;
-        this.moveBackButton.height = 200;
+        this.moveBackButton.width = 100;
+        this.moveBackButton.height = 100;
         this.moveBackButton.position.y = -200;
         this.moveBackButton.position.x = -700;
         this.moveBackButton.hitTestEnabled = true;

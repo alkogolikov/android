@@ -1,10 +1,11 @@
 package ru.ndra.deadfall.combat.controls;
 
+import ru.ndra.engine.di.OnCreate;
 import ru.ndra.engine.gameobject.Sprite;
 import ru.ndra.engine.touch.TouchEvent;
 import ru.ndra.engine.touch.TouchKeeper;
 
-public class Button extends Sprite {
+public class Button extends Sprite implements OnCreate {
 
     private final TouchKeeper touchKeeper;
 
@@ -22,4 +23,8 @@ public class Button extends Sprite {
         return false;
     }
 
+    @Override
+    public void onCreate() {
+
+    }
 }

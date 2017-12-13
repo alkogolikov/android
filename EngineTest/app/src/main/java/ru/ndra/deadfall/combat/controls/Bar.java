@@ -109,7 +109,6 @@ public class Bar extends Sprite implements OnCreate {
     public void tryToUseSkill() {
         Skill skill = this.getHoveredSkill();
         if(skill != null) {
-            //this.consoleService.sendMessage(skill.getClass().getCanonicalName());
             skill.useInCombat();
         }
         this.reset();

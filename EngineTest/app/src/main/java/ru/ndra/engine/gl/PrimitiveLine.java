@@ -7,6 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import ru.ndra.engine.Viewport;
 import ru.ndra.engine.event.Event;
 import ru.ndra.engine.event.EventManager;
 
@@ -18,8 +19,11 @@ public class PrimitiveLine extends Primitive {
 
     private int uMatrixLocation;
     private int mPositionHandle;
+    private int uMatrixViewLocation;
+    private Viewport viewport;
 
-    public PrimitiveLine(EventManager eventManager) {
+    public PrimitiveLine(EventManager eventManager, Viewport viewport) {
+        this.viewport = viewport;
         eventManager.on("gl/init", (Event event) -> {
             this.glInit();
         });
@@ -37,8 +41,9 @@ public class PrimitiveLine extends Primitive {
         String vertexShaderCode =
                 "attribute vec2 vPosition;" +
                         "uniform mat4 u_Matrix;" +
+                        "uniform mat4 u_MatrixView;" +
                         "void main() {" +
-                        "  gl_Position = u_Matrix * vec4(vPosition, 0.0, 1.0);" +
+                        "  gl_Position = u_MatrixView * u_Matrix * vec4(vPosition, 0.0, 1.0);" +
                         "}";
 
         // Фрагментный шейдер
@@ -65,6 +70,7 @@ public class PrimitiveLine extends Primitive {
         GLES20.glLineWidth(5);
 
         uMatrixLocation = GLES20.glGetUniformLocation(program, "u_Matrix");
+        uMatrixViewLocation = GLES20.glGetUniformLocation(program, "u_MatrixView");
 
         // Передаем в программу вершины спрайта
         mPositionHandle = GLES20.glGetAttribLocation(program, "vPosition");
@@ -89,7 +95,8 @@ public class PrimitiveLine extends Primitive {
         vertexBuffer.put(lineCoords);
 
         // Пуляем матрицу
-        GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
+        GLES20.glUniformMatrix4fv(this.uMatrixLocation, 1, false, matrix, 0);
+        GLES20.glUniformMatrix4fv(this.uMatrixViewLocation, 1, false, this.viewport.viewMatrix, 0);
 
         GLES20.glDrawArrays(GLES20.GL_LINE_STRIP, 0, 2);
 
